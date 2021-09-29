@@ -11,11 +11,11 @@ export interface BookInterface {
 }
 
 interface StateInterface {
-  books: BookInterface[]
+  list: BookInterface[]
 }
 
 const initialState:  StateInterface = {
-  books: BOOKS
+  list: BOOKS
 }
 
 
@@ -24,14 +24,14 @@ export const booksSlice = createSlice({
   initialState,
   reducers: {
     addBook: (state, action: PayloadAction<BookInterface>) => {
-      state.books.push(action.payload)
+      state.list.push(action.payload)
     },
     removeBook: (state, action: PayloadAction<BookInterface>) => {
-      state.books = state.books.filter(item => item.id != action.payload.id)
+      state.list = state.list.filter(item => item.id !== action.payload.id)
     },
     borrowReturn: (state, action: PayloadAction<BookInterface>) => {
-      state.books = state.books.map( item => {
-        return item.id == action.payload.id ?
+      state.list = state.list.map( item => {
+        return item.id === action.payload.id ?
           { ...item,
             available: !item.available} :
               item
@@ -43,6 +43,6 @@ export const booksSlice = createSlice({
 
 export const { addBook, removeBook, borrowReturn } = booksSlice.actions
 
-export const selectBooks = (state: RootState) => state.books
+export const selectBooks = (state: RootState) => state.books.list
 
 export default booksSlice.reducer
