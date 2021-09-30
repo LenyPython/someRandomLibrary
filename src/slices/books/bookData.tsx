@@ -5,7 +5,7 @@ export const BOOKS: BookInterface[] = [
   id: 0,
   author: 'Bob Sinclair',
   title: 'New Moon',
-  available: true
+  available: false
 },
   {
   id: 1,
@@ -23,7 +23,7 @@ export const BOOKS: BookInterface[] = [
   id: 4,
   author: 'Bob Sinclair',
   title: 'New Moon: at dawn',
-  available: true
+  available: false
 },
   {
   id: 5,

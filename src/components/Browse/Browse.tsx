@@ -9,25 +9,28 @@ const BrowserContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: hsla(0, 50%, 50%, .4);
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
   border-radius: 20px;
   padding: 20px;
-  margin-top: 150px;
 `
 
 const BookEntry = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding: .5em 1.3em;
   margin: .6em 1.2em;
+  border-radius: 15px;
   background: hsla(0, 50%, 100%, .8);
+  & > * {
+    margin: 0;
+  }
   h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   p{
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
 `
@@ -42,7 +45,7 @@ const Browse = () => {
           <p>{item.id}</p>
           <h3>{item.title}</h3>
           <p>{item.author}</p>
-          <p>{item.available? 'in stock' : 'unavailable'}</p>
+          <p>{item.available? 'available' : 'unavailable'}</p>
           </BookEntry>))
       }
 
