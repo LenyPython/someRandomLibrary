@@ -1,0 +1,19 @@
+* {
+	padding:0;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	padding: 100px 0 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#root {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
