@@ -1,14 +1,31 @@
-import { selectBooks } from './slices/books/booksSlice'
-import { useSelector } from 'react-redux'
+import Navigation from './components/Navigation/Navigation'
+import Welcome from './components/Welcome/Welcome'
+import Browse from './components/Browse/Browse'
+import { BrowserRouter as Router,
+    Switch, Route } from 'react-router-dom'
+
 
 
 function App() {
-  let bookList = useSelector(selectBooks)
-
-  console.log(bookList)
   return (
-    <div className="App">
-    </div>
+    <Router>
+      <Navigation />
+
+      <Switch>
+        <Route path='/home'>
+          <Welcome />
+          </Route>
+        <Route path='/' exact>
+          <Welcome />
+          </Route>
+        <Route path='/browse'>
+          <Browse />
+          </Route>
+        <Route path='*'>
+          <h1>Error 404 route does not exist</h1>
+          </Route>
+      </Switch>
+    </Router>
   );
 }
 
