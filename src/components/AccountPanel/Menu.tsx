@@ -1,4 +1,11 @@
 import styled from 'styled-components'
+import { useAppDispatch } from '../../appStore/hooks'
+import { 
+  addBook, 
+  removeBook, 
+  borrowReturn
+  }
+  from '../../slices/books/booksSlice'
 
 const StyledMenu = styled.div`
   box-sizing: border-box;
@@ -24,7 +31,14 @@ const Button = styled.button`
 `
 
 const Menu = () => {
+  const dispatch = useAppDispatch()
   const handleAddRubish = () =>{
+    dispatch(addBook({
+      id: 1,
+      title: 'BarKochba',
+      author: 'SOme Random Dude',
+      available: Math.random() > 0.5
+    }))
     console.log('rubbish')
 
   }
