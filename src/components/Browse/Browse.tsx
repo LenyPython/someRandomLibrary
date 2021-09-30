@@ -15,7 +15,7 @@ const BrowserContainer = styled.div`
   padding: 20px;
 `
 
-const BookEntry = styled.div`
+export const BookEntry = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
