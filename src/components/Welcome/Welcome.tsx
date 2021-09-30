@@ -6,7 +6,6 @@ const WelcomeScreen = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 200px;
   h1 { 
     font-size: 3em;
     text-decoration: italic;
