@@ -5,7 +5,7 @@ import {
   BookInterface
 } from '../../slices/books/booksSlice'
 import { useAppSelector } from '../../appStore/hooks'
-import { BookEntry } from '../Browse/Browse'
+import  BookEntry from '../BookEntry/BookEntry'
 
 
 const PanelGrid = styled.div`
@@ -29,12 +29,9 @@ const Panel = () =>{
       <List>
       {
         bookList.map((item: BookInterface) => (
-          <BookEntry key={item.title}>
-          <p>{item.id}</p>
-          <h3>{item.title}</h3>
-          <p>{item.author}</p>
-          <p>{item.available? 'available' : 'unavailable'}</p>
-          </BookEntry>))
+          <BookEntry 
+          { ...item }
+          />))
       }
       </List>
     </PanelGrid>

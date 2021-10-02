@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import BookEntry from '../BookEntry/BookEntry'
 import {
   selectBooks,
   BookInterface
@@ -15,38 +16,19 @@ const BrowserContainer = styled.div`
   padding: 20px;
 `
 
-export const BookEntry = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .5em 1.3em;
-  margin: .6em 1.2em;
-  border-radius: 15px;
-  background: hsla(0, 50%, 100%, .8);
-  & > * {
-    margin: 0;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  p{
-    font-size: 1rem;
-  }
 
-`
 
-const Browse = () => {
+const Browse: React.FC = () => {
   let bookList = useAppSelector(selectBooks)
   return(
     <BrowserContainer>
       {
         bookList.map((item: BookInterface) => (
-          <BookEntry key={item.title}>
-          <p>{item.id}</p>
-          <h3>{item.title}</h3>
-          <p>{item.author}</p>
-          <p>{item.available? 'available' : 'unavailable'}</p>
-          </BookEntry>))
+          <BookEntry
+          {...item}
+          />
+
+          ))
       }
 
     </BrowserContainer>
