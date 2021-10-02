@@ -8,6 +8,7 @@ export interface BookInterface {
   author: string,
   title: string,
   available: boolean
+  image?: string
 }
 
 interface StateInterface {

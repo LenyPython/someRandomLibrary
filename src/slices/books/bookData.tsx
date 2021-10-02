@@ -5,7 +5,8 @@ export const BOOKS: BookInterface[] = [
   id: 0,
   author: 'Bob Sinclair',
   title: 'New Moon',
-  available: false
+  available: false,
+  image: 'https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg'
 },
   {
   id: 1,
@@ -17,7 +18,8 @@ export const BOOKS: BookInterface[] = [
   id: 3,
   author: 'Joe Doe',
   title: 'Old brick and duck',
-  available: true
+  available: true,
+  image: 'https://www.designbookcover.pt/uploads/media/photos/cache/b1_only_words_72_media_huge_thumbnail.jpg'
 },
   {
   id: 4,
