@@ -1,13 +1,14 @@
 import { StyledMenu, 
-  Button
+  Button,
+  LinkA
 } from '../Styled/Styled'
 
 const UserMenu = () => {
   return (
     <StyledMenu>
-    <Button>Browse</Button>
-    <Button>My Borrowed</Button>
-    <Button>log out</Button>
+    <LinkA to='/user'>Browse</LinkA>
+    <LinkA to='/user/borrowed'>My Borrowed</LinkA>
+    <LinkA to='/home'>Log out</LinkA>
     </StyledMenu>
   )
 

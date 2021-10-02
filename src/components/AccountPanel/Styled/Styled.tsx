@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 
 export const PanelGrid = styled.div`
@@ -27,13 +28,25 @@ export const StyledMenu = styled.div`
     margin: .3em auto;
   }
 `
+export const LinkA = styled(Link)`
+  display: inline-block;
+  font-weight: bold;
+  text-decoration: none;
+  width: 90%;
+  background: blue;
+  border-radius: .4em;
+  border: none;
+  padding: .3em 0;
+  margin: .3em;
+  color: white
+`
 export const Button = styled.button`
   font-weight: bold;
   width: 90%;
   background: blue;
   border-radius: .4em;
   border: none;
-  padding: .3em .6em;
-  margin: .4em;
+  padding: .3em 0;
+  margin: .3em;
   color: white
 `
