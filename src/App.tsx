@@ -4,8 +4,7 @@ import Browse from './components/Browse/Browse'
 import Footer from './components/Footer/Footer'
 import Panel from './components/AccountPanel/AccountPanel'
 import './App.css'
-import { BrowserRouter as Router,
-    Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -18,14 +17,13 @@ const Container = styled.div`
 
 function App() {
   return (<>
-    <Router>
     <Navigation />
       <Container role='main'>
       <Switch>
         <Route path='/home'>
           <Welcome />
           </Route>
-        <Route path='LenyPython/someRandomLibrary' exact>
+        <Route path='/LenyPython/someRandomLibrary' exact>
           <Welcome />
           </Route>
         <Route path='/' exact>
@@ -42,7 +40,6 @@ function App() {
           </Route>
       </Switch>
       </Container>
-    </Router> 
     <Footer />
   </>
          );
