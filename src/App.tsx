@@ -2,7 +2,7 @@ import Navigation from './components/Navigation/Navigation'
 import Welcome from './components/Welcome/Welcome'
 import Browse from './components/Browse/Browse'
 import Footer from './components/Footer/Footer'
-import Panel from './components/AccountPanel/AccountPanel'
+import AccountPanel from './components/AccountPanel/AccountPanel'
 import './App.css'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
@@ -33,7 +33,7 @@ function App() {
           <Browse />
           </Route>
         <Route path='/account'>
-          <Panel />
+          <AccountPanel />
           </Route>
         <Route path='*'>
           <h1>Error 404 route does not exist</h1>
