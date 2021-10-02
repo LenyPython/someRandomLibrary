@@ -1,41 +1,27 @@
-import styled from 'styled-components'
-import Menu from './Menu'
-import {
-  selectBooks,
-  BookInterface
-} from '../../slices/books/booksSlice'
-import { useAppSelector } from '../../appStore/hooks'
-import  BookEntry from '../BookEntry/BookEntry'
+import AdminPanel from './AdminPanel/AdminPanel'
+import UserPanel from './UserPanel/UserPanel'
+import { Switch,
+  Route,
+  Link,
+  useRouteMatch } from 'react-router-dom'
 
-
-const PanelGrid = styled.div`
-  background: red;
-  width: 100%;
-  height: 100%;
-  padding: 2em;
-  display: grid;
-  grid-template-columns: 150px 1fr;
-`
-const List = styled.div`
-grid-column: 2;
-`
-
-const Panel = () =>{
-  let bookList = useAppSelector(selectBooks)
-  return (
-    <PanelGrid>
-      <Menu />
-      <List>
-      {
-        bookList.map((item: BookInterface) => (
-          <BookEntry 
-          { ...item }
-          />))
-      }
-      </List>
-    </PanelGrid>
-
+const AccountPanel = () =>{
+  let match = useRouteMatch()
+  return (<>
+    <div>
+    <Link to={`${match.url}/admin`}>Admin</Link>
+    <Link to={`${match.url}/user`}>User</Link>
+    </div>
+<Switch>
+        <Route path={`${match.path}/admin`}>
+        <AdminPanel />
+        </Route>
+        <Route path={`${match.path}/user`}>
+        <UserPanel />
+        </Route>
+</Switch>
+    </>
   )
 }
 
-export default Panel
+export default AccountPanel
