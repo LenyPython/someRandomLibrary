@@ -5,10 +5,9 @@ const StyledFooter = styled.footer`
   justify-content: space-evenly;
   padding: 3em 5%;
   background: red;
-  position: absolute;
   width: 100%;
   bottom: 0;
-  margin: 0;
+  margin: 50px 0 0;
   div{
     display: flex;
     flex-direction: column;

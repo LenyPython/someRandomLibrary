@@ -10,7 +10,6 @@ import  BookEntry from '../BookEntry/BookEntry'
 
 const PanelGrid = styled.div`
   background: red;
-  opacity: .7;
   width: 100%;
   height: 100%;
   padding: 2em;

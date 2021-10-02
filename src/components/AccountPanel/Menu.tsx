@@ -22,6 +22,7 @@ const StyledMenu = styled.div`
 `
 const Button = styled.button`
   font-weight: bold;
+  width: 90%;
   background: blue;
   border-radius: .4em;
   border: none;
@@ -36,7 +37,7 @@ const Menu = () => {
     dispatch(addBook({
       id: 1,
       title: 'BarKochba',
-      author: 'SOme Random Dude',
+      author: 'Some Random Dude',
       available: Math.random() > 0.5
     }))
     console.log('rubbish')
@@ -46,7 +47,6 @@ const Menu = () => {
     <StyledMenu>
     <Button>Add entry</Button>
     <Button onClick={handleAddRubish}>Add rubbish</Button>
-
     </StyledMenu>
   )
 
