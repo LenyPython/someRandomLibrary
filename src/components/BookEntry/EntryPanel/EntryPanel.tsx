@@ -39,7 +39,7 @@ const EntryPanel: React.FC<PropsInterface> = props => {
       <h3>{title}</h3>
       <p>{author}</p>
       {available?
-        <StyledLink to={`/account/user/:${id}`}>Borrow It!</StyledLink> :
+        <StyledLink to={`/account/user/borrow/${id}`}>Borrow It!</StyledLink> :
       <DisabledBtn>Unavailable</DisabledBtn>}
     </div>
   )

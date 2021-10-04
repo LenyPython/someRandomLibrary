@@ -24,7 +24,7 @@ export const StyledEntry = styled.div`
 const BookEntry: React.FC<BookInterface> = props =>{
   let { id, title, image, author, available } = props
   return(
-<StyledEntry key={title}>
+<StyledEntry>
   <ImgScreener image={image} title={title} />
   <EntryPanel 
     id={id}

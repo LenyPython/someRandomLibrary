@@ -1,11 +1,8 @@
 import AdminMenu from './AdminMenu'
 import AddingForm from './AddingForm'
 import  BookEntry from '../../BookEntry/BookEntry'
-import { useAppSelector } from '../../../appStore/hooks'
-import {
-  selectBooks,
-  BookInterface
-} from '../../../slices/books/booksSlice'
+import { ListPropsInterface } from '../../Browse/Browse'
+import { BookInterface } from '../../../slices/books/booksSlice'
 import {
   List,
   PanelGrid
@@ -17,28 +14,24 @@ import {
 } from 'react-router-dom'
 
 
-
-const AdminPanel: React.FC = () =>{
-  let {url} = useRouteMatch()
-  let bookList = useAppSelector(selectBooks)
+const AdminPanel: React.FC<ListPropsInterface> = ({ bookList }) =>{
+  let match = useRouteMatch()
   return(
   <PanelGrid>
       <AdminMenu />
     <Switch>
-      <Route path={`${url}/add`}>
+      <Route path={`${match.path}/add`}>
         <AddingForm />
       </Route>
-      <Route></Route>
-      <Route path={url}>
+      <Route path={`${match.path}`}>
       <List>
       {
         bookList.map((item: BookInterface) => (
-          <BookEntry 
+          <BookEntry key={`${item.id}.${item.title}`} 
           { ...item }
           />))
       }
       </List>
-
       </Route>
     </Switch>
     </PanelGrid>

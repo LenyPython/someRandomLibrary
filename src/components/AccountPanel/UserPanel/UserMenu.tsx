@@ -1,13 +1,14 @@
+import { useRouteMatch } from 'react-router-dom'
 import { StyledMenu, 
-  Button,
   LinkA
 } from '../Styled/Styled'
 
 const UserMenu = () => {
+  let match = useRouteMatch()
   return (
     <StyledMenu>
-    <LinkA to='/user'>Browse</LinkA>
-    <LinkA to='/user/borrowed'>My Borrowed</LinkA>
+    <LinkA to={`${match.url}`}>Browse</LinkA>
+    <LinkA to={`${match.url}/borrowed`}>My Borrowed</LinkA>
     <LinkA to='/home'>Log out</LinkA>
     </StyledMenu>
   )

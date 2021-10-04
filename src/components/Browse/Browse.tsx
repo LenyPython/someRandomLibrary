@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import BookEntry from '../BookEntry/BookEntry'
-import {
-  selectBooks,
-  BookInterface
-} from '../../slices/books/booksSlice'
-import { useAppSelector } from '../../appStore/hooks'
+import { BookInterface } from '../../slices/books/booksSlice'
 
 const BrowserContainer = styled.div`
   display: flex;
@@ -15,11 +11,11 @@ const BrowserContainer = styled.div`
   border-radius: 20px;
   padding: 20px;
 `
+export interface ListPropsInterface {
+  bookList: BookInterface[]
+}
 
-
-
-const Browse: React.FC = () => {
-  let bookList = useAppSelector(selectBooks)
+const Browse: React.FC<ListPropsInterface> = ({ bookList }) => {
   return(
     <BrowserContainer>
       {
@@ -27,10 +23,8 @@ const Browse: React.FC = () => {
           <BookEntry
           {...item}
           />
-
           ))
       }
-
     </BrowserContainer>
   )
 }

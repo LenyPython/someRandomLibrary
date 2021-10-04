@@ -1,11 +1,14 @@
 import AdminPanel from './AdminPanel/AdminPanel'
 import UserPanel from './UserPanel/UserPanel'
-import { Switch,
+import { ListPropsInterface } from '../Browse/Browse'
+import { 
+  Switch,
   Route,
   Link,
-  useRouteMatch } from 'react-router-dom'
+  useRouteMatch
+} from 'react-router-dom'
 
-const AccountPanel = () =>{
+const AccountPanel:React.FC<ListPropsInterface> = ({ bookList }) =>{
   let match = useRouteMatch()
   return (<>
     <div>
@@ -14,10 +17,10 @@ const AccountPanel = () =>{
     </div>
 <Switch>
         <Route path={`${match.path}/admin`}>
-        <AdminPanel />
+        <AdminPanel bookList={bookList}/>
         </Route>
         <Route path={`${match.path}/user`}>
-        <UserPanel />
+        <UserPanel bookList={bookList}/>
         </Route>
 </Switch>
     </>
