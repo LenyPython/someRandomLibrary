@@ -2,8 +2,15 @@ import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../../../appStore/hooks'
 import {
   selectAddForm,
-  changeForm
+  changeImg,
+  changeTitle,
+  changeAuthor,
+  FormInputEnum
 } from '../../../slices/addBookForm/addBookForm'
+import { 
+  addBook,
+  selectBooks
+} from '../../../slices/books/booksSlice'
 
 const Container = styled.div`
 width: 90%;
@@ -22,34 +29,52 @@ form {
     }
   }
 `
-const AUTHOR = 'author'
-const TITLE = 'title'
-const IMG = 'img'
-
 
 const AddingForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const { author, title, img } = useAppSelector(selectAddForm)
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const idx = useAppSelector(selectBooks).length
 
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    if( 
+       author === '' ||
+      title === ''
+      ) return
+      dispatch(addBook({
+        id: idx,
+        author,
+        title,
+        available: true,
+        image: img
+      }))
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(changeForm({
-      [e.target.name]: e.target.value
-    }))
-
+    switch(e.target.name){
+      case FormInputEnum.author:
+        dispatch(changeAuthor(e.target.value))
+        break
+      case FormInputEnum.title:
+        dispatch(changeTitle(e.target.value))
+        break
+      case FormInputEnum.img:
+        dispatch(changeImg(e.target.value))
+        break
+      default:
+        throw new Error('Something went wrong with filling the form...')
+    }
   }
 
   return (
     <Container>
       <form onSubmit={handleSubmit}>
       <label htmlFor='author'>Author</label>
-      <input type="text" onChange={handleChange} name={AUTHOR} value={author} />
+      <input type="text" onChange={handleChange} name={FormInputEnum.author} value={author} />
       <label htmlFor='title'>Title</label>
-      <input type="text" onChange={handleChange} name={TITLE} value={title} />
+      <input type="text" onChange={handleChange} name={FormInputEnum.title} value={title} />
       <label htmlFor='img'>Cover image</label>
-      <input type="url" onChange={handleChange} name={IMG} value={img} />
+      <input type="url" onChange={handleChange} name={FormInputEnum.img} value={img} />
       <button type='submit'>Add book</button>
     </form>
     </Container>
