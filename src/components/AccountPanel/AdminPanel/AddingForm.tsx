@@ -2,9 +2,7 @@ import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../../../appStore/hooks'
 import {
   selectAddForm,
-  changeImg,
-  changeTitle,
-  changeAuthor
+  changeForm
 } from '../../../slices/addBookForm/addBookForm'
 
 const Container = styled.div`
@@ -37,21 +35,9 @@ const AddingForm: React.FC = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(e.target.name, e.target.value)
-    switch(e.target.name){
-      case AUTHOR:
-        dispatch(changeAuthor(e.target.value))
-        break
-      case TITLE:
-        dispatch(changeTitle(e.target.value))
-        break
-      case IMG:
-        dispatch(changeImg(e.target.value))
-        break
-      default:
-        throw new Error('Something went wrong with filling the form...')
-
-    }
+    dispatch(changeForm({
+      [e.target.name]: e.target.value
+    }))
 
   }
 

@@ -13,21 +13,18 @@ export const addFormState = createSlice({
   name: 'addForm',
   initialState,
   reducers: {
-    changeAuthor: (state, action: PayloadAction<string>): void => {
-      state.author = action.payload
-    },
-    changeTitle: (state, action: PayloadAction<string>): void => {
-      state.title = action.payload
-    },
-    changeImg: (state, action: PayloadAction<string>):void => {
-      state.img = action.payload
-    }
-    } 
+    changeForm: (state, action: PayloadAction<addFormInterface>): void => {
+      state = {
+        ...state,
+        ...action.payload
+      }
+    }    
+  } 
   }
 )
 
 
-export const { changeAuthor, changeTitle, changeImg } = addFormState.actions
+export const { changeForm } = addFormState.actions
 
 export const selectAddForm = (state: RootState) => state.addFormState
 
