@@ -4,19 +4,24 @@ import { BOOKS } from './bookData'
 
 //Type for the slice state
 export interface BookInterface {
-  id: number,
   author: string,
   title: string,
   available: boolean
   image?: string
 }
 
-interface StateInterface {
-  list: BookInterface[]
+export interface Entry {
+ [id: number]: BookInterface 
+}
+
+export interface StateInterface {
+  list: Entry
+  length: number
 }
 
 const initialState:  StateInterface = {
-  list: BOOKS
+  list: BOOKS,
+  length: Object.keys(BOOKS).length
 }
 
 
@@ -25,25 +30,21 @@ export const booksSlice = createSlice({
   initialState,
   reducers: {
     addBook: (state, action: PayloadAction<BookInterface>) => {
-      state.list.push(action.payload)
+      state.list[state.length] = action.payload
+      state.length++
     },
     removeBook: (state, action: PayloadAction<BookInterface>) => {
-      state.list = state.list.filter(item => item.id !== action.payload.id)
     },
     borrowReturn: (state, action: PayloadAction<BookInterface>) => {
-      state.list = state.list.map( item => {
-        return item.id === action.payload.id ?
-          { ...item,
-            available: !item.available} :
-              item
-      })
+      }
     } 
   }
-})
+)
 
 
 export const { addBook, removeBook, borrowReturn } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
+export const noOfEntries = (state: RootState) => state.books.length
 
 export default booksSlice.reducer

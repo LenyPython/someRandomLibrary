@@ -9,7 +9,7 @@ import {
 } from '../../../slices/addBookForm/addBookForm'
 import { 
   addBook,
-  selectBooks
+  noOfEntries
 } from '../../../slices/books/booksSlice'
 
 const Container = styled.div`
@@ -33,21 +33,21 @@ form {
 const AddingForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const { author, title, img } = useAppSelector(selectAddForm)
-  const idx = useAppSelector(selectBooks).length
+  // const { idx } = useAppSelector(noOfEntries)
+
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    if( 
-       author === '' ||
-      title === ''
-      ) return
-      dispatch(addBook({
-        id: idx,
-        author,
-        title,
-        available: true,
-        image: img
-      }))
+    if(author === '' || title === '') return
+    dispatch(addBook({
+            author,
+            title,
+            available: true,
+            image: img
+          }))
+    dispatch(changeTitle(''))
+    dispatch(changeAuthor(''))
+    dispatch(changeImg(''))
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

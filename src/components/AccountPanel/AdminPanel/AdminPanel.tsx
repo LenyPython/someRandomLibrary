@@ -1,8 +1,5 @@
 import AdminMenu from './AdminMenu'
 import AddingForm from './AddingForm'
-import  BookEntry from '../../BookEntry/BookEntry'
-import { ListPropsInterface } from '../../Browse/Browse'
-import { BookInterface } from '../../../slices/books/booksSlice'
 import {
   List,
   PanelGrid
@@ -14,7 +11,7 @@ import {
 } from 'react-router-dom'
 
 
-const AdminPanel: React.FC<ListPropsInterface> = ({ bookList }) =>{
+const AdminPanel: React.FC = () =>{
   let match = useRouteMatch()
   return(
   <PanelGrid>
@@ -25,12 +22,6 @@ const AdminPanel: React.FC<ListPropsInterface> = ({ bookList }) =>{
       </Route>
       <Route path={`${match.path}`}>
       <List>
-      {
-        bookList.map((item: BookInterface) => (
-          <BookEntry key={`${item.id}.${item.title}`} 
-          { ...item }
-          />))
-      }
       </List>
       </Route>
     </Switch>

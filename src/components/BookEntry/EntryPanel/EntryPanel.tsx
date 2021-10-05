@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-interface PropsInterface {
+interface Props {
   id: number,
   title: string,
   author: string,
@@ -32,15 +32,18 @@ const DisabledBtn = styled.button`
   cursor: not-allowed;
 `
 
-const EntryPanel: React.FC<PropsInterface> = props => {
+const EntryPanel: React.FC<Props> = props => {
   let { id, title, author, available } = props
   return(
     <div>
       <h3>{title}</h3>
       <p>{author}</p>
-      {available?
-        <StyledLink to={`/account/user/borrow/${id}`}>Borrow It!</StyledLink> :
-      <DisabledBtn>Unavailable</DisabledBtn>}
+      { 
+       available?
+      <StyledLink to={`/account/user/borrow/${id}`}>Borrow It!</StyledLink> :
+      <DisabledBtn>Unavailable</DisabledBtn>
+         
+      }
     </div>
   )
 }

@@ -1,37 +1,35 @@
-import BookEntry from '../../BookEntry/BookEntry'
 import UserMenu from './UserMenu'
 import BorrowBook from './BorrowBook/BorrowBook'
+import { useAppSelector } from '../../../appStore/hooks'
+import { selectBooks } from '../../../slices/books/booksSlice'
+import { toBooksList } from '../../../customFunc/Funcs'
 import { 
   Switch,
   useRouteMatch,
   Route
 } from 'react-router-dom'
-import { BookInterface } from '../../../slices/books/booksSlice'
-import { ListPropsInterface } from '../../Browse/Browse'
 import {
   List,
   PanelGrid
 } from '../Styled/Styled'
 
 
-const UserPanel: React.FC<ListPropsInterface> = ({ bookList }) =>{
+const UserPanel: React.FC = () =>{
   let { url } = useRouteMatch()
+  let booksObj = useAppSelector(selectBooks)
+  const list = toBooksList(booksObj)
+
   return(
     <PanelGrid>
     <UserMenu />
     <Switch>
       <Route exact path={url} >
       <List>
-      {
-        bookList.map((item: BookInterface) => (
-          <BookEntry 
-          { ...item }
-          />))
-      }
+        {list}
       </List>
       </Route>
       <Route path={`${url}/borrow/:id`}>
-      <BorrowBook />
+        <BorrowBook {...booksObj} />
       </Route>
     </Switch>
     </PanelGrid>

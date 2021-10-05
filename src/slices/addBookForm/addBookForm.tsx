@@ -23,6 +23,7 @@ export const addFormState = createSlice({
   initialState,
   reducers: {
     changeAuthor: (state, action: PayloadAction<string>): void => {
+      console.log(state)
       state.author = action.payload
     },
     changeTitle: (state, action: PayloadAction<string>): void => {
@@ -30,9 +31,9 @@ export const addFormState = createSlice({
     },
     changeImg: (state, action: PayloadAction<string>):void => {
       state.img = action.payload
-    }
     } 
   }
+}
 )
 
 

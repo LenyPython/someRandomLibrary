@@ -5,10 +5,7 @@ import {
   LinkA,
   Button
 } from '../Styled/Styled'
-import { 
-  addBook, 
-  }
-  from '../../../slices/books/booksSlice'
+import { addBook } from '../../../slices/books/booksSlice'
 
 
 const AdminMenu = () => {
@@ -16,7 +13,6 @@ const AdminMenu = () => {
   const dispatch = useAppDispatch()
   const handleAddRubish = () => {
     dispatch(addBook({
-      id: 1,
       title: 'BarKochba',
       author: 'Some Random Dude',
       available: Math.random() > 0.5

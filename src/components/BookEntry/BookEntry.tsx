@@ -20,17 +20,23 @@ export const StyledEntry = styled.div`
   }
 `
 
+interface Props extends BookInterface {
+  id: number
+}
 
-const BookEntry: React.FC<BookInterface> = props =>{
-  let { id, title, image, author, available } = props
+const BookEntry: React.FC<Props> = props => {
+  let { id, author, title, image, available } = props
   return(
 <StyledEntry>
-  <ImgScreener image={image} title={title} />
-  <EntryPanel 
+  <ImgScreener
+    title={title}
+    image={image}
+  />
+  <EntryPanel
     id={id}
-    title={title} 
     author={author}
-    available={available} 
+    title={title}
+    available={available}
   />
 </StyledEntry>
   )

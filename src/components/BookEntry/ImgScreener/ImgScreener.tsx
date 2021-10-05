@@ -23,20 +23,20 @@ export const Cover = styled.img`
 `
 
 export const NoImgIcon = styled(Icon)`
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   color: red;
 `
 
-interface PropsInterface {
+interface Props {
     title: string
     image?: string
 }
 
-const ImgScreener: React.FC<PropsInterface> = ({ image, title }) => {
+const ImgScreener: React.FC<Props>= ({ image, title }) => {
     return (
         <ImgContainer>
-            {
+            { 
             image ?
             <Cover src={image} alt={`Cover: ${title}`} />:
             <NoImgIcon icon='carbon:no-image' />

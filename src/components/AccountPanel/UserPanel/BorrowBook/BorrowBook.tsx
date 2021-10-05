@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
+import { Entry } from '../../../../slices/books/booksSlice'
 
 const Container = styled.div`
   display: grid;
@@ -28,18 +30,22 @@ interface Params {
   id?: string
 }
 
-const BorrwoBook: React.FC = () => {
+const BorrwoBook: React.FC<Entry> = props => {
   let { id } = useParams<Params>()
-  console.log(id)
+  if(!id) return <h2>No such book index</h2>
+  const { author, title, image, available } = props[+id]
   return(<Container>
     <ImgContainer>
-
+      { 
+          image?
+        <img src={image} alt='cover' /> :
+        <NoImgIcon icon='carbon:no-image' />
+      }
     </ImgContainer>
     <TextContainer>
-      <h2>
-            {id}
-      </h2>
-
+      <h2>{title}</h2>
+      <h3>{author}</h3>
+      <h3>{available? 'avail': 'nope'}</h3>
     </TextContainer>
          </Container>)
 }
