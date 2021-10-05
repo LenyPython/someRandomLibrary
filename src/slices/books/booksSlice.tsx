@@ -33,7 +33,10 @@ export const booksSlice = createSlice({
       state.list[state.length] = action.payload
       state.length++
     },
-    removeBook: (state, action: PayloadAction<BookInterface>) => {
+    removeBook: (state, action: PayloadAction<number>) => {
+      state.list[action.payload] = state.list[state.length - 1]
+      delete state.list[state.length - 1]
+      state.length--
     },
     borrowReturn: (state, action: PayloadAction<BookInterface>) => {
       }
@@ -45,6 +48,5 @@ export const booksSlice = createSlice({
 export const { addBook, removeBook, borrowReturn } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
-export const noOfEntries = (state: RootState) => state.books.length
 
 export default booksSlice.reducer

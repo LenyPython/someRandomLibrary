@@ -1,5 +1,8 @@
 import AdminMenu from './AdminMenu'
 import AddingForm from './AddingForm'
+import { toBooksList } from '../../../customFunc/Funcs'
+import { useAppSelector } from '../../../appStore/hooks'
+import { selectBooks } from '../../../slices/books/booksSlice'
 import {
   List,
   PanelGrid
@@ -13,6 +16,9 @@ import {
 
 const AdminPanel: React.FC = () =>{
   let match = useRouteMatch()
+  const booksObj = useAppSelector(selectBooks)
+  const list = toBooksList(booksObj, true)
+  
   return(
   <PanelGrid>
       <AdminMenu />
@@ -20,8 +26,14 @@ const AdminPanel: React.FC = () =>{
       <Route path={`${match.path}/add`}>
         <AddingForm />
       </Route>
-      <Route path={`${match.path}`}>
+      <Route path={`${match.path}/browse`} >
       <List>
+        {list}
+      </List>
+      </Route>
+      <Route path={`${match.path}`} exact>
+      <List>
+        {list}
       </List>
       </Route>
     </Switch>

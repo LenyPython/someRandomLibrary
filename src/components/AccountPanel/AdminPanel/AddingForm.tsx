@@ -9,7 +9,6 @@ import {
 } from '../../../slices/addBookForm/addBookForm'
 import { 
   addBook,
-  noOfEntries
 } from '../../../slices/books/booksSlice'
 
 const Container = styled.div`
@@ -33,7 +32,6 @@ form {
 const AddingForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const { author, title, img } = useAppSelector(selectAddForm)
-  // const { idx } = useAppSelector(noOfEntries)
 
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void => {
