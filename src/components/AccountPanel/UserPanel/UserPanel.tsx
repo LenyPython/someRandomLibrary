@@ -1,5 +1,6 @@
 import UserMenu from './UserMenu'
 import BorrowBook from './BorrowBook/BorrowBook'
+import BorrowedBooks from './BorrowedBooks/BorrowedBooks'
 import { useAppSelector } from '../../../appStore/hooks'
 import { selectBooks } from '../../../slices/books/booksSlice'
 import { toBooksList } from '../../../customFunc/Funcs'
@@ -30,6 +31,9 @@ const UserPanel: React.FC = () =>{
       </Route>
       <Route path={`${url}/borrow/:id`}>
         <BorrowBook {...booksObj} />
+      </Route>
+      <Route path={`${url}/borrowed`}>
+        <BorrowedBooks />
       </Route>
     </Switch>
     </PanelGrid>
