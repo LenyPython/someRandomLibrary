@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
-import { Entry } from '../../../../slices/books/booksSlice'
-import { DisabledBtn } from '../../../Styled/Styled'
+import { borrowReturn, Entry } from '../../../../slices/books/booksSlice'
+import { useAppDispatch } from '../../../../appStore/hooks'
+import { 
+  borrowBook,
+  returnBook
+} from '../../../../slices/borrowedBooks/borrowedBooks'
 
 const Container = styled.div`
   display: grid;
@@ -32,9 +36,21 @@ interface Params {
 }
 
 const BorrwoBook: React.FC<Entry> = props => {
+  const dispatch = useAppDispatch()
   let { id } = useParams<Params>()
   if(!id) return <h2>No such book index</h2>
   const { author, title, image, available } = props[+id]
+
+const handleClick = (): void => {
+  dispatch(borrowReturn(+id!))
+  available?
+  dispatch(borrowBook({
+    id: +id!,
+    book: props[+id!]
+  })):
+  dispatch(returnBook(+id!))
+}
+
   return(
     <Container>
     <ImgContainer>
@@ -47,10 +63,11 @@ const BorrwoBook: React.FC<Entry> = props => {
     <TextContainer>
       <h2>{title}</h2>
       <h3>{author}</h3>
-      {
+      <button onClick={handleClick}>{
         available?
-          <DisabledBtn>Borrow it</DisabledBtn> :
-          <DisabledBtn>Unavailable</DisabledBtn>}
+        'Borrow it':
+        'Return'
+    }</button> 
     </TextContainer>
     </Container>
   )

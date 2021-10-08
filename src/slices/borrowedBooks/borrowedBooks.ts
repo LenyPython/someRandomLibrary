@@ -8,10 +8,6 @@ import {
   BookInterface
 } from '../books/booksSlice'
 
-export interface borrowAction {
-  id: number
-  borrowing: boolean
-}
 
 const initialState: StateInterface = {
 	list: {},
@@ -22,8 +18,9 @@ export const borrowedList = createSlice({
 	name: 'borrowedBooks',
 	initialState,
 	reducers: {
-    borrowBook: (state, action: PayloadAction<BookInterface>) => {
-      state.list[state.length] = action.payload
+    borrowBook: (state, action: PayloadAction<{id: number, book: BookInterface}>) => {
+      let { id, book } = action.payload
+      state.list[id] = book
       state.length++
     },
     returnBook: (state, action: PayloadAction<number>) => {
