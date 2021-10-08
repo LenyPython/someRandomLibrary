@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../appStore/store'
 import { BOOKS } from './bookData'
+import { borrowAction } from '../borrowedBooks/borrowedBooks'
 
 //Type for the slice state
 export interface BookInterface {
@@ -38,7 +39,8 @@ export const booksSlice = createSlice({
       delete state.list[state.length - 1]
       state.length--
     },
-    borrowReturn: (state, action: PayloadAction<BookInterface>) => {
+    borrowReturn: (state, action: PayloadAction<borrowAction>) => {
+      state.list[action.payload.id].available = action.payload.borrowing
       }
     } 
   }
