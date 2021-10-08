@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { DisabledBtn } from '../../Styled/Styled'
 
 interface Props {
   id: number,
@@ -11,25 +12,15 @@ interface Props {
 const StyledLink = styled(Link)`
   border-radius: 10px;
   text-decoration: none;
+  display: inline-block;
   border: none;
-  min-widht: 200px;
+  min-widht: var(--btn-min-width);
   font-size: 1.3rem;
   margin: .5em .5em;
   padding: .3em .6em;
   background: blue;
   color: white;
   cursor: pointer;
-`
-const DisabledBtn = styled.button`
-  border-radius: 10px;
-  border: none;
-  min-widht: 200px;
-  font-size: 1.1rem;
-  margin: .5em;
-  padding: .3em .6em;
-  background: gray;
-  color: white;
-  cursor: not-allowed;
 `
 
 const EntryPanel: React.FC<Props> = props => {

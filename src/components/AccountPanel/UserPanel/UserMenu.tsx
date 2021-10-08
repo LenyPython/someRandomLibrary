@@ -1,7 +1,7 @@
 import { useRouteMatch } from 'react-router-dom'
 import { StyledMenu, 
   LinkA
-} from '../Styled/Styled'
+} from '../../Styled/Styled'
 
 const UserMenu = () => {
   let match = useRouteMatch()

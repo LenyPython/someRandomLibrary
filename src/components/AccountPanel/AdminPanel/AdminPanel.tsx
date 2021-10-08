@@ -6,7 +6,7 @@ import { selectBooks } from '../../../slices/books/booksSlice'
 import {
   List,
   PanelGrid
-} from '../Styled/Styled'
+} from '../../Styled/Styled'
 import {
   Switch,
   Route,

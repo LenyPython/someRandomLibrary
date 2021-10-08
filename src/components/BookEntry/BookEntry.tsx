@@ -14,7 +14,7 @@ export const StyledEntry = styled.div`
   border-radius: 15px;
   background: hsla(0, 50%, 100%, .8);
   & > * {
-    margin: 0;
+    margin: auto 2em;
   }
   h3 {
     font-size: 1.5rem;
@@ -26,6 +26,7 @@ export const StyledEntry = styled.div`
 const DelBtn = styled.button`
   background: red;
   border: none;
+  padding: .5em;
   color: white;
   font-size: 1.2rem;
   border-radius: 10px;
@@ -46,6 +47,10 @@ const BookEntry: React.FC<Props> = props => {
   
   return(
 <StyledEntry>
+  {
+    props.adminUser &&  <h3>{id}</h3>
+
+  }
   <ImgScreener
     title={title}
     image={image}

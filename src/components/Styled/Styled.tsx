@@ -50,3 +50,14 @@ export const Button = styled.button`
   margin: .3em;
   color: white
 `
+export const DisabledBtn = styled.button`
+  border-radius: 10px;
+  border: none;
+  min-widht: var(--btn-min-width);
+  font-size: 1.1rem;
+  margin: .5em;
+  padding: .3em .6em;
+  background: gray;
+  color: white;
+  cursor: not-allowed;
+`

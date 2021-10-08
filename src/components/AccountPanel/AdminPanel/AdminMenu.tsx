@@ -4,7 +4,7 @@ import {
   StyledMenu,
   LinkA,
   Button
-} from '../Styled/Styled'
+} from '../../Styled/Styled'
 import { addBook } from '../../../slices/books/booksSlice'
 
 

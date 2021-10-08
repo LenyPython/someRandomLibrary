@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { Entry } from '../../../../slices/books/booksSlice'
+import { DisabledBtn } from '../../../Styled/Styled'
 
 const Container = styled.div`
   display: grid;
@@ -34,7 +35,8 @@ const BorrwoBook: React.FC<Entry> = props => {
   let { id } = useParams<Params>()
   if(!id) return <h2>No such book index</h2>
   const { author, title, image, available } = props[+id]
-  return(<Container>
+  return(
+    <Container>
     <ImgContainer>
       { 
           image?
@@ -45,9 +47,13 @@ const BorrwoBook: React.FC<Entry> = props => {
     <TextContainer>
       <h2>{title}</h2>
       <h3>{author}</h3>
-      <h3>{available? 'avail': 'nope'}</h3>
+      {
+        available?
+          <DisabledBtn>Borrow it</DisabledBtn> :
+          <DisabledBtn>Unavailable</DisabledBtn>}
     </TextContainer>
-         </Container>)
+    </Container>
+  )
 }
 
 export default BorrwoBook

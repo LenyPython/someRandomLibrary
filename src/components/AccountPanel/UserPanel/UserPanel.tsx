@@ -11,7 +11,7 @@ import {
 import {
   List,
   PanelGrid
-} from '../Styled/Styled'
+} from '../../Styled/Styled'
 
 
 const UserPanel: React.FC = () =>{
