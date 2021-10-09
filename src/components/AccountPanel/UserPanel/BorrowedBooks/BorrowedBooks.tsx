@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { 
   useAppSelector,
   useAppDispatch
@@ -6,8 +7,19 @@ import { selectBorrowedBooks } from '../../../../slices/borrowedBooks/borrowedBo
 import { returnBook } from '../../../../slices/borrowedBooks/borrowedBooks'
 import { borrowReturn } from '../../../../slices/books/booksSlice'
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: var(--secondary-color);
+  border-radius: 5px;
+  margin: 0 1em;
+  padding: 2em;
+  & > * {
+    margin-bottom: 1.2em;
+  }
+`
 
-const BorrowedBooks = () =>{
+const BorrowedBooks = () => {
   let booksObj = useAppSelector(selectBorrowedBooks)
   const dispatch = useAppDispatch()
 
@@ -26,9 +38,9 @@ const BorrowedBooks = () =>{
    }
      
   return(
-   <div>
+    <Container>
      {list}
-    </div>
+    </Container>
   )
 
 }

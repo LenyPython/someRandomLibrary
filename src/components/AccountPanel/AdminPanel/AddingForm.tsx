@@ -16,15 +16,32 @@ width: 90%;
 text-align: center;
 margin: auto;
 form {
+  background: var(--secondary-color);
+  padding: 2em;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  input {
+    height: 2rem;
+    font-size: 1.3rem;
+    padding: 0 .4em;
+    &:invalid {
+      border: 2px solid var(--main-error-color);
+    }
+  }
   label {
     font-size: 1.5rem;
     margin: .4em;
     color: white;
     }
   button {
-    margin: 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 150px;
+    background: var(--main-color);
+    color: var(--main-button-font-color);
+    margin: 1em auto;
     }
   }
 `

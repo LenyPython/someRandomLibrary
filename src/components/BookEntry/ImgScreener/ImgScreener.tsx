@@ -25,7 +25,7 @@ export const Cover = styled.img`
 export const NoImgIcon = styled(Icon)`
   width: 100%;
   height: 100%;
-  color: red;
+  color: var(--main-error-color);
 `
 
 interface Props {

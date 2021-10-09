@@ -14,12 +14,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: inline-block;
   border: none;
-  min-widht: var(--btn-min-width);
   font-size: 1.3rem;
   margin: .5em .5em;
-  padding: .3em .6em;
-  background: blue;
-  color: white;
+  padding: .2em .4em;
+  background: var(--main-color);
+  color: var(--main-button-font-color);
   cursor: pointer;
 `
 

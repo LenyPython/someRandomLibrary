@@ -14,7 +14,7 @@ const Container = styled.div`
 `
 
 function App() {
-  const theme = false
+  const theme = true
   return (<>
     <GlobalStyle dark={theme} />
     <Navigation />
