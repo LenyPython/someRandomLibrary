@@ -6,7 +6,7 @@ import { toBooksList } from '../../customFunc/Funcs'
 const BrowserContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: hsla(0, 50%, 50%, .4);
+  background: var(--secondary-color);
   width: 100%;
   max-width: 1200px;
   border-radius: 20px;

@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { Icon } from '@iconify/react'
 
 const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-evenly;
   padding: 3em 5%;
-  background: red;
+  background: var(--main-color);
   width: 100%;
   bottom: 0;
   margin: 50px 0 0;
@@ -13,17 +14,21 @@ const StyledFooter = styled.footer`
     flex-direction: column;
     align-items: center;
     padding: .5em;
-    color: white;
+    color: var(--main-header-font-color);
+    &>div{
+      flex-direction: row;
+    }
     h2 {
       margin: .6em;
     }
     p{
       font-size: 1.1rem;
-      margin-bottom: .3em;
+      margin: 0 .3em .3em;
+      transition: .4s all;
       &:hover{
-        text-decoration: underline;
         opacity: .6;
         cursor: pointer;
+        transform: translateY(-.2em);
       }
     }
   }
@@ -43,9 +48,20 @@ const Footer = () => {
       </div>
       <div>
         <h2>Social</h2>
-        <p>Twiter</p>
-        <p>Facebook</p>
-        <p>LinkedIn</p>
+        <div>
+          <p>
+      <Icon icon="akar-icons:twitter-fill" width='30' height='30'/>
+          </p>
+          <p>
+      <Icon icon="bx:bxl-facebook-square" width='30' height='30' />
+          </p>
+          <p>
+      <Icon icon="akar-icons:linkedin-fill" width='30' height='30' />
+          </p>
+          <p>
+      <Icon icon="bx:bxl-instagram-alt" width='30' height='30'  />
+          </p>
+        </div>
       </div>
 
 

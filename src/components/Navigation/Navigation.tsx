@@ -1,5 +1,5 @@
 import styled from 'styled-components' 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 const NavContainer = styled.div`
@@ -8,25 +8,26 @@ const NavContainer = styled.div`
   left: 0;
   right: 0;
   width: 100%;
-  background: hsl(0, 100%, 50%);
+  min-height: var(--nav-height);
+  background: var(--main-color);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: .3em 5%;
+  padding: auto 5%;
   margin: 0;
   h1 {
-    color: hsl(0, 0%, 0%);
-    font-size: 1.5rem;
+    font-family: var(--logo-font);
+    color: var(--main-header-font-color);
+    font-size: 3rem;
   }
 `
-const StyledA = styled(Link)`
+const StyledA = styled(NavLink)`
   text-decoration: none;
   font-size: 1.2em;
   margin: 0 .6em;
-  color: hsl(0, 50%, 10%);
+  color: var(--main-header-font-color);
   &:hover {
-    opacity: 0.8;
-    transform: translateY(-10px);
+    opacity: 0.6;
   }
   &:active {
     font-weight: bold;

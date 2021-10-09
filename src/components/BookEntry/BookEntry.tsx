@@ -10,10 +10,11 @@ import {
 
 export const StyledEntry = styled.div`
   display: flex;
+  justify-content: space-between;
   padding: .9em 1.3em;
-  margin: .6em 1.2em;
+  margin: 0 1.2em 1.2em;
   border-radius: 15px;
-  background: hsla(0, 50%, 100%, .8);
+  background: var(--secondary-color);
   & > * {
     margin: auto 2em;
   }
@@ -25,10 +26,10 @@ export const StyledEntry = styled.div`
   }
 `
 const DelBtn = styled.button`
-  background: red;
+  background: var(--main-error-color);
   border: none;
   padding: .5em;
-  color: white;
+  color: var(--main-button-font-color);
   font-size: 1.2rem;
   border-radius: 10px;
 `
@@ -49,6 +50,7 @@ const BookEntry: React.FC<Props> = props => {
   
   return(
 <StyledEntry>
+  <div>
   {
     adminUser &&  <h3>{id}</h3>
   }
@@ -62,6 +64,8 @@ const BookEntry: React.FC<Props> = props => {
     title={title}
     available={available}
   />
+
+  </div>
   {
     adminUser &&  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>
   }

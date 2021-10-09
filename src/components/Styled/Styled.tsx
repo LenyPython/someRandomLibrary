@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 export const PanelGrid = styled.div`
-  background: red;
+  background: var(--bg-color);
   width: 100%;
   height: 100%;
   padding: 2em;
@@ -18,10 +18,9 @@ grid-column: 2;
 export const StyledMenu = styled.div`
   box-sizing: border-box;
   grid-column: 1;
-  background: lightblue;
+  background: var(--secondary-color);
   border-radius 10px;
   width: 100%;
-  max-height: 200px;
   padding: .6em;
   text-align: center;
   p{
@@ -30,34 +29,33 @@ export const StyledMenu = styled.div`
 `
 export const LinkA = styled(Link)`
   display: inline-block;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
   width: 90%;
-  background: blue;
+  background: var(--main-color);
   border-radius: .4em;
   border: none;
   padding: .3em 0;
   margin: .3em;
-  color: white
+  color: var(--main-button-font-color);
 `
 export const Button = styled.button`
-  font-weight: bold;
+  font-weight: 600;
   width: 90%;
-  background: blue;
+  background: var(--main-color);
   border-radius: .4em;
   border: none;
   padding: .3em 0;
   margin: .3em;
-  color: white
+  color: var(--main-button-font-color);
 `
 export const DisabledBtn = styled.button`
   border-radius: 10px;
   border: none;
-  min-widht: var(--btn-min-width);
   font-size: 1.1rem;
   margin: .5em;
   padding: .3em .6em;
   background: gray;
-  color: white;
+  color: var(--main-button-font-color);
   cursor: not-allowed;
 `

@@ -1,18 +1,17 @@
 import styled from 'styled-components'
 
 const WelcomeScreen = styled.div`
+  background: var(--bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   h1 { 
-    font-size: 3em;
-    text-decoration: italic;
+    font-size: 3rem;
   }
   p {
     font-size: 1.3em;
-    text-decoration: italic;
   }
 `
 
