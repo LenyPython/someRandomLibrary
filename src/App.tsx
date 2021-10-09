@@ -1,10 +1,8 @@
 import Navigation from './components/Navigation/Navigation'
-import Welcome from './components/Welcome/Welcome'
-import Browse from './components/Browse/Browse'
+import MainContent from './components/MainContent/MainContent'
+import GlobalStyle from './components/Styled/GlobalStyle'
 import Footer from './components/Footer/Footer'
-import AccountPanel from './components/AccountPanel/AccountPanel'
 import './App.css'
-import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -16,29 +14,12 @@ const Container = styled.div`
 `
 
 function App() {
+  const theme = false
   return (<>
+    <GlobalStyle dark={theme} />
     <Navigation />
       <Container role='main'>
-      <Switch>
-        <Route path='/browse'>
-          <Browse />
-          </Route>
-        <Route path='/account'>
-          <AccountPanel />
-          </Route>
-        <Route path='/home'>
-          <Welcome />
-          </Route>
-        <Route path='/LenyPython/someRandomLibrary' exact>
-          <Welcome />
-          </Route>
-        <Route path='/' exact>
-          <Welcome />
-          </Route>
-        <Route path='*'>
-          <h1>Error 404 route does not exist</h1>
-          </Route>
-      </Switch>
+        <MainContent />
       </Container>
     <Footer />
   </>
