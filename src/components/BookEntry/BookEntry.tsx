@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import ImgScreener from './ImgScreener/ImgScreener'
-import EntryPanel from './EntryPanel/EntryPanel'
+import EntryData from './EntryData/EntryData'
 import { useAppDispatch } from '../../appStore/hooks'
 import { returnBook } from '../../slices/borrowedBooks/borrowedBooks'
 import { 
@@ -34,13 +33,13 @@ const DelBtn = styled.button`
   border-radius: 10px;
 `
 
-interface Props extends BookInterface {
+export interface Props extends BookInterface {
   id: number
   adminUser?: boolean
 }
 
 const BookEntry: React.FC<Props> = props => {
-  let { id, author, title, image, available, adminUser } = props
+  const { id, adminUser } = props
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
@@ -50,22 +49,7 @@ const BookEntry: React.FC<Props> = props => {
   
   return(
 <StyledEntry>
-  <div>
-  {
-    adminUser &&  <h3>{id}</h3>
-  }
-  <ImgScreener
-    title={title}
-    image={image}
-  />
-  <EntryPanel
-    id={id}
-    author={author}
-    title={title}
-    available={available}
-  />
-
-  </div>
+  <EntryData {...props}/>
   {
     adminUser &&  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>
   }
