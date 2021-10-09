@@ -38,6 +38,7 @@ export const LinkA = styled(Link)`
   padding: .3em 0;
   margin: .3em;
   color: var(--main-button-font-color);
+  cursor: pointer;
 `
 export const Button = styled.button`
   font-weight: 600;
@@ -48,6 +49,7 @@ export const Button = styled.button`
   padding: .3em 0;
   margin: .3em;
   color: var(--main-button-font-color);
+  cursor: pointer;
 `
 export const DisabledBtn = styled.button`
   border-radius: 10px;
