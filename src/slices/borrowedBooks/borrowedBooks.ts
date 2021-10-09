@@ -24,8 +24,8 @@ export const borrowedList = createSlice({
       state.length++
     },
     returnBook: (state, action: PayloadAction<number>) => {
-      state.list[action.payload] = state.list[state.length - 1]
-      delete state.list[state.length - 1]
+      if(state.list[action.payload] === undefined) return
+      delete state.list[action.payload]
       state.length--
     }
 	}

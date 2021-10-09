@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import ImgScreener from './ImgScreener/ImgScreener'
 import EntryPanel from './EntryPanel/EntryPanel'
 import { useAppDispatch } from '../../appStore/hooks'
+import { returnBook } from '../../slices/borrowedBooks/borrowedBooks'
 import { 
   BookInterface,
   removeBook
@@ -38,18 +39,18 @@ interface Props extends BookInterface {
 }
 
 const BookEntry: React.FC<Props> = props => {
-  let { id, author, title, image, available } = props
+  let { id, author, title, image, available, adminUser } = props
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
     dispatch(removeBook(id))
+    dispatch(returnBook(id))
   }
   
   return(
 <StyledEntry>
   {
-    props.adminUser &&  <h3>{id}</h3>
-
+    adminUser &&  <h3>{id}</h3>
   }
   <ImgScreener
     title={title}
@@ -62,8 +63,7 @@ const BookEntry: React.FC<Props> = props => {
     available={available}
   />
   {
-    props.adminUser &&  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>
-
+    adminUser &&  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>
   }
 </StyledEntry>
   )

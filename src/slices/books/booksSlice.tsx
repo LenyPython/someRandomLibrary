@@ -34,9 +34,7 @@ export const booksSlice = createSlice({
       state.length++
     },
     removeBook: (state, action: PayloadAction<number>) => {
-      state.list[action.payload] = state.list[state.length - 1]
-      delete state.list[state.length - 1]
-      state.length--
+      delete state.list[action.payload]
     },
     borrowReturn: (state, action: PayloadAction<number>) => {
       state.list[action.payload].available = !state.list[action.payload].available
