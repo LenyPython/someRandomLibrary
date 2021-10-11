@@ -8,7 +8,8 @@ const WelcomeScreen = styled.div`
   align-items: center;
   width: 100%;
   h1 { 
-    font-size: 3rem;
+    font-size: 7rem;
+    font-family: var(--logo-font);
   }
   p {
     font-size: 1.3em;
