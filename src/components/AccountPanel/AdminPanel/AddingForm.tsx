@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import SearchApi from  './SearchApi'
 import { useAppDispatch, useAppSelector } from '../../../appStore/hooks'
 import {
   selectAddForm,
@@ -32,7 +33,7 @@ form {
   label {
     font-size: 1.5rem;
     margin: .4em;
-    color: white;
+    color: var(--main-font-color);
     }
   button {
     border: none;
@@ -83,6 +84,7 @@ const AddingForm: React.FC = () => {
 
   return (
     <Container>
+      <SearchApi />
       <form onSubmit={handleSubmit}>
       <label htmlFor='author'>Author</label>
       <input type="text" onChange={handleChange} name={FormInputEnum.author} value={author} />
