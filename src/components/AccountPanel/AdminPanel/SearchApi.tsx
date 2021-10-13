@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useAppDispatch } from '../../../appStore/hooks'
 import { useState } from 'react'
 
 const Container = styled.div`
@@ -33,12 +34,18 @@ const Container = styled.div`
 `
 
 const SearchApi = () => {
-  const [ISBN, setISBN] = useState<string>()
+  const [ISBN, setISBN] = useState<string>('')
+  const dispatch = useAppDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void =>{
     const string = e.target.value
     if(string.match(/\D+/)) return
     setISBN(string)
+  }
+
+  const handleClick = () => {
+    if(ISBN.length !== 10 && ISBN.length !== 13) return
+    dispatch({ type: 'GET_BOOK', payload: ISBN})
   }
 
   return(
@@ -47,7 +54,7 @@ const SearchApi = () => {
         Search by ISBN:  
       <input type="text" onChange={handleChange} name="ISBN" value={ISBN}/>
       </label>
-      <button>Search...</button>
+      <button onClick={handleClick}>Search...</button>
     </Container>
 
   )
