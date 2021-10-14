@@ -30,6 +30,7 @@ export const booksSlice = createSlice({
   initialState,
   reducers: {
     addBook: (state, action: PayloadAction<BookInterface>) => {
+      console.log(action.payload)
       state.list[state.length] = action.payload
       state.length++
     },
