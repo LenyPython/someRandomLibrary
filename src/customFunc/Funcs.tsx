@@ -1,4 +1,4 @@
-import { Entry } from '../slices/books/booksSlice'
+import { Entry } from '../constants/interface/bookSlice'
 import BookEntry from '../components/BookEntry/BookEntry'
 
 

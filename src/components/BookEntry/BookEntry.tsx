@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 import { DisabledBtn } from '../Styled/Styled'
 import { useAppDispatch } from '../../appStore/hooks'
 import { returnBook } from '../../slices/borrowedBooks/borrowedBooks'
-import { 
-  BookInterface,
-  removeBook
-} from '../../slices/books/booksSlice'
+import { removeBook } from '../../slices/books/booksSlice'
+import { BookInterface } from '../../constants/interface/bookSlice'
 
 export const StyledEntry = styled.div`
   display: flex;

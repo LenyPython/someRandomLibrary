@@ -6,7 +6,7 @@ import {
 import { 
   StateInterface,
   BookInterface
-} from '../books/booksSlice'
+} from '../../constants/interface/bookSlice'
 
 
 const initialState: StateInterface = {

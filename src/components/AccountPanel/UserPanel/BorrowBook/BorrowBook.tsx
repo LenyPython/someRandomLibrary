@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
-import { borrowReturn, Entry } from '../../../../slices/books/booksSlice'
+import { borrowReturn } from '../../../../slices/books/booksSlice'
+import { Entry } from '../../../../constants/interface/bookSlice'
 import { useAppDispatch } from '../../../../appStore/hooks'
 import { 
   borrowBook,

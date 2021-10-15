@@ -1,23 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../appStore/store'
 import { BOOKS } from './bookData'
+import { 
+  BookInterface,
+  StateInterface
+} from '../../constants/interface/bookSlice'
 
-//Type for the slice state
-export interface BookInterface {
-  author: string,
-  title: string,
-  available: boolean
-  image?: string
-}
 
-export interface Entry {
- [id: number]: BookInterface 
-}
-
-export interface StateInterface {
-  list: Entry
-  length: number
-}
 
 const initialState:  StateInterface = {
   list: BOOKS,

@@ -1,4 +1,4 @@
-import { Entry } from './booksSlice'
+import { Entry } from '../../constants/interface/bookSlice'
 
 export const BOOKS: Entry = {
 0:{
