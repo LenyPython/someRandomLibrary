@@ -1,16 +1,16 @@
 import styled from 'styled-components'
-import SearchApi from  './SearchApi/SearchApi'
-import { useAppDispatch, useAppSelector } from '../../../appStore/hooks'
+import SearchApi from  '../SearchApi/SearchApi'
+import { useAppDispatch, useAppSelector } from '../../../../appStore/hooks'
 import {
   selectAddForm,
   changeImg,
   changeTitle,
   changeAuthor,
   FormInputEnum
-} from '../../../slices/addBookForm/addBookForm'
+} from '../../../../slices/addBookForm/addBookForm'
 import { 
   addBook,
-} from '../../../slices/books/booksSlice'
+} from '../../../../slices/books/booksSlice'
 
 const Container = styled.div`
 width: 90%;
@@ -67,7 +67,6 @@ const AddingForm: React.FC = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    e.preventDefault()
     switch(e.target.name){
       case FormInputEnum.author:
         dispatch(changeAuthor(e.target.value))

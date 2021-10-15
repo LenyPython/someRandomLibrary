@@ -1,5 +1,5 @@
 import AdminMenu from './AdminMenu'
-import AddingForm from './AddingForm'
+import AddingForm from './AddingForm/AddingForm'
 import { toBooksList } from '../../../customFunc/Funcs'
 import { useAppSelector } from '../../../appStore/hooks'
 import { selectBooks } from '../../../slices/books/booksSlice'

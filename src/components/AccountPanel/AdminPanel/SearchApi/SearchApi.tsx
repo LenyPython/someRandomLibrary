@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { useAppDispatch } from '../../../appStore/hooks'
+import FoundEntries from './FoundEntries'
+import { useAppDispatch } from '../../../../appStore/hooks'
 import { useState } from 'react'
 
 const Container = styled.div`
@@ -7,7 +8,11 @@ const Container = styled.div`
   padding: 2em;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   margin-bottom:  35px;
+  div {
+    display: flex;
+  }
   input {
     height: 1.8rem;
     font-size: 1.1rem;
@@ -50,11 +55,15 @@ const SearchApi = () => {
 
   return(
     <Container>
+      <div>
       <label htmlFor="ISBN">
         Search by ISBN:  
       <input type="text" onChange={handleChange} name="ISBN" value={ISBN}/>
       </label>
       <button onClick={handleClick}>Search...</button>
+      </div>
+      <h2>Latest search: </h2>
+      <FoundEntries />
     </Container>
 
   )

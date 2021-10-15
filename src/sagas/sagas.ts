@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery, takeLatest, Effect, StrictEffect } from 'redux-saga/effects'
-import { addBook } from '../slices/books/booksSlice'
+import { addToFound } from '../slices/foundEntries/foundEntries'
 import {
 	saveBook
 } from './actions'
@@ -41,6 +41,7 @@ function* getBookWorker(action: Effect)
 	 yield put(saveBook({
 									author,
 									title,
+									ISBN: action.payload,
 									available: true,
 									image
 								})
@@ -52,7 +53,7 @@ function* getBookWorker(action: Effect)
 }
 
 function* saveBookWorker(action: Effect) {
-	yield put(addBook(action.payload))
+	yield put(addToFound(action.payload))
 
 }
 

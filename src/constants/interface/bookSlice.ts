@@ -4,9 +4,10 @@ export interface StateInterface {
 }
 
 export interface BookInterface {
-  author: string,
-  title: string,
+  author: string
+  title: string
   available: boolean
+  ISBN?: string
   image?: string
 }
 
