@@ -13,8 +13,8 @@ export const foundSlice = createSlice({
   initialState,
   reducers: {
     addToFound: (state, action: PayloadAction<BookInterface>) => {
-			state.push(action.payload)
-			if(state.length > 5) state.shift()
+			state.unshift(action.payload)
+			if(state.length > 5) state.pop()
     } 
   }
 }

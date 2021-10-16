@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom:  35px;
-  div {
+  search-bar {
     display: flex;
   }
   input {
@@ -55,7 +55,7 @@ const SearchApi = () => {
 
   return(
     <Container>
-      <div>
+      <div className='search-bar'>
       <label htmlFor="ISBN">
         Search by ISBN:  
       <input type="text" onChange={handleChange} name="ISBN" value={ISBN}/>
