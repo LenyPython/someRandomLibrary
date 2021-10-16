@@ -16,26 +16,16 @@ const theme = createTheme({
       },
     },
   },
-});
+})
 
-
-
-const FoundEntries = () => {
-  const data = useAppSelector(foundBooksSelector)
-  const handleClick =(  ) => {}
-  const rows: GridRowData[] = data.map ((item, idx) => {
-    return { 
-      'id': idx,
-      'author': item.author,
-      'title': item.title,
-      'cover': 'show img',
-  }})
-  const columns: GridColDef[] = [
-  { field: 'author', flex: 1, headerName: 'Author', width: 150, editable: true },
-  { field: 'title', flex: 1, headerName: 'Title', width: 150, editable: true},
-  { field: 'cover', flex: 1, headerName: 'Cover', width: 150, editable: true},
-  { field: 'btn', headerName: 'Add Entry', width: 100, editable: true,
-    renderCell: () => (
+const columns: GridColDef[] = [
+  { field: 'author', flex: 1, headerName: 'Author'},
+  { field: 'title', flex: 1, headerName: 'Title' },
+  { field: 'cover', flex: 1, headerName: 'Cover'},
+  { field: 'btn', headerName: 'Add Entry',
+    renderCell: (params) => {
+      const handleClick = () => console.log(params.row)
+      return (
         <Button
           onClick={handleClick}
           variant="contained"
@@ -44,9 +34,21 @@ const FoundEntries = () => {
         >
           Add
         </Button>
-    )
+      )
+    }
      }
-];
+]
+
+
+const FoundEntries = () => {
+  const data = useAppSelector(foundBooksSelector)
+  const rows: GridRowData[] = data.map ((item, idx) => {
+    return { 
+      'id': idx,
+      'author': item.author,
+      'title': item.title,
+      'cover': 'show img',
+  }})
 
   return (
     <div>
