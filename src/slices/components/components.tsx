@@ -22,11 +22,11 @@ const componentsSlice  = createSlice({
   name: 'componenstState',
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction) => {
+    changeTheme: (state) => {
       if(state.theme === ThemeType.light) state.theme = ThemeType.dark
       else state.theme = ThemeType.light
     },
-  changeIsLoading: (state, action: PayloadAction) => {
+  changeIsLoading: (state) => {
     state.isLoading = !state.isLoading
   }
   }

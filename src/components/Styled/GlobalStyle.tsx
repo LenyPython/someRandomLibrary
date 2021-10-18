@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle<StyleProps>`
   box-sizing: border-box;
 	padding:0;
 	margin: 0;
+	transition: .5s;
 }
 
 body {

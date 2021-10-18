@@ -46,7 +46,33 @@ const StyledA = styled(NavLink)`
   &:active {
     font-weight: bold;
   }
-
+`
+const ThemeSwitcher = styled.label`
+  position:relative;
+  width: 80px;
+  height: 35px;
+  input {
+    position: relative;
+    appearance: none;
+    z-index: 1;
+  }
+  span{
+    background: var(--secondary-color);
+    position: absolute;
+    border-radius: 17px;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    & > div {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
+   }
+   input:checked ~ span div{
+    left: 50px;
+   }
 `
 
 const Navigation = () => {
@@ -64,11 +90,21 @@ const Navigation = () => {
     <StyledA to='/home'> Home </StyledA>
     <StyledA to='/browse'> Browse </StyledA>
     <StyledA to='/account'> Account </StyledA>
+      <ThemeSwitcher>
+        <input type="checkbox"
+          onChange={handleClick}
+          checked={theme === ThemeType.dark}
+      />
+        <span>
+          <div>
       {
        theme === ThemeType.dark?
-      <Icon onClick={handleClick} icon="fluent:weather-sunny-24-filled" width="35" height="35" color="yellow"/>:
-      <Icon onClick={handleClick} icon="ri:moon-fill" width="35" height="35" color="grey"/>
+      <Icon icon="fluent:weather-sunny-24-filled" width="25" height="25" color="yellow"/>:
+      <Icon icon="ri:moon-fill" width="25" height="25" color="grey"/>
       }
+          </div>
+        </span>
+      </ThemeSwitcher>
     </div>
   </NavContainer>
   )}
