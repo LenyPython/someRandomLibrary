@@ -4,21 +4,24 @@ import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { borrowReturn } from '../../../../slices/books/booksSlice'
 import { Entry } from '../../../../constants/interface/bookSlice'
 import { useAppDispatch } from '../../../../appStore/hooks'
+import Button, { ButtonProps } from '@mui/material/Button'
 import { 
   borrowBook,
   returnBook
 } from '../../../../slices/borrowedBooks/borrowedBooks'
 
 const Container = styled.div`
+  background: var(--secondary-color);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: auto 3em;
   display: grid;
   grid-template-columns: 300px 1fr;
-  margin: auto 3em;
 `
 
 const ImgContainer = styled.div`
   width: 300px;
   grid-column; 1;
-  border: solid 1px black;
   img{
     width: 100%;
   }
@@ -27,9 +30,9 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   grid-area: 1/2;
   padding: 2em;
-  border: solid 1px black;
 `
 
 interface Params {
@@ -62,13 +65,22 @@ const handleClick = (): void => {
       }
     </ImgContainer>
     <TextContainer>
+      <div>
       <h2>{title}</h2>
       <h3>{author}</h3>
-      <button onClick={handleClick}>{
+      </div>
+      <Button 
+        onClick={handleClick}
+        variant="contained"
+        sx={{
+          background: 'var(--main-color)',
+          color: 'var(--main-button-font-color)'
+        }}
+        >{
         available?
         'Borrow it':
         'Return'
-    }</button> 
+    }</Button> 
     </TextContainer>
     </Container>
   )

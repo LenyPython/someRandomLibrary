@@ -1,22 +1,29 @@
 import styled from 'styled-components'
+import { selectBorrowedBooks } from '../../../../slices/borrowedBooks/borrowedBooks'
+import { returnBook } from '../../../../slices/borrowedBooks/borrowedBooks'
+import { borrowReturn } from '../../../../slices/books/booksSlice'
+import Button from '@mui/material/Button'
 import { 
   useAppSelector,
   useAppDispatch
 } from '../../../../appStore/hooks'
-import { selectBorrowedBooks } from '../../../../slices/borrowedBooks/borrowedBooks'
-import { returnBook } from '../../../../slices/borrowedBooks/borrowedBooks'
-import { borrowReturn } from '../../../../slices/books/booksSlice'
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   background: var(--secondary-color);
   border-radius: 5px;
   margin: 0 1em;
-  padding: 2em;
+  padding: 2em 3em;
   & > * {
-    margin-bottom: 1.2em;
+    margin: .6em 1em;
   }
+`
+const EntryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  min-height: 250px;
 `
 
 const BorrowedBooks = () => {
@@ -30,11 +37,20 @@ const BorrowedBooks = () => {
 
   const list: JSX.Element[] = []
       for(let entry in booksObj){
-    list.push(<div key={booksObj[entry].author + booksObj[entry].title }>
+    list.push(<EntryContainer key={booksObj[entry].author + booksObj[entry].title }>
         <h2>{booksObj[entry].title}</h2>
         <h3>{booksObj[entry].author}</h3>
-      <button onClick={()=>handleClick(+entry)}>Return</button>
-      </div>)
+      <Button 
+        onClick={()=>handleClick(+entry)}
+        variant="contained"
+        sx={{
+          background: 'var(--main-color)',
+          color: 'var(--main-button-font-color)'
+        }}
+        >
+        Return
+      </Button> 
+      </EntryContainer>)
    }
      
   return(

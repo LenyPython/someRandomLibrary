@@ -10,7 +10,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom:  35px;
-  search-bar {
+  a {
+    text-decoration: none;
+  }
+  .search-bar {
     display: flex;
   }
   input {
@@ -57,7 +60,8 @@ const SearchApi = () => {
     <Container>
       <div className='search-bar'>
       <label htmlFor="ISBN">
-        Search by ISBN:  
+        Search <a href='https://openlibrary.org/explore'>OpenLibrary </a>
+        by ISBN( 10 or 13 char):  
       <input type="text" onChange={handleChange} name="ISBN" value={ISBN}/>
       </label>
       <button onClick={handleClick}>Search...</button>
