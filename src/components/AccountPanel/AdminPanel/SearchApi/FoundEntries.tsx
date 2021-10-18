@@ -1,8 +1,7 @@
-import { useMemo } from 'react'
 import { DataGrid, GridRowData, GridColDef } from '@mui/x-data-grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppDispatch, useAppSelector } from '../../../../appStore/hooks'
-import { foundBooksSelector } from '../../../../slices/foundEntries/foundEntries'
+import { foundBooksSelector  } from '../../../../slices/foundEntries/foundEntries'
 import { BookInterface } from '../../../../constants/interface/bookSlice'
 import { addBook } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
@@ -27,6 +26,7 @@ const FoundEntries = () => {
   const dispatch = useAppDispatch()
   const handleClick = (entry: BookInterface) => {
     dispatch(addBook(entry))
+
   }
   const data = useAppSelector(foundBooksSelector)
   const rows: GridRowData[] = data.map ((item, idx) => {
@@ -37,7 +37,7 @@ const FoundEntries = () => {
       'cover': item.image,
   }})
 
-  const columns: GridColDef[] = useMemo(() =>[
+  const columns: GridColDef[] = [
   { field: 'author', flex: 1, headerName: 'Author'},
   { field: 'title', flex: 1, headerName: 'Title' },
   { field: 'cover', flex: 1, headerName: 'Cover',
@@ -67,7 +67,7 @@ const FoundEntries = () => {
       )
     }
      }
-], [handleClick])
+]
 
   return (
     <div>

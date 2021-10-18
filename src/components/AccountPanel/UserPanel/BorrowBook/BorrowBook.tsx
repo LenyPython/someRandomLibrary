@@ -4,7 +4,7 @@ import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { borrowReturn } from '../../../../slices/books/booksSlice'
 import { Entry } from '../../../../constants/interface/bookSlice'
 import { useAppDispatch } from '../../../../appStore/hooks'
-import Button, { ButtonProps } from '@mui/material/Button'
+import Button from '@mui/material/Button'
 import { 
   borrowBook,
   returnBook

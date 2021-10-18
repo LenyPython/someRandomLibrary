@@ -15,7 +15,7 @@ export const foundSlice = createSlice({
     addToFound: (state, action: PayloadAction<BookInterface>) => {
 			state.unshift(action.payload)
 			if(state.length > 5) state.pop()
-    } 
+    }
   }
 }
 )

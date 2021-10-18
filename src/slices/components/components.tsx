@@ -1,8 +1,5 @@
 import type { RootState } from '../../appStore/store'
-import { 
-  createSlice,
-  PayloadAction
-} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 export enum ThemeType {
   dark,
