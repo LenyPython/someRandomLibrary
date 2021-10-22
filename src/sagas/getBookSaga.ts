@@ -1,7 +1,8 @@
 import { all, call, put, takeEvery, takeLatest, Effect, StrictEffect } from 'redux-saga/effects'
 import { addToFound } from '../slices/foundEntries/foundEntries'
 import {
-	saveBook
+	saveBook,
+	sendError
 } from './actions'
 import { getBookActions } from './actionTypes/actions'
 
@@ -30,31 +31,32 @@ function* getBookWatcher(){
 }
 
 function* getBookWorker(action: Effect)
-	: Generator<StrictEffect, void, never>{
+	: Generator<StrictEffect, void, OpenLibResponse>{
 	console.log('getBookWorkerTriggered')
 	try {
 	const data: OpenLibResponse = yield call(fetchBook, action.payload)
 	if(Object.keys(data).length === 0) throw new Error('No data recieved')
 	const key = `ISBN:${action.payload}`
-	const { by_statement: author, title, cover:{ large: image } } = data[key]
+	const { by_statement: author, title, cover:{ large: cover } } = data[key]
 
 	 yield put(saveBook({
-									author,
+									authors: [author],
 									title,
 									ISBN: action.payload,
 									available: true,
-									image
+									cover
 								})
 					 ) 
-	} catch (e) {
-		console.log(e)
+	} catch (error) {
+		console.log(error)
+		yield put(sendError('Something went wrong with reciving data...'))
+
 	}
 
 }
 
 function* saveBookWorker(action: Effect) {
 	yield put(addToFound(action.payload))
-
 }
 
 const fetchBook = async (ISBN: string): Promise<any> => {

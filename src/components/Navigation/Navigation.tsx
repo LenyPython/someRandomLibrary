@@ -1,15 +1,6 @@
 import styled from 'styled-components' 
-import { 
-  selectTheme,
-  changeTheme,
-  ThemeType
-} from '../../slices/components/components'
-import { 
-  useAppDispatch,
-  useAppSelector
-} from '../../appStore/hooks'
+import ThemeSwitcher from './ThemeSwitcher'
 import { NavLink } from 'react-router-dom'
-import { Icon } from '@iconify/react'
 
 
 const NavContainer = styled.div`
@@ -38,51 +29,22 @@ const NavContainer = styled.div`
 const StyledA = styled(NavLink)`
   text-decoration: none;
   font-size: 1.2em;
-  margin-right: 1.3em;
   color: var(--main-header-font-color);
+  margin: 0 .6em;
+  &.login {
+    border: 1px solid var(--main-header-font-color);
+    border-radius: 5px;
+    padding: .4em .8em;
+  }
   &:hover {
-    opacity: 0.6;
+    opacity: .7;
   }
   &:active {
     font-weight: bold;
   }
 `
-const ThemeSwitcher = styled.label`
-  position:relative;
-  width: 80px;
-  height: 35px;
-  input {
-    position: relative;
-    appearance: none;
-    z-index: 1;
-  }
-  span{
-    background: var(--secondary-color);
-    position: absolute;
-    border-radius: 17px;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    & > div {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-    }
-   }
-   input:checked ~ span div{
-    left: 50px;
-   }
-`
 
 const Navigation = () => {
-  const theme = useAppSelector(selectTheme)
-  const dispatch = useAppDispatch()
-
-  const handleClick = () => {
-    dispatch(changeTheme())
-
-  }
   return(
   <NavContainer>
     <h1>Bookler</h1>
@@ -90,22 +52,11 @@ const Navigation = () => {
     <StyledA to='/home'> Home </StyledA>
     <StyledA to='/browse'> Browse </StyledA>
     <StyledA to='/account'> Account </StyledA>
-      <ThemeSwitcher>
-        <input type="checkbox"
-          onChange={handleClick}
-          checked={theme === ThemeType.dark}
-      />
-        <span>
-          <div>
-      {
-       theme === ThemeType.dark?
-      <Icon icon="fluent:weather-sunny-24-filled" width="25" height="25" color="yellow"/>:
-      <Icon icon="ri:moon-fill" width="25" height="25" color="grey"/>
-      }
-          </div>
-        </span>
-      </ThemeSwitcher>
+    <StyledA className='login' to='/login'> Login </StyledA>
+    <StyledA className='login' to='/register'> Register </StyledA>
+    <ThemeSwitcher />
     </div>
+
   </NavContainer>
   )}
 
