@@ -12,7 +12,7 @@ const theme = createTheme({
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          backgroundColor: 'var(--seconday-color)',
+          backgroundColor: 'var(--secondary-color)',
           color: 'var(--main-font-color)',
         },
       },

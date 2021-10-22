@@ -48,5 +48,4 @@ body {
 	min-width: 100vw;
 }
 `
-
 export default GlobalStyle
