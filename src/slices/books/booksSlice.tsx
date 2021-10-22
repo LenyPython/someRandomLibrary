@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../appStore/store'
-import { BOOKS } from './bookData'
 import { 
   BookInterface,
   StateInterface
@@ -9,8 +8,8 @@ import {
 
 
 const initialState:  StateInterface = {
-  list: BOOKS,
-  length: Object.keys(BOOKS).length
+  list: [],
+  length: 0
 }
 
 
@@ -18,6 +17,10 @@ export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
+    setState: (state, action: PayloadAction<BookInterface[]>) => {
+      state.list = action.payload
+      state.length = action.payload.length
+    },
     addBook: (state, action: PayloadAction<BookInterface>) => {
       state.list[state.length] = action.payload
       state.length++
@@ -33,7 +36,7 @@ export const booksSlice = createSlice({
 )
 
 
-export const { addBook, removeBook, borrowReturn } = booksSlice.actions
+export const { setState, addBook, removeBook, borrowReturn } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
 

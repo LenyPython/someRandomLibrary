@@ -14,7 +14,7 @@ const AdminMenu = () => {
   const handleAddRubish = () => {
     dispatch(addBook({
       title: 'BarKochba',
-      author: 'Some Random Dude',
+      authors: ['one', 'two'],
       available: Math.random() > 0.5
     }))
   }

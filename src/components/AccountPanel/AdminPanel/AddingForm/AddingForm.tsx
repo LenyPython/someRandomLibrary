@@ -56,10 +56,10 @@ const AddingForm: React.FC = () => {
     e.preventDefault()
     if(author === '' || title === '') return
     dispatch(addBook({
-            author,
+      authors: [ author ],
             title,
             available: true,
-            image: img
+            cover: img
           }))
     dispatch(changeTitle(''))
     dispatch(changeAuthor(''))

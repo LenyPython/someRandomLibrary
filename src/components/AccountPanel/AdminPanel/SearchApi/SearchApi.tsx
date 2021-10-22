@@ -38,7 +38,11 @@ const Container = styled.div`
     color: var(--main-button-font-color);
     margin: 1em auto;
     }
-
+    #error-msg{
+      font-size: 1.3rem;
+      color: var(--main-error-color);
+      margin: .5em;
+    }
 `
 
 const SearchApi = () => {
@@ -66,6 +70,7 @@ const SearchApi = () => {
       </label>
       <button onClick={handleClick}>Search...</button>
       </div>
+      <div id="error-msg"></div>
       <h2>Latest search: </h2>
       <FoundEntries />
     </Container>

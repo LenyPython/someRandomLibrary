@@ -18,7 +18,7 @@ const Container = styled.div`
 `
 
 const EntryData: React.FC<Props> = props => {
-  const { id, author, title, image, available, adminUser } = props
+  const { id, authors, title, cover:image, available, adminUser } = props
   return (
   <Container>
   {
@@ -30,7 +30,7 @@ const EntryData: React.FC<Props> = props => {
   />
   <EntryPanel
     id={id}
-    author={author}
+    author={authors.join(' ')}
     title={title}
     available={available}
   />

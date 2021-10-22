@@ -37,9 +37,9 @@ const BorrowedBooks = () => {
 
   const list: JSX.Element[] = []
       for(let entry in booksObj){
-    list.push(<EntryContainer key={booksObj[entry].author + booksObj[entry].title }>
+    list.push(<EntryContainer key={booksObj[entry].title + entry}>
         <h2>{booksObj[entry].title}</h2>
-        <h3>{booksObj[entry].author}</h3>
+        <h3>{booksObj[entry].authors.join(' ')}</h3>
       <Button 
         onClick={()=>handleClick(+entry)}
         variant="contained"

@@ -30,11 +30,12 @@ const FoundEntries = () => {
   }
   const data = useAppSelector(foundBooksSelector)
   const rows: GridRowData[] = data.map ((item, idx) => {
+    const authors = item.authors.join(' ')
     return { 
       'id': idx,
-      'author': item.author,
+      'author': authors,
       'title': item.title,
-      'cover': item.image,
+      'cover': item.cover
   }})
 
   const columns: GridColDef[] = [
@@ -50,9 +51,9 @@ const FoundEntries = () => {
     renderCell: (params) => {
       const { author, title, cover } = params.row
       const data = {
-        author,
+        authors: [ author ],
         title,
-        image: cover,
+        cover,
         available: true
       }
       return (

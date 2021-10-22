@@ -43,7 +43,7 @@ const BorrwoBook: React.FC<Entry> = props => {
   const dispatch = useAppDispatch()
   let { id } = useParams<Params>()
   if(!id) return <h2>No such book index</h2>
-  const { author, title, image, available } = props[+id]
+  const { authors, title, cover, available } = props[+id]
 
 const handleClick = (): void => {
   dispatch(borrowReturn(+id!))
@@ -59,15 +59,15 @@ const handleClick = (): void => {
     <Container>
     <ImgContainer>
       { 
-          image?
-        <img src={image} alt='cover' /> :
+          cover?
+        <img src={cover} alt='cover' /> :
         <NoImgIcon icon='carbon:no-image' />
       }
     </ImgContainer>
     <TextContainer>
       <div>
       <h2>{title}</h2>
-      <h3>{author}</h3>
+        <h3>{authors.join(' ')}</h3>
       </div>
       <Button 
         onClick={handleClick}
