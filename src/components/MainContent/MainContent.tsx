@@ -1,6 +1,7 @@
 import Welcome from '../Welcome/Welcome'
 import Browse from '../Browse/Browse'
 import AccountPanel from '../AccountPanel/AccountPanel'
+import LoginForm from '../LoginForm/LoginForm'
 import { Switch, Route } from 'react-router-dom'
 
 const MainContent = () => {
@@ -14,7 +15,13 @@ const MainContent = () => {
           </Route>
         <Route path='/home'>
           <Welcome />
-          </Route>
+        </Route>
+        <Route path='/login'>
+          <LoginForm />
+        </Route>
+        <Route path='/register'>
+          <LoginForm reg />
+        </Route>
         <Route path='/LenyPython/someRandomLibrary' exact>
           <Welcome />
           </Route>
