@@ -8,11 +8,15 @@ export enum getBookActions {
 
 export enum FbDataActions {
   GET_DATA = 'GET_DATA',
-  SAVE_DATA = 'SAVE_DATA'
+  SAVE_DATA = 'SAVE_DATA',
+  EMPTY_DATA = 'EMPTY_DATA'
 }
 
 export interface getFirebaseDataInterface {
   type: FbDataActions.GET_DATA
+}
+export interface emptyFirebaseDataInterface {
+  type: FbDataActions.EMPTY_DATA
 }
 export interface saveFbDataInterface {
   type: FbDataActions.SAVE_DATA
@@ -22,6 +26,10 @@ export interface saveFbDataInterface {
 export interface saveBookInterface {
   type: getBookActions.SAVE_BOOK
   payload: BookInterface
+}
+export interface getBookInterface {
+  type: getBookActions.GET_BOOK
+  payload: string
 }
 export interface errorInterface {
   type: getBookActions.ERROR

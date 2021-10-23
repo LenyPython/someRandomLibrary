@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import FoundEntries from './FoundEntries'
 import { useAppDispatch } from '../../../../appStore/hooks'
 import { useState } from 'react'
+import { getBook } from '../../../../sagas/actions'
 
 const Container = styled.div`
   background: var(--secondary-color);
@@ -57,7 +58,7 @@ const SearchApi = () => {
 
   const handleClick = () => {
     if(ISBN.length !== 10 && ISBN.length !== 13) return
-    dispatch({ type: 'GET_BOOK', payload: ISBN})
+    dispatch(getBook(ISBN))
   }
 
   return(

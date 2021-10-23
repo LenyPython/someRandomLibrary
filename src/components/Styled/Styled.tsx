@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 export const PanelGrid = styled.div`
@@ -60,4 +60,23 @@ export const DisabledBtn = styled.button`
   background: gray;
   color: var(--main-button-font-color);
   cursor: not-allowed;
+`
+
+export const StyledA = styled(NavLink)`
+  text-decoration: none;
+  font-size: 1.2em;
+  color: var(--main-header-font-color);
+  margin: 0 .6em;
+  &.login {
+    background: var(--main-color);
+    border: 1px solid var(--main-header-font-color);
+    border-radius: 5px;
+    padding: .4em .8em;
+  }
+  &:hover {
+    opacity: .7;
+  }
+  &:active {
+    font-weight: bold;
+  }
 `

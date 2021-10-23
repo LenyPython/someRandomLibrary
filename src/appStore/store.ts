@@ -5,6 +5,7 @@ import addFormStateReducer from '../slices/addBookForm/addBookForm'
 import borrowedBooksReducer from '../slices/borrowedBooks/borrowedBooks'
 import componentsReducer from '../slices/components/components'
 import foundBooksReducer from '../slices/foundEntries/foundEntries'
+import currentUserReducer from '../slices/user/user'
 import rootSaga from '../sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -15,7 +16,8 @@ export const store = configureStore({
     books: booksReducer,
     borrowedBooks: borrowedBooksReducer,
     addFormState: addFormStateReducer,
-    componentsState: componentsReducer
+    componentsState: componentsReducer,
+    currentUser: currentUserReducer
   },
   middleware: (getDefaultMiddleware) => 
      getDefaultMiddleware()

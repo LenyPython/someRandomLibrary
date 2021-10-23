@@ -2,6 +2,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import styled from 'styled-components'
 import { auth } from '../../firebase-config'
+import { useHistory } from 'react-router-dom'
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
@@ -9,14 +10,20 @@ import {
 import { useState } from 'react'
 
 const StyledForm = styled.form`
+  background: white;
+  border-radius: 10px;
+  padding: 8em;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `
 interface Props {
   reg?: boolean
 }
 
 const LoginForm: React.FC<Props> = ( { reg } ) => {
+  const history = useHistory()
   const [email, setEmail] = useState<string>('')
   const [pass1, setPass1] = useState<string>('')
   const [pass2, setPass2] = useState<string>('')
@@ -28,13 +35,22 @@ const LoginForm: React.FC<Props> = ( { reg } ) => {
     if(name === 'pass2') setPass2(value)
   }
   const handleSubmit = async () => {
-    if(!email || !pass1 || !pass2) return
-   reg
-     ?createUserWithEmailAndPassword(auth, email, pass1)
-     : await signInWithEmailAndPassword(auth, email, pass1)
+    if(!email || !pass1) return
+      try{
+        if(reg && pass2) {
+        await createUserWithEmailAndPassword(auth, email, pass1)
+        return
+        }
+      await signInWithEmailAndPassword(auth, email, pass1)
+      } catch(e) {
+        //dispatch error msg to errorSaga?????
+        console.log(e)
+      } finally {
         setEmail('')
         setPass1('')
         setPass2('')
+        history.push('/account')
+      }
   }
 
   return(

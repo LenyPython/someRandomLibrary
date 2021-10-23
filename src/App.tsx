@@ -4,13 +4,13 @@ import GlobalStyle from './components/Styled/GlobalStyle'
 import Footer from './components/Footer/Footer'
 import './App.css'
 import styled from 'styled-components'
-import db from './firebase-config'
-import { onSnapshot, collection } from 'firebase/firestore'
+import { auth } from './firebase-config'
+import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from './appStore/hooks'
-import { setState } from './slices/books/booksSlice'
+import { onUserChange } from './slices/user/user'
 import { selectTheme } from './slices/components/components'
-import { BookInterface } from './constants/interface/bookSlice'
+import { getFirebaseData, emptyFirebaseData } from './sagas/actions'
 
 
 const Container = styled.div`
@@ -24,21 +24,23 @@ const Container = styled.div`
 function App() {
   const theme = useAppSelector(selectTheme)
   const dispatch = useAppDispatch()
-  useEffect (() => onSnapshot(collection(db, 'BookEntry'), snapshot =>{
-    const booksArray: BookInterface[] = snapshot.docs.map(doc=>{
-      const { authors, title, ISBN, cover, available } = doc.data()
-      return {
-        authors,
-        title,
-        ISBN,
-        cover,
-        available
-      }
-    })
-      dispatch(setState(booksArray))
-                             
+
+
+  useEffect (() => onAuthStateChanged(auth, user => {
+    const payload = user ? JSON.stringify(user) : null
+    dispatch(onUserChange(payload))
+    if(payload) {
+      console.log('login')
+      dispatch(getFirebaseData())
+    }
+    else {
+      console.log('logout')
+      dispatch(emptyFirebaseData())
+    }
   })
   , []) 
+
+
   return (<>
     <GlobalStyle dark={theme} />
     <Navigation />
@@ -47,7 +49,7 @@ function App() {
       </Container>
     <Footer />
   </>
-         );
+         )
 }
 
 export default App;

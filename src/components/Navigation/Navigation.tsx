@@ -1,6 +1,7 @@
 import styled from 'styled-components' 
 import ThemeSwitcher from './ThemeSwitcher'
-import { NavLink } from 'react-router-dom'
+import LogMenu from './LogMenu'
+import { StyledA } from '../Styled/Styled'
 
 
 const NavContainer = styled.div`
@@ -26,23 +27,6 @@ const NavContainer = styled.div`
     align-items: center;
   }
 `
-const StyledA = styled(NavLink)`
-  text-decoration: none;
-  font-size: 1.2em;
-  color: var(--main-header-font-color);
-  margin: 0 .6em;
-  &.login {
-    border: 1px solid var(--main-header-font-color);
-    border-radius: 5px;
-    padding: .4em .8em;
-  }
-  &:hover {
-    opacity: .7;
-  }
-  &:active {
-    font-weight: bold;
-  }
-`
 
 const Navigation = () => {
   return(
@@ -51,9 +35,7 @@ const Navigation = () => {
     <div>
     <StyledA to='/home'> Home </StyledA>
     <StyledA to='/browse'> Browse </StyledA>
-    <StyledA to='/account'> Account </StyledA>
-    <StyledA className='login' to='/login'> Login </StyledA>
-    <StyledA className='login' to='/register'> Register </StyledA>
+    <LogMenu />
     <ThemeSwitcher />
     </div>
 

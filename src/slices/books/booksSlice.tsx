@@ -7,7 +7,7 @@ import {
 
 
 
-const initialState:  StateInterface = {
+const initialState: StateInterface = {
   list: [],
   length: 0
 }
