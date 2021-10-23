@@ -6,6 +6,19 @@ export enum getBookActions {
   ERROR = 'ERROR'
 }
 
+export enum FbDataActions {
+  GET_DATA = 'GET_DATA',
+  SAVE_DATA = 'SAVE_DATA'
+}
+
+export interface getFirebaseDataInterface {
+  type: FbDataActions.GET_DATA
+}
+export interface saveFbDataInterface {
+  type: FbDataActions.SAVE_DATA
+  payload: BookInterface
+}
+
 export interface saveBookInterface {
   type: getBookActions.SAVE_BOOK
   payload: BookInterface
