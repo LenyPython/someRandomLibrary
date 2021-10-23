@@ -14,8 +14,8 @@ export function* getFirebaseDataWatcher(){
 
 function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
 	console.log('getFirebaseDataWorker')
-	const response = yield call(getBookEntries)
-	// yield put(setState(response))
+	const response: BookInterface[] = yield call(getBookEntries)
+	yield put(setState(response))
 }
 
 function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
@@ -23,9 +23,18 @@ function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
 	yield put(setState([]))
 }
 
-const getBookEntries = async () =>  {
+const getBookEntries = async (): Promise<BookInterface[]> =>  {
+	let bookEntries: BookInterface[] = []
+	try{
 		const response = await getDocs(collection(db,'BookEntry'))
-		console.log(response)
+		bookEntries = response.docs.map( doc => {
+			const { authors, title, cover, ISBN, available } = doc.data()
+			return { authors, title, cover, ISBN, available }
+		})
+	} catch(e) {
+		console.log(e)
+	}
+	return bookEntries
 }
 
 
