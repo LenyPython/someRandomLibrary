@@ -1,7 +1,14 @@
+import { doc, setDoc } from 'firebase/firestore'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from 'firebase/auth'
 
+import {
+} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY ,
@@ -13,6 +20,21 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
 
-export default getFirestore(app)
+export default db
 export const auth = getAuth(app)
+
+export const createUser = async (email: string, pass: string) => {
+  try{
+  const { user } = await createUserWithEmailAndPassword(auth, email, pass)
+  await setDoc(doc(db,'users', user.uid), { admin: false } )
+
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+export const signIn = async (email: string, pass: string) => {
+   await signInWithEmailAndPassword(auth, email, pass)
+}

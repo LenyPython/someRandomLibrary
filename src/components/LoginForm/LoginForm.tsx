@@ -1,12 +1,11 @@
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import styled from 'styled-components'
-import { auth } from '../../firebase-config'
+import { 
+  signIn,
+  createUser
+} from '../../firebase-config'
 import { useHistory } from 'react-router-dom'
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from 'firebase/auth'
 import { useState } from 'react'
 
 const StyledForm = styled.form`
@@ -38,10 +37,10 @@ const LoginForm: React.FC<Props> = ( { reg } ) => {
     if(!email || !pass1) return
       try{
         if(reg && pass2) {
-        await createUserWithEmailAndPassword(auth, email, pass1)
+        await createUser(email, pass1)
         return
         }
-      await signInWithEmailAndPassword(auth, email, pass1)
+      await signIn(email,pass1)
       } catch(e) {
         //dispatch error msg to errorSaga?????
         console.log(e)
