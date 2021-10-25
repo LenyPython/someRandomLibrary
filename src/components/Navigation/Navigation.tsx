@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import ThemeSwitcher from './ThemeSwitcher'
 import LogMenu from './LogMenu'
 import { StyledA } from '../Styled/Styled'
+import { useAppSelector } from '../../appStore/hooks'
+import { getUser } from '../../slices/user/user'
 
 
 const NavContainer = styled.div`
@@ -29,12 +31,14 @@ const NavContainer = styled.div`
 `
 
 const Navigation = () => {
+  const { email, admin } = useAppSelector(getUser)
   return(
   <NavContainer>
-    <h1>Bookler</h1>
+    <h1>Bookler { admin && 'ADMIN ACC' }</h1>
     <div>
     <StyledA to='/home'> Home </StyledA>
     <StyledA to='/browse'> Browse </StyledA>
+    <p>{email}</p>
     <LogMenu />
     <ThemeSwitcher />
     </div>

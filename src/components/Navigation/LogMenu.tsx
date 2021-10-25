@@ -8,7 +8,7 @@ import { setState } from '../../slices/books/booksSlice'
 
 const LogMenu = () => {
     const dispatch = useAppDispatch()
-    const user = useAppSelector(getUser)
+    const { id, email } = useAppSelector(getUser)
     const handleSignOut = () => {
         signOut(auth)
         dispatch(setState([]))
@@ -16,7 +16,7 @@ const LogMenu = () => {
     return (
     <>
         {
-    user
+    id && email
         ?<>
     <StyledA to='/account'> Account </StyledA>
     <StyledA 
