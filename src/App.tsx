@@ -10,7 +10,11 @@ import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from './appStore/hooks'
 import { onUserChange } from './slices/user/user'
 import { selectTheme } from './slices/components/components'
-import { getFirebaseData, emptyFirebaseData } from './sagas/actions'
+import { 
+  getFirebaseData,
+  emptyFirebaseData,
+  checkAdminPriv
+} from './sagas/actions'
 
 
 const Container = styled.div`
@@ -27,14 +31,17 @@ function App() {
 
 
   useEffect (() => onAuthStateChanged(auth, user => {
-    const payload = user ? JSON.stringify(user) : null
+    console.log(user)
+    const payload = {
+      id: user ? user.uid : null,
+      email: user ? user.email : null
+    } 
     dispatch(onUserChange(payload))
-    if(payload) {
-      console.log('login')
+    if(user) {
       dispatch(getFirebaseData())
+      dispatch(checkAdminPriv(user.uid))
     }
     else {
-      console.log('logout')
       dispatch(emptyFirebaseData())
     }
   })

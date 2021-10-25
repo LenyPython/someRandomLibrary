@@ -1,6 +1,7 @@
 import db from '../firebase-config'
-import { collection, getDocs } from 'firebase/firestore'
-import { takeEvery, call, put, StrictEffect } from 'redux-saga/effects'
+import { collection, getDoc, doc, getDocs } from 'firebase/firestore'
+import { takeEvery, call, put, StrictEffect, Effect } from 'redux-saga/effects'
+import { setAdminPrivlidge } from '../slices/user/user'
 import { setState } from '../slices/books/booksSlice'
 import { FbDataActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
@@ -10,8 +11,16 @@ export function* getFirebaseDataWatcher(){
 	console.log('FirebaseDataWatcher')
 	yield takeEvery(FbDataActions.GET_DATA, getFbDataWorker)
 	yield takeEvery(FbDataActions.EMPTY_DATA, emptyFbDataWorker)
+	yield takeEvery(FbDataActions.CHECK_ADMIN_PRIV, checkAdminWorker)
 }
 
+function* checkAdminWorker (action: Effect):
+	Generator<StrictEffect, void, boolean>{
+	const uid = action.payload
+	const adminPriv = yield call(checkAdminPriv, uid)
+	if(adminPriv) yield put(setAdminPrivlidge())
+
+}
 function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
 	console.log('getFirebaseDataWorker')
 	const response: BookInterface[] = yield call(getBookEntries)
@@ -37,5 +46,14 @@ const getBookEntries = async (): Promise<BookInterface[]> =>  {
 	return bookEntries
 }
 
-
+const checkAdminPriv = async (uid: string) => {
+	try {
+	const docSnap = await getDoc(doc(db,'users', uid))
+	if(docSnap.exists()) return docSnap.data().admin
+	} catch(e) {
+		//maybe some wrning sign
+		console.log(e)
+	}
+	return false
+}
 
