@@ -22,14 +22,14 @@ const BrowserContainer = styled.div`
 
 const Browse: React.FC = () => {
   let bookObj = useAppSelector(selectBooks)
-  let user = useAppSelector(getUser)
+  let { id } = useAppSelector(getUser)
   const list = toBooksList(bookObj)
 
 
   return(
     <BrowserContainer>
       {
-        list.length > 0 || user
+        list.length > 0 || id
         ?list
         :
     <div>

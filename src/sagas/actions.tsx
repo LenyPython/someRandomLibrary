@@ -6,6 +6,7 @@ import {
   getBookInterface,
   errorInterface,
   getFirebaseDataInterface,
+  checkAdminPrivInterface,
   emptyFirebaseDataInterface
 } from './actionTypes/actions'
 
@@ -31,5 +32,10 @@ export const getFirebaseData = (): getFirebaseDataInterface => {
 }
 export const emptyFirebaseData = (): emptyFirebaseDataInterface => {
   return { type: FbDataActions.EMPTY_DATA }
+}
+export const checkAdminPriv = (payload: string): checkAdminPrivInterface => {
+  return { type: FbDataActions.CHECK_ADMIN_PRIV,
+          payload
+  }
 }
 
