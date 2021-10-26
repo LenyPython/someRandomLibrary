@@ -1,28 +1,26 @@
-import { useAppDispatch } from '../../../appStore/hooks'
 import { useRouteMatch } from 'react-router-dom'
+import {useAppSelector} from '../../../appStore/hooks'
+import {reqLength} from '../../../slices/requests/requestsSlice'
+import {logOut} from '../../../firebase-config'
 import { 
   StyledMenu,
+  Button,
   LinkA,
-  Button
 } from '../../Styled/Styled'
-import { addBook } from '../../../slices/books/booksSlice'
 
 
 const AdminMenu = () => {
   let { url } = useRouteMatch()
-  const dispatch = useAppDispatch()
-  const handleAddRubish = () => {
-    dispatch(addBook({
-      title: 'BarKochba',
-      authors: ['one', 'two'],
-      available: Math.random() > 0.5
-    }))
-  }
+  const requestsNumber = useAppSelector(reqLength)
+
   return (
     <StyledMenu>
     <LinkA to={`${url}/add`}>Add entry</LinkA>
-    <Button onClick={handleAddRubish}>Add rubbish</Button>
-    <LinkA to='/home'>Log out</LinkA>
+    <LinkA to={`${url}/requests`}>
+      Requests { requestsNumber > 0 && `${requestsNumber}` }
+    </LinkA>
+    <LinkA to={`${url}/show_users`}>Users</LinkA>
+    <Button onClick={logOut}>Logout</Button>
     </StyledMenu>
   )
 
