@@ -2,12 +2,10 @@ import { doc, setDoc } from 'firebase/firestore'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 import {
+  signOut,
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword
-} from 'firebase/auth'
-
-import {
 } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -37,4 +35,7 @@ export const createUser = async (email: string, pass: string) => {
 
 export const signIn = async (email: string, pass: string) => {
    await signInWithEmailAndPassword(auth, email, pass)
+}
+export const logOut = async () => {
+  await signOut(auth)
 }

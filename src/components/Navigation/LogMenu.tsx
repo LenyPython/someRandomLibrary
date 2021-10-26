@@ -1,8 +1,7 @@
 import { StyledA } from '../Styled/Styled'
 import { useAppSelector } from '../../appStore/hooks'
 import { getUser } from '../../slices/user/user'
-import { signOut } from 'firebase/auth'
-import { auth } from '../../firebase-config'
+import { logOut } from '../../firebase-config'
 import { useAppDispatch } from '../../appStore/hooks'
 import { setState } from '../../slices/books/booksSlice'
 
@@ -10,7 +9,7 @@ const LogMenu = () => {
     const dispatch = useAppDispatch()
     const { id, email } = useAppSelector(getUser)
     const handleSignOut = () => {
-        signOut(auth)
+        logOut()
         dispatch(setState([]))
     }
     return (

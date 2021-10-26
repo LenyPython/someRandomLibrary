@@ -1,5 +1,7 @@
 import { useRouteMatch } from 'react-router-dom'
+import {logOut} from '../../../firebase-config'
 import { StyledMenu, 
+  Button,
   LinkA
 } from '../../Styled/Styled'
 
@@ -9,7 +11,7 @@ const UserMenu = () => {
     <StyledMenu>
     <LinkA to={`${match.url}`}>Browse</LinkA>
     <LinkA to={`${match.url}/borrowed`}>My Borrowed</LinkA>
-    <LinkA to='/home'>Log out</LinkA>
+    <Button onClick={logOut}>Log out</Button>
     </StyledMenu>
   )
 
