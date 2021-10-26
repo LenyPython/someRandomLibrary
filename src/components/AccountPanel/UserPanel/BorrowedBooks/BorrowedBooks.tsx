@@ -3,21 +3,12 @@ import { selectBorrowedBooks } from '../../../../slices/borrowedBooks/borrowedBo
 import { returnBook } from '../../../../slices/borrowedBooks/borrowedBooks'
 import { borrowReturn } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
+import { Container } from '../../../Styled/Styled'
 import { 
   useAppSelector,
   useAppDispatch
 } from '../../../../appStore/hooks'
 
-const Container = styled.div`
-  display: flex;
-  background: var(--secondary-color);
-  border-radius: 5px;
-  margin: 0 1em;
-  padding: 2em 3em;
-  & > * {
-    margin: .6em 1em;
-  }
-`
 const EntryContainer = styled.div`
   display: flex;
   flex-direction: column;

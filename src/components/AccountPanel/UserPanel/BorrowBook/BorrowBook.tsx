@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { borrowReturn } from '../../../../slices/books/booksSlice'
-import { Entry } from '../../../../constants/interface/bookSlice'
+import { BookInterface } from '../../../../constants/interface/bookSlice'
 import { useAppDispatch } from '../../../../appStore/hooks'
 import Button from '@mui/material/Button'
 import { 
@@ -39,7 +39,7 @@ interface Params {
   id?: string
 }
 
-const BorrwoBook: React.FC<Entry> = props => {
+const BorrwoBook: React.FC<BookInterface[]> = props => {
   const dispatch = useAppDispatch()
   let { id } = useParams<Params>()
   if(!id) return <h2>No such book index</h2>

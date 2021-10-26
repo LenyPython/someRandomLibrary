@@ -3,9 +3,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useAppDispatch, useAppSelector } from '../../../../appStore/hooks'
 import { foundBooksSelector  } from '../../../../slices/foundEntries/foundEntries'
 import { BookInterface } from '../../../../constants/interface/bookSlice'
-import { addBook } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
 import type {} from '@mui/x-data-grid/themeAugmentation';
+import {addToAdd} from '../../../../slices/requests/requestsSlice';
 
 const theme = createTheme({
   components: {
@@ -25,8 +25,7 @@ const theme = createTheme({
 const FoundEntries = () => {
   const dispatch = useAppDispatch()
   const handleClick = (entry: BookInterface) => {
-    dispatch(addBook(entry))
-
+    dispatch(addToAdd(entry))
   }
   const data = useAppSelector(foundBooksSelector)
   const rows: GridRowData[] = data.map ((item, idx) => {

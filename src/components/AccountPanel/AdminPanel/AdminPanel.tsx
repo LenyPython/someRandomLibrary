@@ -1,5 +1,5 @@
 import AdminMenu from './AdminMenu'
-import AddingForm from './AddingForm/AddingForm'
+import AddingForm from './AddingForm'
 import Requests from './Requests'
 import { toBooksList } from '../../../customFunc/Funcs'
 import { useAppSelector } from '../../../appStore/hooks'
