@@ -80,3 +80,13 @@ export const StyledA = styled(NavLink)`
     font-weight: bold;
   }
 `
+export const Container = styled.div`
+  display: flex;
+  background: var(--secondary-color);
+  border-radius: 5px;
+  margin: 0 1em;
+  padding: 2em 3em;
+  & > * {
+    margin: .6em 1em;
+  }
+`

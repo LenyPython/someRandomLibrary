@@ -5,8 +5,7 @@ import {
 	takeEvery,
 	takeLatest,
 	Effect,
-	StrictEffect,
-	PutEffect
+	StrictEffect
 } from 'redux-saga/effects'
 import { addToFound } from '../slices/foundEntries/foundEntries'
 import {
@@ -40,14 +39,14 @@ function* getBookWatcher(){
 }
 
 function* getBookWorker(action: Effect)
-	: Generator<StrictEffect, PutEffect, OpenLibResponse>{
+	: Generator<StrictEffect, void, OpenLibResponse>{
 	console.log('getBookWorkerTriggered')
 	try {
 	const data: OpenLibResponse = yield call(fetchBook, action.payload)
-	if(Object.keys(data).length === 0) return put(sendError('No data recieved, probably wrong ISBN'))
+	if(Object.keys(data).length === 0) yield put(sendError('No data recieved, probably wrong ISBN'))
 	const key = `ISBN:${action.payload}`
 	const { by_statement: author, title, cover:{ large: cover } } = data[key]
-	return put(saveBook({
+	yield put(saveBook({
 									authors: [author],
 									title,
 									ISBN: action.payload,
@@ -57,7 +56,7 @@ function* getBookWorker(action: Effect)
 					 ) 
 	} catch (error) {
 		console.log(error)
-		return put(sendError('Something went wrong...'))
+		yield put(sendError('Something went wrong...'))
 	}
 }
 

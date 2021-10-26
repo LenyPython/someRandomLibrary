@@ -1,5 +1,5 @@
 export interface StateInterface {
-  list: Entry
+  list: BookInterface[]
   length: number
 }
 
@@ -11,6 +11,3 @@ export interface BookInterface {
   cover?: string
 }
 
-export interface Entry {
- [id: number]: BookInterface 
-}
