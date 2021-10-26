@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../appStore/store'
 
 
-interface initialStateInterface {
+export interface userInterface {
   id: string | null,
   email: string | null
   admin?: boolean
 }
-const initialState: initialStateInterface = {
+const initialState: userInterface = {
   id: null,
   email: null
 }
@@ -16,7 +16,7 @@ const user = createSlice({
   name: 'currentUser',
   initialState,
   reducers:{
-    onUserChange: (state, action: PayloadAction<initialStateInterface>) =>{
+    onUserChange: (state, action: PayloadAction<userInterface>) =>{
       const { id, email } = action.payload
       state.id = id
       state.email = email

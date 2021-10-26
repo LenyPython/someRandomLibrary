@@ -6,6 +6,7 @@ import { setState } from '../slices/books/booksSlice'
 import { FbDataActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
 import {getUsersData} from './actions'
+import {setUsers} from '../slices/usersData/user'
 
 
 export function* getFirebaseDataWatcher(){
@@ -39,7 +40,7 @@ function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
 
 function* getUsersDataWorker(): Generator<StrictEffect, void, []>{
 	const USERS = yield call(getUsersFromDb)
-	console.log(USERS)
+	yield put(setUsers(USERS))
 }
 
 const getBookEntries = async (): Promise<BookInterface[]> =>  {
@@ -59,8 +60,12 @@ const getBookEntries = async (): Promise<BookInterface[]> =>  {
 const getUsersFromDb = async () => {
 	try{
 	const docsSnap = await getDocs(collection(db,'users'))
-	docsSnap.forEach( doc => console.log(doc.data()) )
-	return docsSnap
+	const data = docsSnap.docs.map( doc => {
+		return {
+			id: doc.id, ...doc.data()
+		}
+	})
+	return data
 
 	} catch(e) {
 		console.log(e)
