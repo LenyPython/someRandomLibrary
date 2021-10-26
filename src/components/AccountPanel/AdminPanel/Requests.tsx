@@ -7,7 +7,11 @@ import {
   removeToAdd,
   removeToDelete
 } from '../../../slices/requests/requestsSlice'
-import { List, Button } from '../../Styled/Styled'
+import { 
+  List,
+  Button,
+  Container
+} from '../../Styled/Styled'
 
 const Requests = () => {
   const requests = useAppSelector(getRequests)
@@ -18,7 +22,7 @@ const Requests = () => {
     
   }
   const toDelete = requests.toDelete.map((item, idx)=> {
-    return <div key={item.ISBN + item.title}>{`ISBN: ${item.ISBN||'none'}, 
+    return <div key={item.ISBN + item.title + idx}>{`ISBN: ${item.ISBN||'none'}, 
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
@@ -26,17 +30,26 @@ const Requests = () => {
       </div>
   } )
   const toAdd = requests.toAdd.map((item, idx) => {
-    return <div key={item.ISBN + item.title}>{`ISBN: ${item.ISBN||'none'},
+    return <div key={item.ISBN + item.title + idx}>{`ISBN: ${item.ISBN||'none'},
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
       <Button onClick={()=>handleRemoveReq(idx, 'add')}>Remove Request</Button>
       </div>
   } )
-  return(<List>
-    {toDelete} <br />
-    {toAdd} <br />
-    </List>)
+  return(
+    <Container>
+      <List>
+        <h2>Books to Add</h2>
+    {toAdd}
+      </List>
+      <List>
+        <h2>Books to Delete</h2>
+    {toDelete}
+      </List><br />
+
+    </Container>
+  )
 }
 
 export default Requests

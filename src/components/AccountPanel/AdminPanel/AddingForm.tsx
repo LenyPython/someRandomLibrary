@@ -8,9 +8,7 @@ import {
   changeAuthor,
   FormInputEnum
 } from '../../../slices/addBookForm/addBookForm'
-import { 
-  addBook,
-} from '../../../slices/books/booksSlice'
+import { addToFound } from '../../../slices/foundEntries/foundEntries'
 
 const Container = styled.div`
 width: 90%;
@@ -55,12 +53,13 @@ const AddingForm: React.FC = () => {
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     if(author === '' || title === '') return
-    dispatch(addBook({
-      authors: [ author ],
+    const data = {
+            authors: [ author ],
             title,
             available: true,
             cover: img
-          }))
+          }
+    dispatch(addToFound(data))
     dispatch(changeTitle(''))
     dispatch(changeAuthor(''))
     dispatch(changeImg(''))
