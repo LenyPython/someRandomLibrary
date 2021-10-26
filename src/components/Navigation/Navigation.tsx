@@ -14,6 +14,7 @@ const NavContainer = styled.div`
   width: 100%;
   min-height: var(--nav-height);
   background: var(--main-color);
+  color: var(--main-header-font-color);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -34,7 +35,7 @@ const Navigation = () => {
   const { email, admin } = useAppSelector(getUser)
   return(
   <NavContainer>
-    <h1>Bookler { admin && 'ADMIN ACC' }</h1>
+    <h1>{ admin ? `Admin account` : 'Bookler' }</h1>
     <div>
     <StyledA to='/home'> Home </StyledA>
     <StyledA to='/browse'> Browse </StyledA>
