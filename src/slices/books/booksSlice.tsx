@@ -25,9 +25,6 @@ export const booksSlice = createSlice({
       state.list[state.length] = action.payload
       state.length++
     },
-    removeBook: (state, action: PayloadAction<number>) => {
-      delete state.list[action.payload]
-    },
     borrowReturn: (state, action: PayloadAction<number>) => {
       state.list[action.payload].available = !state.list[action.payload].available
       }
@@ -36,7 +33,7 @@ export const booksSlice = createSlice({
 )
 
 
-export const { setState, addBook, removeBook, borrowReturn } = booksSlice.actions
+export const { setState, addBook, borrowReturn } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
 

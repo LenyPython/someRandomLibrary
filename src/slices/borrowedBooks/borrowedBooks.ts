@@ -10,7 +10,7 @@ import {
 
 
 const initialState: StateInterface = {
-	list: {},
+	list: [],
 	length: 0
 }
 
