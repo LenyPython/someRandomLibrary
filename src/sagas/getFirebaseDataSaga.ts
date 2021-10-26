@@ -5,11 +5,13 @@ import { setAdminPrivlidge } from '../slices/user/user'
 import { setState } from '../slices/books/booksSlice'
 import { FbDataActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
+import {getUsersData} from './actions'
 
 
 export function* getFirebaseDataWatcher(){
 	console.log('FirebaseDataWatcher')
 	yield takeEvery(FbDataActions.GET_DATA, getFbDataWorker)
+	yield takeEvery(FbDataActions.GET_USERS, getUsersDataWorker)
 	yield takeEvery(FbDataActions.EMPTY_DATA, emptyFbDataWorker)
 	yield takeEvery(FbDataActions.CHECK_ADMIN_PRIV, checkAdminWorker)
 }
@@ -18,7 +20,10 @@ function* checkAdminWorker (action: Effect):
 	Generator<StrictEffect, void, boolean>{
 	const uid = action.payload
 	const adminPriv = yield call(checkAdminPriv, uid)
-	if(adminPriv) yield put(setAdminPrivlidge())
+	if(adminPriv) {
+	yield put(setAdminPrivlidge())
+	yield put(getUsersData())
+	}
 
 }
 function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
@@ -30,6 +35,11 @@ function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
 function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
 	console.log('emptyFirebaseDataWorker')
 	yield put(setState([]))
+}
+
+function* getUsersDataWorker(): Generator<StrictEffect, void, []>{
+	const USERS = yield call(getUsersFromDb)
+	console.log(USERS)
 }
 
 const getBookEntries = async (): Promise<BookInterface[]> =>  {
@@ -44,6 +54,17 @@ const getBookEntries = async (): Promise<BookInterface[]> =>  {
 		console.log(e)
 	}
 	return bookEntries
+}
+
+const getUsersFromDb = async () => {
+	try{
+	const docsSnap = await getDocs(collection(db,'users'))
+	docsSnap.forEach( doc => console.log(doc.data()) )
+	return docsSnap
+
+	} catch(e) {
+		console.log(e)
+	}
 }
 
 const checkAdminPriv = async (uid: string) => {

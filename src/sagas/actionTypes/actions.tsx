@@ -10,7 +10,8 @@ export enum FbDataActions {
   GET_DATA = 'GET_DATA',
   SAVE_DATA = 'SAVE_DATA',
   EMPTY_DATA = 'EMPTY_DATA',
-  CHECK_ADMIN_PRIV = 'CHECK_ADMIN_PRIV'
+  CHECK_ADMIN_PRIV = 'CHECK_ADMIN_PRIV',
+  GET_USERS = 'GET_USERS'
 }
 
 export interface getFirebaseDataInterface {
@@ -18,6 +19,9 @@ export interface getFirebaseDataInterface {
 }
 export interface emptyFirebaseDataInterface {
   type: FbDataActions.EMPTY_DATA
+}
+export interface getUsersDataInterface {
+  type: FbDataActions.GET_USERS
 }
 export interface checkAdminPrivInterface {
   type: FbDataActions.CHECK_ADMIN_PRIV

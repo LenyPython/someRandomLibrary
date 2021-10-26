@@ -31,7 +31,6 @@ function App() {
 
 
   useEffect (() => onAuthStateChanged(auth, user => {
-    console.log(user)
     const payload = {
       id: user ? user.uid : null,
       email: user ? user.email : null

@@ -1,6 +1,7 @@
 import AdminMenu from './AdminMenu'
 import AddingForm from './AddingForm'
 import Requests from './Requests'
+import Users from './Users'
 import { toBooksList } from '../../../customFunc/Funcs'
 import { useAppSelector } from '../../../appStore/hooks'
 import { selectBooks } from '../../../slices/books/booksSlice'
@@ -26,6 +27,9 @@ const AdminPanel: React.FC = () =>{
     <Switch>
       <Route path={`${match.path}/add`}>
         <AddingForm />
+      </Route>
+      <Route path={`${match.path}/show_users`} >
+        <Users />
       </Route>
       <Route path={`${match.path}/requests`} >
         <Requests />
