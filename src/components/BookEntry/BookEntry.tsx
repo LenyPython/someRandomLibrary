@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import EntryData from './EntryData/EntryData'
 import { Link } from 'react-router-dom'
 import { DisabledBtn } from '../Styled/Styled'
-import { useAppDispatch } from '../../appStore/hooks'
-import { returnBook } from '../../slices/borrowedBooks/borrowedBooks'
+import { useAppDispatch, useAppSelector } from '../../appStore/hooks'
 import { BookInterface } from '../../constants/interface/bookSlice'
 import {addToDelete} from '../../slices/requests/requestsSlice'
+import {getUser} from '../../slices/user/user'
 
 export const StyledEntry = styled.div`
   display: flex;
@@ -45,18 +45,13 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 `
 
-export interface Props extends BookInterface {
-  id: number
-  adminUser?: boolean
-}
-
-const BookEntry: React.FC<Props> = props => {
-  const { id, adminUser, available } = props
+const BookEntry: React.FC<BookInterface> = props => {
+  const { id, available } = props
+  const { admin } = useAppSelector(getUser)
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
     dispatch(addToDelete(props))
-    dispatch(returnBook(id))
   }
   
   return(
@@ -64,9 +59,9 @@ const BookEntry: React.FC<Props> = props => {
   <EntryData {...props}/>
   <div>
   { 
-  adminUser ?  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>:
+  admin ?  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>:
    available?
-  <StyledLink to={`/account/user/borrow/${id}`}>Borrow It!</StyledLink> :
+  <StyledLink to={`/account/borrow/${id}`}>Borrow It!</StyledLink> :
   <DisabledBtn>Unavailable</DisabledBtn>
   }
   </div>

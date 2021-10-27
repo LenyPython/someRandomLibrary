@@ -4,6 +4,7 @@ export interface StateInterface {
 }
 
 export interface BookInterface {
+  id: string
   authors: string[]
   title: string
   available: boolean

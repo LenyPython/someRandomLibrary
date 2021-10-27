@@ -47,6 +47,7 @@ function* getBookWorker(action: Effect)
 	const key = `ISBN:${action.payload}`
 	const { by_statement: author, title, cover:{ large: cover } } = data[key]
 	yield put(saveBook({
+									id: '',
 									authors: [author],
 									title,
 									ISBN: action.payload,

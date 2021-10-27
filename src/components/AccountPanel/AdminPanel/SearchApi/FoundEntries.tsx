@@ -50,6 +50,7 @@ const FoundEntries = () => {
     renderCell: (params) => {
       const { author, title, cover } = params.row
       const data = {
+        id: '',
         authors: [ author ],
         title,
         cover,

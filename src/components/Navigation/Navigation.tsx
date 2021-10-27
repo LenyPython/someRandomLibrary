@@ -38,8 +38,11 @@ const Navigation = () => {
     <h1>{ admin ? `Admin account` : 'Bookler' }</h1>
     <div>
     <StyledA to='/home'> Home </StyledA>
+      {
+      email?
+        <p>{email}</p>:
     <StyledA to='/browse'> Browse </StyledA>
-    <p>{email}</p>
+      }
     <LogMenu />
     <ThemeSwitcher />
     </div>

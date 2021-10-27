@@ -18,10 +18,8 @@ export const borrowedList = createSlice({
 	name: 'borrowedBooks',
 	initialState,
 	reducers: {
-    borrowBook: (state, action: PayloadAction<{id: number, book: BookInterface}>) => {
-      let { id, book } = action.payload
-      state.list[id] = book
-      state.length++
+    borrowBook: (state, action: PayloadAction<BookInterface>) => {
+      state.list.push(action.payload)
     },
     returnBook: (state, action: PayloadAction<number>) => {
       if(state.list[action.payload] === undefined) return

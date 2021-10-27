@@ -30,7 +30,7 @@ const UserPanel: React.FC = () =>{
       </List>
       </Route>
       <Route path={`${url}/borrow/:id`}>
-        <BorrowBook {...booksObj} />
+        <BorrowBook />
       </Route>
       <Route path={`${url}/borrowed`}>
         <BorrowedBooks />

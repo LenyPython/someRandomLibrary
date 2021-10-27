@@ -19,7 +19,7 @@ import {
 const AdminPanel: React.FC = () =>{
   let match = useRouteMatch()
   const booksObj = useAppSelector(selectBooks)
-  const list = toBooksList(booksObj, true)
+  const list = toBooksList(booksObj)
   
   return(
   <PanelGrid>

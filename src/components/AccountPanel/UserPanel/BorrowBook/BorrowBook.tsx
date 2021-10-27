@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
-import { borrowReturn } from '../../../../slices/books/booksSlice'
 import { BookInterface } from '../../../../constants/interface/bookSlice'
-import { useAppDispatch } from '../../../../appStore/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../appStore/hooks'
+import { selectBooks } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
-import { 
-  borrowBook,
-  returnBook
-} from '../../../../slices/borrowedBooks/borrowedBooks'
 
 const Container = styled.div`
   background: var(--secondary-color);
@@ -39,22 +35,19 @@ interface Params {
   id?: string
 }
 
-const BorrwoBook: React.FC<BookInterface[]> = props => {
+const BorrwoBook = () => {
   const dispatch = useAppDispatch()
+  const BOOKS = useAppSelector<BookInterface[]>(selectBooks)
   let { id } = useParams<Params>()
+  console.log(id)
   if(!id) return <h2>No such book index</h2>
-  const { authors, title, cover, available } = props[+id]
+  const book = BOOKS.find(item => item.id === id)
+  if(book === undefined) return <h1>Something went wrong...</h1>
+  const { available, cover, title, authors } = book!
 
 const handleClick = (): void => {
-  dispatch(borrowReturn(+id!))
-  available?
-  dispatch(borrowBook({
-    id: +id!,
-    book: props[+id!]
-  })):
-  dispatch(returnBook(+id!))
+  // need to create new actions and async saga control
 }
-
   return(
     <Container>
     <ImgContainer>
@@ -84,6 +77,7 @@ const handleClick = (): void => {
     </TextContainer>
     </Container>
   )
+
 }
 
 export default BorrwoBook

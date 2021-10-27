@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import ImgScreener from '../ImgScreener/ImgScreener'
 import EntryPanel from '../EntryPanel/EntryPanel'
-import { Props } from '../BookEntry'
+import {BookInterface} from '../../../constants/interface/bookSlice'
+import {useAppSelector} from '../../../appStore/hooks'
+import {getUser} from '../../../slices/user/user'
 
 const Container = styled.div`
   display: flex;
@@ -17,20 +19,21 @@ const Container = styled.div`
 
 `
 
-const EntryData: React.FC<Props> = props => {
-  const { id, authors, title, cover:image, available, adminUser } = props
+const EntryData: React.FC<BookInterface> = props => {
+  const { admin } = useAppSelector(getUser)
+  const { id, authors, title, cover, available } = props
   return (
   <Container>
-  {
-    adminUser &&  <h3>{id}</h3>
-  }
   <ImgScreener
     title={title}
-    image={image}
+    image={cover}
   />
+  {
+    admin &&  <h4>ID: {id}</h4>
+  }
   <EntryPanel
     id={id}
-    author={authors.join(' ')}
+    authors={authors}
     title={title}
     available={available}
   />

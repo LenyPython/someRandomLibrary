@@ -15,6 +15,7 @@ const AdminMenu = () => {
 
   return (
     <StyledMenu>
+    <LinkA to={`${url}`}>Browse</LinkA>
     <LinkA to={`${url}/add`}>Add entry</LinkA>
     <LinkA to={`${url}/requests`}>
       Requests { requestsNumber > 0 && `${requestsNumber}` }

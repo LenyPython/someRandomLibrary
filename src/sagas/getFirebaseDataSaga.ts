@@ -49,7 +49,7 @@ const getBookEntries = async (): Promise<BookInterface[]> =>  {
 		const response = await getDocs(collection(db,'BookEntry'))
 		bookEntries = response.docs.map( doc => {
 			const { authors, title, cover, ISBN, available } = doc.data()
-			return { authors, title, cover, ISBN, available }
+			return { id: doc.id, authors, title, cover, ISBN, available }
 		})
 	} catch(e) {
 		console.log(e)
