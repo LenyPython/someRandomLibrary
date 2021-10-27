@@ -5,18 +5,21 @@ interface  addFormInterface {
   author: string
   title: string
   img: string
+  ISBN: string
 }
 
 export enum FormInputEnum {
   author = 'author',
   title = 'title',
-  img = 'img'
+  img = 'img',
+  ISBN = 'ISBN'
 }
 
 const initialState: addFormInterface = {
   author: '',
   title: '',
-  img: ''
+  img: '',
+  ISBN: ''
 }
 export const addFormState = createSlice({
   name: 'addNewPositionForm',
@@ -30,13 +33,16 @@ export const addFormState = createSlice({
     },
     changeImg: (state, action: PayloadAction<string>):void => {
       state.img = action.payload
+    },
+    changeISBN: (state, action: PayloadAction<string>):void => {
+      state.ISBN = action.payload
     } 
   }
 }
 )
 
 
-export const { changeAuthor, changeTitle, changeImg } = addFormState.actions
+export const { changeISBN, changeAuthor, changeTitle, changeImg } = addFormState.actions
 
 export const selectAddForm = (state: RootState) => state.addFormState
 

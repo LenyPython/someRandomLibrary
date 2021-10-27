@@ -3,6 +3,7 @@ import SearchApi from  './SearchApi/SearchApi'
 import { useAppDispatch, useAppSelector } from '../../../appStore/hooks'
 import {
   selectAddForm,
+  changeISBN,
   changeImg,
   changeTitle,
   changeAuthor,
@@ -47,7 +48,7 @@ form {
 
 const AddingForm: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { author, title, img } = useAppSelector(selectAddForm)
+  const { author, title, img, ISBN } = useAppSelector(selectAddForm)
 
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>): void => {
@@ -67,15 +68,20 @@ const AddingForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault()
+    const string = e.target.value
     switch(e.target.name){
       case FormInputEnum.author:
-        dispatch(changeAuthor(e.target.value))
+        dispatch(changeAuthor(string))
         break
       case FormInputEnum.title:
-        dispatch(changeTitle(e.target.value))
+        dispatch(changeTitle(string))
         break
       case FormInputEnum.img:
-        dispatch(changeImg(e.target.value))
+        dispatch(changeImg(string))
+        break
+      case FormInputEnum.ISBN:
+        if(string.match(/\D+/)) return
+        dispatch(changeISBN(string))
         break
       default:
         throw new Error('Something went wrong with filling the form...')
@@ -86,6 +92,8 @@ const AddingForm: React.FC = () => {
     <Container>
       <SearchApi />
       <form onSubmit={handleSubmit}>
+      <label htmlFor='ISBN'>ISBN</label>
+      <input type="text" onChange={handleChange} name={FormInputEnum.ISBN} value={ISBN} />
       <label htmlFor='author'>Author</label>
       <input type="text" onChange={handleChange} name={FormInputEnum.author} value={author} />
       <label htmlFor='title'>Title</label>
