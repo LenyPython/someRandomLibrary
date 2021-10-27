@@ -1,5 +1,6 @@
 import { BookInterface } from '../constants/interface/bookSlice'
 import { 
+  usersActions,
   FbDataActions,
   getBookActions,
   saveBookInterface,
@@ -8,6 +9,7 @@ import {
   getFirebaseDataInterface,
   getUsersDataInterface,
   checkAdminPrivInterface,
+  updateUserPrivlidgeInterface,
   emptyFirebaseDataInterface
 } from './actionTypes/actions'
 
@@ -35,10 +37,15 @@ export const emptyFirebaseData = (): emptyFirebaseDataInterface => {
   return { type: FbDataActions.EMPTY_DATA }
 }
 export const getUsersData = (): getUsersDataInterface => {
-  return { type: FbDataActions.GET_USERS }
+  return { type: usersActions.GET_USERS }
+}
+export const updateUserPrivlidge = (id: string, admin: boolean): updateUserPrivlidgeInterface => {
+  return { type: usersActions.CHANGE_STATUS,
+    payload: { id, admin }
+  }
 }
 export const checkAdminPriv = (payload: string): checkAdminPrivInterface => {
-  return { type: FbDataActions.CHECK_ADMIN_PRIV,
+  return { type: usersActions.CHECK_ADMIN_PRIV,
           payload
   }
 }

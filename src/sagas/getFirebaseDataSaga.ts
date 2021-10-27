@@ -3,7 +3,7 @@ import { collection, getDoc, doc, getDocs } from 'firebase/firestore'
 import { takeEvery, call, put, StrictEffect, Effect } from 'redux-saga/effects'
 import { setAdminPrivlidge } from '../slices/user/user'
 import { setState } from '../slices/books/booksSlice'
-import { FbDataActions } from './actionTypes/actions'
+import { FbDataActions, usersActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
 import {getUsersData} from './actions'
 import {setUsers} from '../slices/usersData/user'
@@ -12,9 +12,9 @@ import {setUsers} from '../slices/usersData/user'
 export function* getFirebaseDataWatcher(){
 	console.log('FirebaseDataWatcher')
 	yield takeEvery(FbDataActions.GET_DATA, getFbDataWorker)
-	yield takeEvery(FbDataActions.GET_USERS, getUsersDataWorker)
 	yield takeEvery(FbDataActions.EMPTY_DATA, emptyFbDataWorker)
-	yield takeEvery(FbDataActions.CHECK_ADMIN_PRIV, checkAdminWorker)
+	yield takeEvery(usersActions.GET_USERS, getUsersDataWorker)
+	yield takeEvery(usersActions.CHECK_ADMIN_PRIV, checkAdminWorker)
 }
 
 function* checkAdminWorker (action: Effect):

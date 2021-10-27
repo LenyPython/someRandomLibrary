@@ -26,7 +26,10 @@ export const auth = getAuth(app)
 export const createUser = async (email: string, pass: string) => {
   try{
   const { user } = await createUserWithEmailAndPassword(auth, email, pass)
-  await setDoc(doc(db,'users', user.uid), { admin: false } )
+  await setDoc(doc(db,'users', user.uid), { 
+    admin: false,
+    email: user.email
+  } )
 
   } catch(e) {
     console.log(e)
