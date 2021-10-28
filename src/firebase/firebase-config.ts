@@ -30,6 +30,9 @@ export const createUser = async (email: string, pass: string) => {
     admin: false,
     email: user.email
   } )
+  await setDoc(doc(db,'borrowed', user.uid), { 
+    books: []
+  } )
 
   } catch(e) {
     console.log(e)
