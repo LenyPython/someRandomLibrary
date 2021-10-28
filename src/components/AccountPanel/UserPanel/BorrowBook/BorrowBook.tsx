@@ -42,7 +42,6 @@ const BorrwoBook = () => {
   const user = useAppSelector(getUser)
   const BOOKS = useAppSelector<BookInterface[]>(selectBooks)
   let { id } = useParams<Params>()
-  console.log(id)
   if(!id) return <h2>No such book index</h2>
   if(!user) return <h2> You must be logged in to borroa a book </h2>
   const book = BOOKS.find(item => item.id === id)

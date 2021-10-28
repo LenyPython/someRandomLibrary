@@ -48,10 +48,6 @@ export interface saveFbDataInterface {
   payload: BookInterface
 }
 
-export interface saveMyBorrowedInterface {
-  type: getBookActions.SAVE_BORROWED_BOOKS
-  payload: BookInterface[]
-}
 export interface saveBookInterface {
   type: getBookActions.SAVE_BOOK
   payload: BookInterface

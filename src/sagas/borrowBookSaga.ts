@@ -1,9 +1,8 @@
 import { takeEvery, put, call, Effect, StrictEffect } from 'redux-saga/effects'
 import { doc, getDoc } from 'firebase/firestore'
 import { usersActions } from './actionTypes/actions'
-import { saveMyBorrowed } from './actions'
+import { saveMyBorrowed } from '../slices/borrowedBooks/borrowedBooks'
 import db from '../firebase/firebase-config'
-import {BookInterface} from '../constants/interface/bookSlice'
 
 export function* getBorrowedWatcher() {
 	console.log('borrowReturnWatcher')
@@ -11,7 +10,7 @@ export function* getBorrowedWatcher() {
 }
 
 function* getBorrowedWorker(action: Effect):
-	Generator<StrictEffect, void, BookInterface[]>{
+	Generator<StrictEffect, void, string[]>{
 	console.log('borrowReturnorker')
 	const borrowedBooks = yield call(getBorrowed, action.payload)
 	yield put(saveMyBorrowed(borrowedBooks))

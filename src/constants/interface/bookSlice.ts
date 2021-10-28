@@ -1,6 +1,5 @@
 export interface StateInterface {
   list: BookInterface[]
-  length: number
 }
 
 export interface BookInterface {

@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 import { selectBorrowedBooks } from '../../../../slices/borrowedBooks/borrowedBooks'
-import { returnBook } from '../../../../slices/borrowedBooks/borrowedBooks'
-import { borrowReturn } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
 import { Container } from '../../../Styled/Styled'
 import { 
   useAppSelector,
   useAppDispatch
 } from '../../../../appStore/hooks'
+import {selectBooks} from '../../../../slices/books/booksSlice'
 
 const EntryContainer = styled.div`
   display: flex;
@@ -18,21 +17,25 @@ const EntryContainer = styled.div`
 `
 
 const BorrowedBooks = () => {
-  let booksObj = useAppSelector(selectBorrowedBooks)
+  const borrowedBooksIds = useAppSelector(selectBorrowedBooks)
   const dispatch = useAppDispatch()
+  const Books = useAppSelector(selectBooks)
+  let hash: { [key: string]: number } = {}
+  for(let i in Books) hash[Books[i].id] = +i
 
-  const handleClick =(id: number) => {
-    dispatch(borrowReturn(id))
-    dispatch(returnBook(id))
+  const handleClick =(id: string) => {
+    console.log(`borrowing returning: ${id}`)
   }
 
   const list: JSX.Element[] = []
-      for(let entry in booksObj){
-    list.push(<EntryContainer key={booksObj[entry].title + entry}>
-        <h2>{booksObj[entry].title}</h2>
-        <h3>{booksObj[entry].authors.join(' ')}</h3>
+  for(let entry in borrowedBooksIds) {
+  const id = borrowedBooksIds[entry]
+  const { title, authors } = Books[hash[id]]
+    list.push(<EntryContainer key={id}>
+        <h2>{title}</h2>
+        <h3>{authors.join(', ')}</h3>
       <Button 
-        onClick={()=>handleClick(+entry)}
+        onClick={()=>handleClick(id)}
         variant="contained"
         sx={{
           background: 'var(--main-color)',

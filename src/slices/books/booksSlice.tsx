@@ -8,10 +8,8 @@ import {
 
 
 const initialState: StateInterface = {
-  list: [],
-  length: 0
+  list: []
 }
-
 
 export const booksSlice = createSlice({
   name: 'books',
@@ -19,21 +17,13 @@ export const booksSlice = createSlice({
   reducers: {
     setState: (state, action: PayloadAction<BookInterface[]>) => {
       state.list = action.payload
-      state.length = action.payload.length
-    },
-    addBook: (state, action: PayloadAction<BookInterface>) => {
-      state.list[state.length] = action.payload
-      state.length++
-    },
-    borrowReturn: (state, action: PayloadAction<number>) => {
-      state.list[action.payload].available = !state.list[action.payload].available
-      }
+    }
     } 
   }
 )
 
 
-export const { setState, addBook, borrowReturn } = booksSlice.actions
+export const { setState } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
 

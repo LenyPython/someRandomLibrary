@@ -11,15 +11,9 @@ import {
   getBorrowedInterface,
   checkAdminPrivInterface,
   updateUserPrivlidgeInterface,
-  saveMyBorrowedInterface,
   emptyFirebaseDataInterface
 } from './actionTypes/actions'
 
-export const saveMyBorrowed = (payload: BookInterface[]): saveMyBorrowedInterface => {
-  return { type:  getBookActions.SAVE_BORROWED_BOOKS,
-          payload
-        }
-}
 export const saveBook = (payload: BookInterface): saveBookInterface => {
   return { type:  getBookActions.SAVE_BOOK,
           payload
