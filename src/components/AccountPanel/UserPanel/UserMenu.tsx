@@ -1,5 +1,5 @@
 import { useRouteMatch } from 'react-router-dom'
-import {logOut} from '../../../firebase-config'
+import {logOut} from '../../../firebase/firebase-config'
 import { StyledMenu, 
   Button,
   LinkA

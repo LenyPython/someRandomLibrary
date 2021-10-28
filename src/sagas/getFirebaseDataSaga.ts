@@ -1,11 +1,11 @@
-import db from '../firebase-config'
+import db from '../firebase/firebase-config'
 import { collection, getDoc, doc, getDocs } from 'firebase/firestore'
 import { takeEvery, call, put, StrictEffect, Effect } from 'redux-saga/effects'
 import { setAdminPrivlidge } from '../slices/user/user'
 import { setState } from '../slices/books/booksSlice'
 import { FbDataActions, usersActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
-import {getUsersData} from './actions'
+import {getUsersData, getBorrowed} from './actions'
 import {setUsers} from '../slices/usersData/user'
 
 
@@ -24,6 +24,8 @@ function* checkAdminWorker (action: Effect):
 	if(adminPriv) {
 	yield put(setAdminPrivlidge())
 	yield put(getUsersData())
+	} else {
+		yield put(getBorrowed(uid))
 	}
 
 }

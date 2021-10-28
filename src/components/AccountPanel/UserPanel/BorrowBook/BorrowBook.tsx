@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { BookInterface } from '../../../../constants/interface/bookSlice'
 import { useAppSelector, useAppDispatch } from '../../../../appStore/hooks'
+import { getUser } from '../../../../slices/user/user'
+//import { borrowReturn } from '../../../../sagas/actions'
 import { selectBooks } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
 
@@ -37,16 +39,18 @@ interface Params {
 
 const BorrwoBook = () => {
   const dispatch = useAppDispatch()
+  const user = useAppSelector(getUser)
   const BOOKS = useAppSelector<BookInterface[]>(selectBooks)
   let { id } = useParams<Params>()
   console.log(id)
   if(!id) return <h2>No such book index</h2>
+  if(!user) return <h2> You must be logged in to borroa a book </h2>
   const book = BOOKS.find(item => item.id === id)
   if(book === undefined) return <h1>Something went wrong...</h1>
   const { available, cover, title, authors } = book!
 
 const handleClick = (): void => {
-  // need to create new actions and async saga control
+ // dispatch(borrowReturn(user.id!, id!))
 }
   return(
     <Container>

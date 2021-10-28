@@ -1,7 +1,7 @@
 import { takeEvery, call, Effect } from 'redux-saga/effects'
 import { doc, updateDoc } from 'firebase/firestore'
 import { usersActions } from './actionTypes/actions'
-import db from '../firebase-config'
+import db from '../firebase/firebase-config'
 
 export function* updateUsersWatcher() {
 	console.log('UserUpdateWatcher')
@@ -17,5 +17,4 @@ function* updateUsersWorker(action: Effect) {
 const updateUser = async (id: string, privlidge: boolean) => {
 	const userToUpdateRef = doc(db, "users", id)
 	await updateDoc(userToUpdateRef, { admin: privlidge })
-	console.log(id, privlidge)
 }

@@ -1,7 +1,7 @@
 import { StyledA } from '../Styled/Styled'
 import { useAppSelector } from '../../appStore/hooks'
 import { getUser } from '../../slices/user/user'
-import { logOut } from '../../firebase-config'
+import { logOut } from '../../firebase/firebase-config'
 import { useAppDispatch } from '../../appStore/hooks'
 import { setState } from '../../slices/books/booksSlice'
 

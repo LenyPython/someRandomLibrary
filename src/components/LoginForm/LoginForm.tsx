@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { 
   signIn,
   createUser
-} from '../../firebase-config'
+} from '../../firebase/firebase-config'
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 

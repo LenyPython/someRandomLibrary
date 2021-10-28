@@ -1,7 +1,7 @@
 import { useRouteMatch } from 'react-router-dom'
 import {useAppSelector} from '../../../appStore/hooks'
 import {reqLength} from '../../../slices/requests/requestsSlice'
-import {logOut} from '../../../firebase-config'
+import {logOut} from '../../../firebase/firebase-config'
 import { 
   StyledMenu,
   Button,
