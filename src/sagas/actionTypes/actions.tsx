@@ -2,6 +2,7 @@ import { BookInterface } from '../../constants/interface/bookSlice'
 
 export enum getBookActions {
   SAVE_BOOK = 'SAVE_BOOK',
+  SAVE_BORROWED_BOOKS = 'SAVE_BORROWED_BOOKS',
   GET_BOOK = 'GET_BOOK',
   ERROR = 'ERROR'
 }
@@ -14,7 +15,8 @@ export enum FbDataActions {
 export enum usersActions {
   CHECK_ADMIN_PRIV = 'CHECK_ADMIN_PRIV',
   GET_USERS = 'GET_USERS',
-  CHANGE_STATUS = 'CHANGE_STATUS'
+  CHANGE_STATUS = 'CHANGE_STATUS',
+  GET_BORROWED = 'GET_BORROWED'
 }
 
 export interface getFirebaseDataInterface {
@@ -22,6 +24,10 @@ export interface getFirebaseDataInterface {
 }
 export interface emptyFirebaseDataInterface {
   type: FbDataActions.EMPTY_DATA
+}
+export interface getBorrowedInterface {
+  type: usersActions.GET_BORROWED
+  payload: string
 }
 export interface getUsersDataInterface {
   type: usersActions.GET_USERS
@@ -42,6 +48,10 @@ export interface saveFbDataInterface {
   payload: BookInterface
 }
 
+export interface saveMyBorrowedInterface {
+  type: getBookActions.SAVE_BORROWED_BOOKS
+  payload: BookInterface[]
+}
 export interface saveBookInterface {
   type: getBookActions.SAVE_BOOK
   payload: BookInterface

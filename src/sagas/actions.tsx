@@ -8,11 +8,18 @@ import {
   errorInterface,
   getFirebaseDataInterface,
   getUsersDataInterface,
+  getBorrowedInterface,
   checkAdminPrivInterface,
   updateUserPrivlidgeInterface,
+  saveMyBorrowedInterface,
   emptyFirebaseDataInterface
 } from './actionTypes/actions'
 
+export const saveMyBorrowed = (payload: BookInterface[]): saveMyBorrowedInterface => {
+  return { type:  getBookActions.SAVE_BORROWED_BOOKS,
+          payload
+        }
+}
 export const saveBook = (payload: BookInterface): saveBookInterface => {
   return { type:  getBookActions.SAVE_BOOK,
           payload
@@ -38,6 +45,11 @@ export const emptyFirebaseData = (): emptyFirebaseDataInterface => {
 }
 export const getUsersData = (): getUsersDataInterface => {
   return { type: usersActions.GET_USERS }
+}
+export const getBorrowed = (uid: string): getBorrowedInterface => {
+  return { type: usersActions.GET_BORROWED,
+    payload:  uid 
+  }
 }
 export const updateUserPrivlidge = (id: string, admin: boolean): updateUserPrivlidgeInterface => {
   return { type: usersActions.CHANGE_STATUS,
