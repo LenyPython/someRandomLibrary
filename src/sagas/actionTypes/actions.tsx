@@ -1,4 +1,5 @@
 import { BookInterface } from '../../constants/interface/bookSlice'
+import {initialRequestsStateInterface} from '../../slices/requests/requestsSlice';
 
 export enum getBookActions {
   SAVE_BOOK = 'SAVE_BOOK',
@@ -11,6 +12,7 @@ export enum FbDataActions {
   GET_DATA = 'GET_DATA',
   SAVE_DATA = 'SAVE_DATA',
   EMPTY_DATA = 'EMPTY_DATA',
+  UPDATE_REQUESTS = 'UPDATE_REQUESTS'
 }
 export enum usersActions {
   CHECK_ADMIN_PRIV = 'CHECK_ADMIN_PRIV',
@@ -31,6 +33,10 @@ export interface getBorrowedInterface {
 }
 export interface getUsersDataInterface {
   type: usersActions.GET_USERS
+}
+export interface updateDataBaseInterface {
+  type: FbDataActions.UPDATE_REQUESTS,
+  payload: initialRequestsStateInterface
 }
 export interface updateUserPrivlidgeInterface {
   type: usersActions.CHANGE_STATUS

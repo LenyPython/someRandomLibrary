@@ -7,6 +7,7 @@ import { FbDataActions, usersActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
 import {getUsersData, getBorrowed} from './actions'
 import {setUsers} from '../slices/usersData/user'
+import {addToDelete, addToAdd} from '../slices/requests/requestsSlice'
 
 
 export function* getFirebaseDataWatcher(){
@@ -24,6 +25,21 @@ function* checkAdminWorker (action: Effect):
 	if(adminPriv) {
 	yield put(setAdminPrivlidge())
 	yield put(getUsersData())
+	const toAddRequests = sessionStorage.getItem('toAdd')
+	const toDeleteRequests = sessionStorage.getItem('toDelete')
+	if(toDeleteRequests){
+		const array = JSON.parse(toDeleteRequests!)
+		for(let i in array){
+			yield put(addToDelete(array[i]))
+		}
+	}
+	if(toAddRequests){
+		const array = JSON.parse(toAddRequests!)
+		for(let i in array){
+			yield put(addToAdd(array[i]))
+		}
+	}
+
 	} else {
 		yield put(getBorrowed(uid))
 	}

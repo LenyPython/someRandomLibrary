@@ -1,4 +1,5 @@
 import { BookInterface } from '../constants/interface/bookSlice'
+import {initialRequestsStateInterface} from '../slices/requests/requestsSlice'
 import { 
   usersActions,
   FbDataActions,
@@ -11,7 +12,8 @@ import {
   getBorrowedInterface,
   checkAdminPrivInterface,
   updateUserPrivlidgeInterface,
-  emptyFirebaseDataInterface
+  emptyFirebaseDataInterface,
+  updateDataBaseInterface
 } from './actionTypes/actions'
 
 export const saveBook = (payload: BookInterface): saveBookInterface => {
@@ -43,6 +45,11 @@ export const getUsersData = (): getUsersDataInterface => {
 export const getBorrowed = (uid: string): getBorrowedInterface => {
   return { type: usersActions.GET_BORROWED,
     payload:  uid 
+  }
+}
+export const updateDataBase = (state: initialRequestsStateInterface): updateDataBaseInterface => {
+  return { type: FbDataActions.UPDATE_REQUESTS,
+    payload: state
   }
 }
 export const updateUserPrivlidge = (id: string, admin: boolean): updateUserPrivlidgeInterface => {
