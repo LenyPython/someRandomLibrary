@@ -45,14 +45,18 @@ function* getBookWorker(action: Effect)
 	const data: OpenLibResponse = yield call(fetchBook, action.payload)
 	if(Object.keys(data).length === 0) yield put(sendError('No data recieved, probably wrong ISBN'))
 	const key = `ISBN:${action.payload}`
-	const { by_statement: author, title, cover:{ large: cover } } = data[key]
+	const { by_statement: author, title, cover } = data[key]
+	let coverImg = ''
+	if(cover?.large) coverImg = cover.large
+	else if(cover?.medium) coverImg = cover.large
+	else if(cover?.small) coverImg = cover.large
 	yield put(saveBook({
 									id: '',
 									authors: [author],
 									title,
 									ISBN: action.payload,
 									available: true,
-									cover
+									cover: coverImg
 								})
 					 ) 
 	} catch (error) {
