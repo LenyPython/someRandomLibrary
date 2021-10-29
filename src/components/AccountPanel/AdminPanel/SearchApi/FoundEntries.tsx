@@ -27,12 +27,14 @@ const FoundEntries = () => {
   const handleClick = (entry: BookInterface) => {
     dispatch(addToAdd(entry))
   }
+
   const data = useAppSelector(foundBooksSelector)
   const rows: GridRowData[] = data.map ((item, idx) => {
     const authors = item.authors.join(' ')
     return { 
       'id': idx,
       'author': authors,
+      'ISBN': item.ISBN,
       'title': item.title,
       'cover': item.cover
   }})
@@ -40,6 +42,7 @@ const FoundEntries = () => {
   const columns: GridColDef[] = [
   { field: 'author', flex: 1, headerName: 'Author'},
   { field: 'title', flex: 1, headerName: 'Title' },
+  { field: 'ISBN', flex: 1, headerName: 'ISBN' },
   { field: 'cover', flex: 1, headerName: 'Cover',
     renderCell: (params) => {
       return(
@@ -48,10 +51,11 @@ const FoundEntries = () => {
     }},
   { field: 'btn', headerName: 'Add Entry',
     renderCell: (params) => {
-      const { author, title, cover } = params.row
+      const { author, ISBN, title, cover } = params.row
       const data = {
         id: '',
         authors: [ author ],
+        ISBN,
         title,
         cover,
         available: true

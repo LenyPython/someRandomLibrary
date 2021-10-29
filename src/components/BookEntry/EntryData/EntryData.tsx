@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const EntryData: React.FC<BookInterface> = props => {
   const { admin } = useAppSelector(getUser)
-  const { id, authors, title, cover, available } = props
+  const { id, title, cover } = props
   return (
   <Container>
   <ImgScreener
@@ -32,10 +32,7 @@ const EntryData: React.FC<BookInterface> = props => {
     admin &&  <h4>ID: {id}</h4>
   }
   <EntryPanel
-    id={id}
-    authors={authors}
-    title={title}
-    available={available}
+    {...props}
   />
   </Container>
   )

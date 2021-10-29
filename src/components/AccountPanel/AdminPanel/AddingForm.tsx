@@ -56,6 +56,7 @@ const AddingForm: React.FC = () => {
     if(author === '' || title === '') return
     const data = {
             id: '',
+            ISBN,
             authors: [ author ],
             title,
             available: true,

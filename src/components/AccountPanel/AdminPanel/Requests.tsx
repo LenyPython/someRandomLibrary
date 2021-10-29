@@ -7,6 +7,7 @@ import {
   removeToAdd,
   removeToDelete
 } from '../../../slices/requests/requestsSlice'
+import { updateDataBase } from '../../../sagas/actions'
 import { 
   List,
   Container
@@ -23,7 +24,7 @@ const Requests = () => {
     
   }
   const handleSubmitRequests = () => {
-
+    dispatch(updateDataBase(requests))
   }
   const toDelete = requests.toDelete.map(item=> {
     return <div key={item.id}>{`ISBN: ${item.ISBN||'none'}, 
@@ -37,7 +38,7 @@ const Requests = () => {
       </div>
   } )
   const toAdd = requests.toAdd.map(item => {
-    return <div key={item.id}>{`ISBN: ${item.ISBN||'none'},
+    return <div key={item.authors.join('') + item.title + item.ISBN}>{`ISBN: ${item.ISBN||'none'},
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
