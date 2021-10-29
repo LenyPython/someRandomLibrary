@@ -49,7 +49,7 @@ const BorrwoBook = () => {
   const { available, cover, title, authors } = book!
 
 const handleClick = (): void => {
- // dispatch(borrowReturn(user.id!, id!))
+ // dispatch(borrowBook(user.id!, id!))
 }
   return(
     <Container>

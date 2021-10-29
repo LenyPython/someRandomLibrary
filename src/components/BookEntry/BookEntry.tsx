@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../appStore/hooks'
 import { BookInterface } from '../../constants/interface/bookSlice'
 import {addToDelete} from '../../slices/requests/requestsSlice'
 import {getUser} from '../../slices/user/user'
+import Button from '@mui/material/Button'
 
 export const StyledEntry = styled.div`
   display: flex;
@@ -23,14 +24,6 @@ export const StyledEntry = styled.div`
   p{
     font-size: 1rem;
   }
-`
-const DelBtn = styled.button`
-  background: var(--main-error-color);
-  border: none;
-  padding: .5em;
-  color: var(--main-button-font-color);
-  font-size: 1.2rem;
-  border-radius: 10px;
 `
 const StyledLink = styled(Link)`
   border-radius: 10px;
@@ -59,10 +52,14 @@ const BookEntry: React.FC<BookInterface> = props => {
   <EntryData {...props}/>
   <div>
   { 
-  admin ?  <DelBtn onClick={handleClick}>Delete Entry</DelBtn>:
+  admin ?  <Button 
+    color="error"
+    variant="contained"
+    onClick={handleClick}>Delete Entry</Button>:
    available?
   <StyledLink to={`/account/borrow/${id}`}>Borrow It!</StyledLink> :
-  <DisabledBtn>Unavailable</DisabledBtn>
+  <Button
+  variant="contained" disabled>Unavailable</Button>
   }
   </div>
 </StyledEntry>

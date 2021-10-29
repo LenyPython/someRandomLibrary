@@ -9,9 +9,10 @@ import {
 } from '../../../slices/requests/requestsSlice'
 import { 
   List,
-  Button,
   Container
 } from '../../Styled/Styled'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 
 const Requests = () => {
   const requests = useAppSelector(getRequests)
@@ -21,12 +22,18 @@ const Requests = () => {
     else dispatch(removeToDelete(idx))
     
   }
+  const handleSubmitRequests = () => {
+
+  }
   const toDelete = requests.toDelete.map((item, idx)=> {
     return <div key={item.ISBN + item.title + idx}>{`ISBN: ${item.ISBN||'none'}, 
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
-      <Button onClick={()=>handleRemoveReq(idx, 'del')}>Remove Request</Button>
+      <Button 
+      color="error"
+      variant="outlined"
+      onClick={()=>handleRemoveReq(idx, 'del')}>Remove Request</Button>
       </div>
   } )
   const toAdd = requests.toAdd.map((item, idx) => {
@@ -34,10 +41,21 @@ const Requests = () => {
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
-      <Button onClick={()=>handleRemoveReq(idx, 'add')}>Remove Request</Button>
+      <Button 
+      color="error"
+      variant="outlined"
+      onClick={()=>handleRemoveReq(idx, 'add')}>Remove Request</Button>
       </div>
   } )
   return(
+    <Box textAlign='center'>
+      <Button 
+        color="success"
+        variant="contained"
+        onClick={handleSubmitRequests}
+        sx={{
+          margin:"15px auto"
+      }}> Make changes to DB</Button>
     <Container>
       <List>
         <h2>Books to Add</h2>
@@ -47,8 +65,8 @@ const Requests = () => {
         <h2>Books to Delete</h2>
     {toDelete}
       </List><br />
-
     </Container>
+    </Box>
   )
 }
 
