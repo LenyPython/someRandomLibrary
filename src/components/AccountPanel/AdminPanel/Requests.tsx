@@ -17,7 +17,7 @@ import Box from '@mui/material/Box'
 const Requests = () => {
   const requests = useAppSelector(getRequests)
   const dispatch = useAppDispatch()
-  const handleRemoveReq = (idx: number, cmd: 'add' | 'del'): void => {
+  const handleRemoveReq = (idx: string, cmd: 'add' | 'del'): void => {
     if(cmd === 'add') dispatch(removeToAdd(idx))
     else dispatch(removeToDelete(idx))
     
@@ -25,26 +25,26 @@ const Requests = () => {
   const handleSubmitRequests = () => {
 
   }
-  const toDelete = requests.toDelete.map((item, idx)=> {
-    return <div key={item.ISBN + item.title + idx}>{`ISBN: ${item.ISBN||'none'}, 
+  const toDelete = requests.toDelete.map(item=> {
+    return <div key={item.id}>{`ISBN: ${item.ISBN||'none'}, 
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
       <Button 
       color="error"
       variant="outlined"
-      onClick={()=>handleRemoveReq(idx, 'del')}>Remove Request</Button>
+      onClick={()=>handleRemoveReq(item.id, 'del')}>Remove Request</Button>
       </div>
   } )
-  const toAdd = requests.toAdd.map((item, idx) => {
-    return <div key={item.ISBN + item.title + idx}>{`ISBN: ${item.ISBN||'none'},
+  const toAdd = requests.toAdd.map(item => {
+    return <div key={item.id}>{`ISBN: ${item.ISBN||'none'},
       Title: ${item.title},
       authors: ${item.authors.join(' ')}`}
       <br />
       <Button 
       color="error"
       variant="outlined"
-      onClick={()=>handleRemoveReq(idx, 'add')}>Remove Request</Button>
+      onClick={()=>handleRemoveReq(item.id, 'add')}>Remove Request</Button>
       </div>
   } )
   return(

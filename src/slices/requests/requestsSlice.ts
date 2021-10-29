@@ -27,12 +27,12 @@ const requests = createSlice({
       state.toDelete.push(action.payload)
       state.length++
     },
-    removeToAdd: (state, action: PayloadAction<number>) =>{
-      state.toAdd = state.toAdd.filter((item, id ) => id !== action.payload)
+    removeToAdd: (state, action: PayloadAction<string>) =>{
+      state.toAdd = state.toAdd.filter(item => item.id !== action.payload)
       state.length--
     },
-    removeToDelete: (state, action: PayloadAction<number>) =>{
-      state.toDelete = state.toDelete.filter((item, id ) => id !== action.payload)
+    removeToDelete: (state, action: PayloadAction<string>) =>{
+      state.toDelete = state.toDelete.filter(item => item.id !== action.payload)
       state.length--
     }
   }
