@@ -13,7 +13,8 @@ import {
   checkAdminPrivInterface,
   updateUserPrivlidgeInterface,
   emptyFirebaseDataInterface,
-  updateDataBaseInterface
+  updateDataBaseInterface,
+  borrowReturnInterface
 } from './actionTypes/actions'
 
 export const saveBook = (payload: BookInterface): saveBookInterface => {
@@ -50,6 +51,12 @@ export const getBorrowed = (uid: string): getBorrowedInterface => {
 export const updateDataBase = (state: initialRequestsStateInterface): updateDataBaseInterface => {
   return { type: FbDataActions.UPDATE_REQUESTS,
     payload: state
+  }
+}
+export const borrowReturn = (id: string, uid: string, status: boolean):
+  borrowReturnInterface => {
+  return { type: usersActions.BORROW_RETURN,
+    payload: { id, uid, status }
   }
 }
 export const updateUserPrivlidge = (id: string, admin: boolean): updateUserPrivlidgeInterface => {

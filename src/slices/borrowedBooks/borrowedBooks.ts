@@ -14,12 +14,18 @@ export const borrowedList = createSlice({
 	reducers: {
     saveMyBorrowed: (state, action: PayloadAction<string[]>) => {
 			state.list = action.payload
-    }
-	}
+    },
+		addMyBorrowed: (state, action: PayloadAction<string>) =>{
+			state.list.push(action.payload)
+		},
+		removeMyBorrowed: (state, action: PayloadAction<string>) =>{
+			state.list = state.list.filter(item => item !== action.payload )
+		}
+}
 })
 
 
-export const { saveMyBorrowed } = borrowedList.actions
+export const { saveMyBorrowed, removeMyBorrowed, addMyBorrowed } = borrowedList.actions
 
 export const selectBorrowedBooks = (state: RootState) => state.borrowedBooks.list
 

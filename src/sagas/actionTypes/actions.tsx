@@ -18,9 +18,17 @@ export enum usersActions {
   CHECK_ADMIN_PRIV = 'CHECK_ADMIN_PRIV',
   GET_USERS = 'GET_USERS',
   CHANGE_STATUS = 'CHANGE_STATUS',
-  GET_BORROWED = 'GET_BORROWED'
+  GET_BORROWED = 'GET_BORROWED',
+  BORROW_RETURN = 'BORROW_RETURN'
 }
 
+export interface borrowReturnInterface {
+  type: usersActions.BORROW_RETURN
+  payload: { id: string
+    status: boolean
+    uid: string
+  }
+}
 export interface getFirebaseDataInterface {
   type: FbDataActions.GET_DATA
 }
