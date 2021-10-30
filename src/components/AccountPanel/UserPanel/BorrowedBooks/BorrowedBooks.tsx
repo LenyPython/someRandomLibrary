@@ -7,6 +7,8 @@ import {
   useAppDispatch
 } from '../../../../appStore/hooks'
 import {selectBooks} from '../../../../slices/books/booksSlice'
+import { borrowReturn } from '../../../../sagas/actions'
+import {getUser} from '../../../../slices/user/user'
 
 const EntryContainer = styled.div`
   display: flex;
@@ -17,14 +19,16 @@ const EntryContainer = styled.div`
 `
 
 const BorrowedBooks = () => {
-  const borrowedBooksIds = useAppSelector(selectBorrowedBooks)
   const dispatch = useAppDispatch()
+  let borrowedBooksIds = useAppSelector(selectBorrowedBooks)
+  const user = useAppSelector(getUser)
   const Books = useAppSelector(selectBooks)
+  if(borrowedBooksIds.length === 0) return <Container><h1>No Books borrowed</h1></Container>
   let hash: { [key: string]: number } = {}
   for(let i in Books) hash[Books[i].id] = +i
 
   const handleClick =(id: string) => {
-    console.log(`borrowing returning: ${id}`)
+    dispatch(borrowReturn(id, user.id!, true))
   }
 
   const list: JSX.Element[] = []

@@ -4,7 +4,7 @@ import { NoImgIcon } from '../../../BookEntry/ImgScreener/ImgScreener'
 import { BookInterface } from '../../../../constants/interface/bookSlice'
 import { useAppSelector, useAppDispatch } from '../../../../appStore/hooks'
 import { getUser } from '../../../../slices/user/user'
-//import { borrowReturn } from '../../../../sagas/actions'
+import { borrowReturn } from '../../../../sagas/actions'
 import { selectBooks } from '../../../../slices/books/booksSlice'
 import Button from '@mui/material/Button'
 
@@ -43,13 +43,13 @@ const BorrwoBook = () => {
   const BOOKS = useAppSelector<BookInterface[]>(selectBooks)
   let { id } = useParams<Params>()
   if(!id) return <h2>No such book index</h2>
-  if(!user) return <h2> You must be logged in to borroa a book </h2>
+  if(!user) return <h2> You must be logged in to borrow a book </h2>
   const book = BOOKS.find(item => item.id === id)
   if(book === undefined) return <h1>Something went wrong...</h1>
   const { available, cover, title, authors } = book!
 
 const handleClick = (): void => {
- // dispatch(borrowBook(user.id!, id!))
+  dispatch(borrowReturn(id!, user.id!, !available))
 }
   return(
     <Container>
