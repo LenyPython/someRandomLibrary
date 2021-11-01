@@ -27,9 +27,6 @@ const Users = () => {
       <p>Id: {item.id}</p>
       <p>Email: {item?.email ?? 'None'}</p>
       <p>Admin permison: {item.admin?'true':'false'}</p>
-      <Button
-      color="error"
-      >Delete Account</Button>
       {
         item.admin?
           <Button 

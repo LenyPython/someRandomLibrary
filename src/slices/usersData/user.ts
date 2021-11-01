@@ -17,13 +17,19 @@ const users = createSlice({
     setUsers: (state, action: PayloadAction<userInterface[]>) =>{
       state.users = action.payload
     },
+    updateUserStatus: (state, action: PayloadAction<{id: string, admin:boolean}>) => {
+      const { id, admin } = action.payload
+      state.users.forEach(user => {
+        if(user.id === id) user.admin = admin
+      } )
+    },
     removeUsers: (state) =>{
       state.users = []
     }
   }
 })
 
-export const { setUsers } = users.actions
+export const { setUsers, updateUserStatus } = users.actions
 
 export const getUsersData = (state: RootState) => state.usersData.users
 

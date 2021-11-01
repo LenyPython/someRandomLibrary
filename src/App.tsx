@@ -15,7 +15,6 @@ import {
   getFirebaseData,
   emptyFirebaseData,
   checkAdminPriv,
-  sendError
 } from './sagas/actions'
 
 

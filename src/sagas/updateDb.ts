@@ -1,13 +1,15 @@
-import { takeEvery, put, call, Effect } from 'redux-saga/effects'
+import { takeEvery, StrictEffect, put, call, Effect } from 'redux-saga/effects'
 import { doc, collection, updateDoc, addDoc, deleteDoc } from 'firebase/firestore'
 import { emptyRequests } from '../slices/requests/requestsSlice'
 import { 
 	usersActions,
 	FbDataActions
 } from './actionTypes/actions'
+import { updateUserStatus } from '../slices/usersData/user'
 import db from '../firebase/firebase-config'
 import { requiredData } from '../constants/interface/bookSlice'
 import {sendError} from './actions'
+import {addBook, removeBooks} from '../slices/books/booksSlice'
 
 export function* updateDBWatcher() {
 	console.log('UserUpdateWatcher')
@@ -15,19 +17,30 @@ export function* updateDBWatcher() {
 	yield takeEvery(FbDataActions.UPDATE_REQUESTS, updateDBWorker)
 }
 
-function* updateDBWorker(action: Effect){
+function* updateDBWorker(action: Effect):
+	Generator<StrictEffect, void, string>{
 	console.log('updateDBWorker')
 	const { toAdd, toDelete } = action.payload
 	try {
 	for(let i in toAdd){
 		const { ISBN, authors, title, cover } = toAdd[i]
-		console.log(toAdd[i])
-		yield call(addDocToDb, { ISBN, authors, title, cover })
+		const id = yield call(addDocToDb, { ISBN, authors, title, cover })
+		yield put(addBook({
+			id,
+			ISBN,
+			authors,
+			title,
+			cover,
+			available: true
+		}))
 	}
+	let toDeleteBooksHash: Set<string> = new Set()
 	for(let i in toDelete){
 		const { id } = toDelete[i]
 		yield call(deleteDocFormDb, id)
+		toDeleteBooksHash.add(id)
 	}
+	yield put(removeBooks(toDeleteBooksHash))
 	yield put(emptyRequests())
 	yield put(sendError({
 		alert: 'success',
@@ -46,6 +59,7 @@ function* updateUsersWorker(action: Effect) {
 	const { id , admin } = action.payload
 	try{
 		yield call(updateUser, id, admin)
+		yield put(updateUserStatus({id, admin}))
 		yield put(sendError({
 			alert: 'success',
 			message: 'Changed successfully'
@@ -69,8 +83,9 @@ const deleteDocFormDb = async (id: string) => {
 }
 
 const addDocToDb = async (data: requiredData) => {
-	await addDoc(collection(db, 'BookEntry'), {
+	let docRef = await addDoc(collection(db, 'BookEntry'), {
 		...data,
 		available: true
 	})
+	return docRef.id
 }

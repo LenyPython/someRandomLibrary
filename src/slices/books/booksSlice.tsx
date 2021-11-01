@@ -17,13 +17,20 @@ export const booksSlice = createSlice({
   reducers: {
     setState: (state, action: PayloadAction<BookInterface[]>) => {
       state.list = action.payload
+    },
+    addBook: (state, action: PayloadAction<BookInterface>) => {
+      state.list.push(action.payload)
+    },
+    removeBooks: (state, action:PayloadAction<Set<string>>) =>{
+      const BooksToDelete = action.payload
+      state.list = state.list.filter( book => !BooksToDelete.has(book.id) ) 
     }
     } 
   }
 )
 
 
-export const { setState } = booksSlice.actions
+export const { setState, addBook, removeBooks } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
 
