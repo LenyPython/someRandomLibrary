@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 import {sendError} from '../../sagas/actions'
 import {useAppDispatch} from '../../appStore/hooks'
+import {changeIsLoading} from '../../slices/components/components'
 
 const StyledForm = styled.form`
   background: white;
@@ -38,6 +39,7 @@ const LoginForm: React.FC<Props> = ( { reg } ) => {
   }
   const handleSubmit = async () => {
     try {
+        dispatch(changeIsLoading(true))
         if(reg && pass2) {
             await createUser(email, pass1)
             dispatch(sendError({
@@ -56,7 +58,7 @@ const LoginForm: React.FC<Props> = ( { reg } ) => {
           alert: 'error',
           message: error
         }))
-        return 
+        dispatch(changeIsLoading(false))
     } 
   }
   return(

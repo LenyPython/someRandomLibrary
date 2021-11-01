@@ -24,7 +24,7 @@ interface componentsInterface {
 }
 const initialState: componentsInterface = {
   theme: ThemeType.light,
-  isLoading: false,
+  isLoading: true,
   snackbar: {
     open: false,
     vertical: 'top',
@@ -42,8 +42,8 @@ const componentsSlice  = createSlice({
       if(state.theme === ThemeType.light) state.theme = ThemeType.dark
       else state.theme = ThemeType.light
     },
-    changeIsLoading: (state) => {
-      state.isLoading = !state.isLoading
+    changeIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload
     },
     closeSnackbar: status => {
       status.snackbar.open = false 

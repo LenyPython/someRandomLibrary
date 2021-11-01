@@ -3,6 +3,7 @@ import MainContent from './components/MainContent/MainContent'
 import GlobalStyle from './components/Styled/GlobalStyle'
 import Footer from './components/Footer/Footer'
 import AlertArea from './components/AlertArea/AlertArea'
+import LoadingScreen from './components/LoadingScreen/LoadingScreen'
 import './App.css'
 import styled from 'styled-components'
 import { auth } from './firebase/firebase-config'
@@ -11,6 +12,7 @@ import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from './appStore/hooks'
 import { onUserChange } from './slices/user/user'
 import { selectTheme } from './slices/components/components'
+import { selectIsLoading } from './slices/components/components'
 import { 
   getFirebaseData,
   emptyFirebaseData,
@@ -28,6 +30,7 @@ const Container = styled.div`
 
 function App() {
   const theme = useAppSelector(selectTheme)
+  const isLoading = useAppSelector(selectIsLoading)
   const dispatch = useAppDispatch()
 
 
@@ -56,6 +59,7 @@ function App() {
         <MainContent />
       </Container>
     <Footer />
+    {isLoading && <LoadingScreen />}
   </>
          )
 }

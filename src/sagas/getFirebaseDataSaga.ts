@@ -8,6 +8,7 @@ import { BookInterface } from '../constants/interface/bookSlice'
 import {getUsersData, getBorrowed, sendError} from './actions'
 import {setUsers} from '../slices/usersData/user'
 import {addToDelete, addToAdd} from '../slices/requests/requestsSlice'
+import {changeIsLoading} from '../slices/components/components'
 
 
 export function* getFirebaseDataWatcher(){
@@ -54,6 +55,8 @@ function* checkAdminWorker (action: Effect):
 			alert: 'error',
 			message: 'Something went wrong during authentication'
 		}))
+	} finally {
+		yield put(changeIsLoading(false))
 	}
 
 }
@@ -73,6 +76,8 @@ function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
 function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
 	console.log('emptyFirebaseDataWorker')
 	yield put(setState([]))
+	yield put(changeIsLoading(false))
+
 }
 
 function* getUsersDataWorker(): Generator<StrictEffect, void, []>{
