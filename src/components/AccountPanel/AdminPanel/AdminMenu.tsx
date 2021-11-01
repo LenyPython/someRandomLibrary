@@ -12,12 +12,13 @@ import {
 const AdminMenu = () => {
   let { url } = useRouteMatch()
   const requestsNumber = useAppSelector(reqLength)
+  const requestEvent = requestsNumber > 0 ? 'event' : ''
 
   return (
     <StyledMenu>
     <LinkA to={`${url}`}>Browse</LinkA>
     <LinkA to={`${url}/add`}>Add entry</LinkA>
-    <LinkA to={`${url}/requests`}>
+    <LinkA className={requestEvent} to={`${url}/requests`}>
       Requests { requestsNumber > 0 && `${requestsNumber}` }
     </LinkA>
     <LinkA to={`${url}/show_users`}>Users</LinkA>

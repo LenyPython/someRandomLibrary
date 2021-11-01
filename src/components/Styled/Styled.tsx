@@ -39,6 +39,9 @@ export const LinkA = styled(Link)`
   margin: .3em;
   color: var(--main-button-font-color);
   cursor: pointer;
+  &.event {
+    background: var(--main-error-color);
+  }
 `
 export const Button = styled.button`
   font-weight: 600;
@@ -51,17 +54,6 @@ export const Button = styled.button`
   color: var(--main-button-font-color);
   cursor: pointer;
 `
-export const DisabledBtn = styled.button`
-  border-radius: 10px;
-  border: none;
-  font-size: 1.1rem;
-  margin: .5em;
-  padding: .3em .6em;
-  background: gray;
-  color: var(--main-button-font-color);
-  cursor: not-allowed;
-`
-
 export const StyledA = styled(NavLink)`
   text-decoration: none;
   font-size: 1.2em;
