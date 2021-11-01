@@ -7,6 +7,8 @@ import {
 } from '../../firebase/firebase-config'
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import {sendError} from '../../sagas/actions'
+import {useAppDispatch} from '../../appStore/hooks'
 
 const StyledForm = styled.form`
   background: white;
@@ -22,6 +24,7 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ( { reg } ) => {
+  const dispatch = useAppDispatch()
   const history = useHistory()
   const [email, setEmail] = useState<string>('')
   const [pass1, setPass1] = useState<string>('')
@@ -34,24 +37,28 @@ const LoginForm: React.FC<Props> = ( { reg } ) => {
     if(name === 'pass2') setPass2(value)
   }
   const handleSubmit = async () => {
-    if(!email || !pass1) return
-      try{
+    try {
         if(reg && pass2) {
-        await createUser(email, pass1)
-        return
-        }
-      await signIn(email,pass1)
-      } catch(e) {
-        //dispatch error msg to errorSaga?????
-        console.log(e)
-      } finally {
+            await createUser(email, pass1)
+            dispatch(sendError({
+              alert: 'success',
+              message: 'User created'
+            }))
+        } else await signIn(email,pass1)
         setEmail('')
         setPass1('')
         setPass2('')
         history.push('/account')
-      }
+    } catch (e) {
+        let error = 'Error during signIn'
+        if(e instanceof Error) error = e.message
+        dispatch(sendError({
+          alert: 'error',
+          message: error
+        }))
+        return 
+    } 
   }
-
   return(
     <StyledForm>
       <TextField 

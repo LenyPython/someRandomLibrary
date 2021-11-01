@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects'
 import { getBookSaga } from './getBookSaga'
-import { errorWatcher } from './errorSaga'
+import  errorWatcher  from './errorSaga'
 import { getFirebaseDataWatcher } from './getFirebaseDataSaga'
 import { updateDBWatcher } from './updateDb'
 import {getBorrowedWatcher} from './borrowBookSaga'

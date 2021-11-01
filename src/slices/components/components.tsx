@@ -9,7 +9,7 @@ export enum ThemeType {
   light
 }
 
-interface snackbarActionPayload {
+export interface snackbarActionPayload {
   alert: AlertColor
   message: string
 }

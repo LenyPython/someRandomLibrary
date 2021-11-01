@@ -5,7 +5,7 @@ import { setAdminPrivlidge } from '../slices/user/user'
 import { setState } from '../slices/books/booksSlice'
 import { FbDataActions, usersActions } from './actionTypes/actions'
 import { BookInterface } from '../constants/interface/bookSlice'
-import {getUsersData, getBorrowed} from './actions'
+import {getUsersData, getBorrowed, sendError} from './actions'
 import {setUsers} from '../slices/usersData/user'
 import {addToDelete, addToAdd} from '../slices/requests/requestsSlice'
 
@@ -21,34 +21,53 @@ export function* getFirebaseDataWatcher(){
 function* checkAdminWorker (action: Effect):
 	Generator<StrictEffect, void, boolean>{
 	const uid = action.payload
-	const adminPriv = yield call(checkAdminPriv, uid)
-	if(adminPriv) {
-	yield put(setAdminPrivlidge())
-	yield put(getUsersData())
-	const toAddRequests = sessionStorage.getItem('toAdd')
-	const toDeleteRequests = sessionStorage.getItem('toDelete')
-	if(toDeleteRequests){
-		const array = JSON.parse(toDeleteRequests!)
-		for(let i in array){
-			yield put(addToDelete(array[i]))
+	try {
+		const adminPriv = yield call(checkAdminPriv, uid)
+		if(adminPriv) {
+		yield put(setAdminPrivlidge())
+		yield put(getUsersData())
+		const toAddRequests = sessionStorage.getItem('toAdd')
+		const toDeleteRequests = sessionStorage.getItem('toDelete')
+		if(toDeleteRequests){
+			const array = JSON.parse(toDeleteRequests!)
+			for(let i in array){
+				yield put(addToDelete(array[i]))
+			}
 		}
-	}
-	if(toAddRequests){
-		const array = JSON.parse(toAddRequests!)
-		for(let i in array){
-			yield put(addToAdd(array[i]))
+		if(toAddRequests){
+			const array = JSON.parse(toAddRequests!)
+			for(let i in array){
+				yield put(addToAdd(array[i]))
+			}
 		}
-	}
 
-	} else {
-		yield put(getBorrowed(uid))
+		} else {
+			yield put(getBorrowed(uid))
+		}
+		yield put(sendError({
+			alert: 'info',
+			message: 'Succesfully loged in'
+		}))
+	} catch (e) {
+		console.log(e)
+		yield put(sendError({
+			alert: 'error',
+			message: 'Something went wrong during authentication'
+		}))
 	}
 
 }
 function* getFbDataWorker(): Generator<StrictEffect, void, BookInterface[]>{
 	console.log('getFirebaseDataWorker')
-	const response: BookInterface[] = yield call(getBookEntries)
-	yield put(setState(response))
+	try {
+		const response: BookInterface[] = yield call(getBookEntries)
+		yield put(setState(response))
+	} catch (e) {
+		yield put(sendError({
+			alert: 'error',
+			message: 'Couldn\'t retrieve data from database'
+		}))
+	}
 }
 
 function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
@@ -57,26 +76,27 @@ function* emptyFbDataWorker(): Generator<StrictEffect, void, []>{
 }
 
 function* getUsersDataWorker(): Generator<StrictEffect, void, []>{
-	const USERS = yield call(getUsersFromDb)
-	yield put(setUsers(USERS))
+	try {
+		const USERS = yield call(getUsersFromDb)
+		yield put(setUsers(USERS))
+	} catch (e) {
+		yield put(sendError({
+			alert: 'error',
+			message: 'Couldn\'t retrive data from database'
+		}))
+	}
 }
 
 const getBookEntries = async (): Promise<BookInterface[]> =>  {
-	let bookEntries: BookInterface[] = []
-	try{
-		const response = await getDocs(collection(db,'BookEntry'))
-		bookEntries = response.docs.map( doc => {
-			const { authors, title, cover, ISBN, available } = doc.data()
-			return { id: doc.id, authors, title, cover, ISBN, available }
-		})
-	} catch(e) {
-		console.log(e)
-	}
+	const response = await getDocs(collection(db,'BookEntry'))
+	let bookEntries = response.docs.map( doc => {
+		const { authors, title, cover, ISBN, available } = doc.data()
+		return { id: doc.id, authors, title, cover, ISBN, available }
+	})
 	return bookEntries
 }
 
 const getUsersFromDb = async () => {
-	try{
 	const docsSnap = await getDocs(collection(db,'users'))
 	const data = docsSnap.docs.map( doc => {
 		return {
@@ -84,20 +104,11 @@ const getUsersFromDb = async () => {
 		}
 	})
 	return data
-
-	} catch(e) {
-		console.log(e)
-	}
 }
 
 const checkAdminPriv = async (uid: string) => {
-	try {
 	const docSnap = await getDoc(doc(db,'users', uid))
 	if(docSnap.exists()) return docSnap.data().admin
-	} catch(e) {
-		//maybe some wrning sign
-		console.log(e)
-	}
 	return false
 }
 

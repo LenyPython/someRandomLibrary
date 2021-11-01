@@ -1,4 +1,5 @@
 import { BookInterface } from '../constants/interface/bookSlice'
+import { snackbarActionPayload } from '../slices/components/components'
 import {initialRequestsStateInterface} from '../slices/requests/requestsSlice'
 import { 
   usersActions,
@@ -14,7 +15,8 @@ import {
   updateUserPrivlidgeInterface,
   emptyFirebaseDataInterface,
   updateDataBaseInterface,
-  borrowReturnInterface
+  borrowReturnInterface,
+  appStateActions
 } from './actionTypes/actions'
 
 export const saveBook = (payload: BookInterface): saveBookInterface => {
@@ -28,9 +30,9 @@ export const getBook = (payload: string): getBookInterface => {
   }
 }
 
-export const sendError = (payload: string | null): errorInterface => {
-  return { type: getBookActions.ERROR,
-          payload
+export const sendError = (payload: snackbarActionPayload): errorInterface => {
+  return { type: appStateActions.ERROR,
+        payload
   }
 }
 

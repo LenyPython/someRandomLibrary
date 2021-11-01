@@ -7,6 +7,7 @@ import {
 } from './actionTypes/actions'
 import db from '../firebase/firebase-config'
 import { requiredData } from '../constants/interface/bookSlice'
+import {sendError} from './actions'
 
 export function* updateDBWatcher() {
 	console.log('UserUpdateWatcher')
@@ -17,6 +18,7 @@ export function* updateDBWatcher() {
 function* updateDBWorker(action: Effect){
 	console.log('updateDBWorker')
 	const { toAdd, toDelete } = action.payload
+	try {
 	for(let i in toAdd){
 		const { ISBN, authors, title, cover } = toAdd[i]
 		console.log(toAdd[i])
@@ -27,11 +29,34 @@ function* updateDBWorker(action: Effect){
 		yield call(deleteDocFormDb, id)
 	}
 	yield put(emptyRequests())
+	yield put(sendError({
+		alert: 'success',
+		message: 'Updates were successfull'
+	}))
+	} catch(e) {
+		console.log(e)
+		yield put(sendError({
+			alert: 'error',
+			message: 'Error occured during fullfilling requests'
+		}))
+	}
 }
 function* updateUsersWorker(action: Effect) {
 	console.log('UserUpdateWorker')
 	const { id , admin } = action.payload
-	yield call(updateUser, id, admin)
+	try{
+		yield call(updateUser, id, admin)
+		yield put(sendError({
+			alert: 'success',
+			message: 'Changed successfully'
+		}))
+	} catch (e) {
+		console.log(e)
+		yield put(sendError({
+			alert: 'error',
+			message: 'Something went wrong with status changes'
+		}))
+	}
 }
 
 const updateUser = async (id: string, privlidge: boolean) => {

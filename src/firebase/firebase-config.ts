@@ -24,19 +24,14 @@ export default db
 export const auth = getAuth(app)
 
 export const createUser = async (email: string, pass: string) => {
-  try{
   const { user } = await createUserWithEmailAndPassword(auth, email, pass)
   await setDoc(doc(db,'users', user.uid), { 
     admin: false,
     email: user.email
   } )
-  await setDoc(doc(db,'borrowed', user.uid), { 
+    await setDoc(doc(db,'borrowed', user.uid), { 
     books: []
   } )
-
-  } catch(e) {
-    console.log(e)
-  }
 }
 
 export const signIn = async (email: string, pass: string) => {

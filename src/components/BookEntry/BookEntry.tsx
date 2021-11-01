@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import EntryData from './EntryData/EntryData'
 import { Link } from 'react-router-dom'
-import { DisabledBtn } from '../Styled/Styled'
 import { useAppDispatch, useAppSelector } from '../../appStore/hooks'
 import { BookInterface } from '../../constants/interface/bookSlice'
 import {addToDelete} from '../../slices/requests/requestsSlice'

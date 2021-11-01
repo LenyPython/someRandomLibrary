@@ -2,6 +2,7 @@ import Navigation from './components/Navigation/Navigation'
 import MainContent from './components/MainContent/MainContent'
 import GlobalStyle from './components/Styled/GlobalStyle'
 import Footer from './components/Footer/Footer'
+import AlertArea from './components/AlertArea/AlertArea'
 import './App.css'
 import styled from 'styled-components'
 import { auth } from './firebase/firebase-config'
@@ -13,7 +14,8 @@ import { selectTheme } from './slices/components/components'
 import { 
   getFirebaseData,
   emptyFirebaseData,
-  checkAdminPriv
+  checkAdminPriv,
+  sendError
 } from './sagas/actions'
 
 
@@ -49,6 +51,7 @@ function App() {
 
   return (<>
     <GlobalStyle dark={theme} />
+    <AlertArea />
     <Navigation />
       <Container role='main'>
         <MainContent />

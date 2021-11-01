@@ -1,10 +1,13 @@
 import { BookInterface } from '../../constants/interface/bookSlice'
+import {snackbarActionPayload} from '../../slices/components/components';
 import {initialRequestsStateInterface} from '../../slices/requests/requestsSlice';
 
 export enum getBookActions {
   SAVE_BOOK = 'SAVE_BOOK',
   SAVE_BORROWED_BOOKS = 'SAVE_BORROWED_BOOKS',
   GET_BOOK = 'GET_BOOK',
+}
+export enum appStateActions {
   ERROR = 'ERROR'
 }
 
@@ -71,6 +74,6 @@ export interface getBookInterface {
   payload: string
 }
 export interface errorInterface {
-  type: getBookActions.ERROR
-  payload: string | null
+  type: appStateActions.ERROR
+  payload: snackbarActionPayload
 }

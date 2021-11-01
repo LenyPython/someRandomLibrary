@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert';
 import {useAppDispatch, useAppSelector} from '../../appStore/hooks';
 import { getSnackbarState, closeSnackbar } from '../../slices/components/components'
 
-export default function PositionedSnackbar() {
+const AlertArea = () => {
   const { vertical, horizontal, open, alert, message  } = useAppSelector(getSnackbarState);
   const dispatch = useAppDispatch()
  
@@ -17,10 +17,10 @@ export default function PositionedSnackbar() {
         anchorOrigin={{ vertical , horizontal }}
         open={open}
         onClose={handleClose}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         key={vertical + horizontal}
       >
-       <Alert variant="outlined" severity={alert}>
+       <Alert variant="filled" severity={alert}>
          {message}
       </Alert>
       </Snackbar>
@@ -28,3 +28,4 @@ export default function PositionedSnackbar() {
   );
 }
 
+export default AlertArea

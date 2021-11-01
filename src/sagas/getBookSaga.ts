@@ -42,26 +42,35 @@ function* getBookWorker(action: Effect)
 	: Generator<StrictEffect, void, OpenLibResponse>{
 	console.log('getBookWorkerTriggered')
 	try {
-	const data: OpenLibResponse = yield call(fetchBook, action.payload)
-	if(Object.keys(data).length === 0) yield put(sendError('No data recieved, probably wrong ISBN'))
-	const key = `ISBN:${action.payload}`
-	const { by_statement: author, title, cover } = data[key]
-	let coverImg = ''
-	if(cover?.large) coverImg = cover.large
-	else if(cover?.medium) coverImg = cover.large
-	else if(cover?.small) coverImg = cover.large
-	yield put(saveBook({
-									id: '',
-									authors: [author],
-									title,
-									ISBN: action.payload,
-									available: true,
-									cover: coverImg
-								})
-					 ) 
+			const data: OpenLibResponse = yield call(fetchBook, action.payload)
+			if(Object.keys(data).length === 0) {
+				yield put(sendError({
+					alert:'warning',
+					message: 'Recived empty response, probably wrong ISBN'
+				}))
+			} else {
+			const key = `ISBN:${action.payload}`
+			const { by_statement: author, title, cover } = data[key]
+			let coverImg = ''
+			if(cover?.large) coverImg = cover.large
+			else if(cover?.medium) coverImg = cover.large
+			else if(cover?.small) coverImg = cover.large
+			yield put(saveBook({
+											id: '',
+											authors: [author],
+											title,
+											ISBN: action.payload,
+											available: true,
+											cover: coverImg
+										})
+								 ) 
+	}
 	} catch (error) {
 		console.log(error)
-		yield put(sendError('Something went wrong...'))
+		yield put(sendError({
+			alert: 'error',
+			message: 'Something went wrong with reciving book data from OpenLib'
+		}))
 	}
 }
 
