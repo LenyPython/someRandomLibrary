@@ -24,6 +24,8 @@ const BorrowedBooks = () => {
   const user = useAppSelector(getUser)
   const Books = useAppSelector(selectBooks)
   if(borrowedBooksIds.length === 0) return <Container><h1>No Books borrowed</h1></Container>
+
+  //hash bookentries to get O(1) time search after O(n) time hashing all books
   let hash: { [key: string]: number } = {}
   for(let i in Books) hash[Books[i].id] = +i
 
@@ -32,8 +34,8 @@ const BorrowedBooks = () => {
   }
 
   const list: JSX.Element[] = []
-  for(let entry in borrowedBooksIds) {
-  const id = borrowedBooksIds[entry]
+  for(let entry of borrowedBooksIds) {
+  const id = entry
   const { title, authors } = Books[hash[id]]
     list.push(<EntryContainer key={id}>
         <h2>{title}</h2>
