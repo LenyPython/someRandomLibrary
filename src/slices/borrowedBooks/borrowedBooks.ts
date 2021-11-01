@@ -28,5 +28,6 @@ export const borrowedList = createSlice({
 export const { saveMyBorrowed, removeMyBorrowed, addMyBorrowed } = borrowedList.actions
 
 export const selectBorrowedBooks = (state: RootState) => state.borrowedBooks.list
+export const selectBorrowedBooksLength = (state: RootState) => state.borrowedBooks.list.length
 
 export default borrowedList.reducer

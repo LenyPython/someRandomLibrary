@@ -24,13 +24,21 @@ export const booksSlice = createSlice({
     removeBooks: (state, action:PayloadAction<Set<string>>) =>{
       const BooksToDelete = action.payload
       state.list = state.list.filter( book => !BooksToDelete.has(book.id) ) 
+    },
+    changeBookStatus: (status, action: PayloadAction<{id:string, available:boolean}>) => {
+      const { id, available } = action.payload
+      status.list.forEach( book => {
+        if(book.id === id) book.available = available
+      })
     }
+
+
     } 
   }
 )
 
 
-export const { setState, addBook, removeBooks } = booksSlice.actions
+export const { setState, addBook, removeBooks, changeBookStatus } = booksSlice.actions
 
 export const selectBooks = (state: RootState) => state.books.list
 
