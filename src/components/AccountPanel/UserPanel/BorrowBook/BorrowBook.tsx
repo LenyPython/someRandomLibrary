@@ -65,18 +65,20 @@ const handleClick = (): void => {
       <h2>{title}</h2>
         <h3>{authors.join(' ')}</h3>
       </div>
-      <Button 
-        onClick={handleClick}
-        variant="contained"
-        sx={{
-          background: 'var(--main-color)',
-          color: 'var(--main-button-font-color)'
-        }}
-        >{
+      {
         available?
-        'Borrow it':
-        'Return'
-    }</Button> 
+          <Button 
+            onClick={handleClick}
+            variant="contained"
+            sx={{
+              background: 'var(--main-color)',
+              color: 'var(--main-button-font-color)'
+            }}
+            >
+            Borrow it
+          </Button> :
+      <Button variant="contained" disabled>Unavailable</Button>
+      }
     </TextContainer>
     </Container>
   )

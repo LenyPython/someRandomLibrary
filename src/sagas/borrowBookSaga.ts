@@ -6,6 +6,7 @@ import {
 	addMyBorrowed,
 	removeMyBorrowed
 } from '../slices/borrowedBooks/borrowedBooks'
+import { changeBookStatus } from '../slices/books/booksSlice'
 import db from '../firebase/firebase-config'
 import {sendError} from './actions'
 
@@ -24,7 +25,7 @@ function* getBorrowedWorker(action: Effect):
 	} catch(e) {
 		yield put(sendError({
 			alert: 'error',
-			message: 'Smething went wrong with reciving borrowed books data'
+			message: 'Something went wrong with reciving borrowed books data'
 			}))
 	}
 }
@@ -35,6 +36,7 @@ function* borrowBookWorker(action: Effect) {
 	try {
 	yield call(updateAvailable, id, status)
 	yield call(updateMyBorrowed, uid, id, status)
+	yield put(changeBookStatus({id, available: status}))
 	if(status) {
 		yield put(removeMyBorrowed(id))
 		yield put(sendError({

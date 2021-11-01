@@ -38,6 +38,15 @@ const BorrowedBooks = () => {
     list.push(<EntryContainer key={id}>
         <h2>{title}</h2>
         <h3>{authors.join(', ')}</h3>
+      <Button
+        variant="contained"
+        sx={{
+          background: 'var(--main-color)',
+          color: 'var(--main-button-font-color)'
+        }}
+      >
+        Read
+      </Button>
       <Button 
         onClick={()=>handleClick(id)}
         variant="contained"
