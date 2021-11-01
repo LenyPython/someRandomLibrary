@@ -31,6 +31,7 @@ const Switcher = styled.label`
     left: 0px;
     & > div {
       position: absolute;
+      transition: all .4s;
       top: 5px;
       left: 5px;
     }
