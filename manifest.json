@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "version": "0.1.0",
+  "short_name": "Library",
+  "author": " Piotr Lenartowicz",
+  "name": "Yet another library app",
+  "start_url": ".",
+  "display": "standalone"
+}

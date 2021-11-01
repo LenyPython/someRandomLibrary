@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/LenyPython/someRandomLibrary/static/css/main.7176885d.chunk.css",
+    "main.js": "/LenyPython/someRandomLibrary/static/js/main.399353b0.chunk.js",
+    "main.js.map": "/LenyPython/someRandomLibrary/static/js/main.399353b0.chunk.js.map",
+    "runtime-main.js": "/LenyPython/someRandomLibrary/static/js/runtime-main.f4f3e4f7.js",
+    "runtime-main.js.map": "/LenyPython/someRandomLibrary/static/js/runtime-main.f4f3e4f7.js.map",
+    "static/js/2.1e91051d.chunk.js": "/LenyPython/someRandomLibrary/static/js/2.1e91051d.chunk.js",
+    "static/js/2.1e91051d.chunk.js.map": "/LenyPython/someRandomLibrary/static/js/2.1e91051d.chunk.js.map",
+    "index.html": "/LenyPython/someRandomLibrary/index.html",
+    "static/css/main.7176885d.chunk.css.map": "/LenyPython/someRandomLibrary/static/css/main.7176885d.chunk.css.map",
+    "static/js/2.1e91051d.chunk.js.LICENSE.txt": "/LenyPython/someRandomLibrary/static/js/2.1e91051d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f4f3e4f7.js",
+    "static/js/2.1e91051d.chunk.js",
+    "static/css/main.7176885d.chunk.css",
+    "static/js/main.399353b0.chunk.js"
+  ]
+}
