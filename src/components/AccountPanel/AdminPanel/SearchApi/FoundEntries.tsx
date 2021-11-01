@@ -6,6 +6,7 @@ import { BookInterface } from '../../../../constants/interface/bookSlice'
 import Button from '@mui/material/Button'
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import {addToAdd} from '../../../../slices/requests/requestsSlice';
+import {sendError} from '../../../../sagas/actions';
 
 const theme = createTheme({
   components: {
@@ -26,6 +27,10 @@ const FoundEntries = () => {
   const dispatch = useAppDispatch()
   const handleClick = (entry: BookInterface) => {
     dispatch(addToAdd(entry))
+    dispatch(sendError({
+      alert: 'success',
+      message: 'Book added to requests'
+    }))
   }
 
   const data = useAppSelector(foundBooksSelector)

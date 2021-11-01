@@ -6,6 +6,7 @@ import { BookInterface } from '../../constants/interface/bookSlice'
 import {addToDelete} from '../../slices/requests/requestsSlice'
 import {getUser} from '../../slices/user/user'
 import Button from '@mui/material/Button'
+import {sendError} from '../../sagas/actions'
 
 export const StyledEntry = styled.div`
   display: flex;
@@ -44,6 +45,10 @@ const BookEntry: React.FC<BookInterface> = props => {
 
   const handleClick = () => {
     dispatch(addToDelete(props))
+    dispatch(sendError({
+      alert: 'error',
+      message: 'Book addet to delete requests'
+    }))
   }
   
   return(
