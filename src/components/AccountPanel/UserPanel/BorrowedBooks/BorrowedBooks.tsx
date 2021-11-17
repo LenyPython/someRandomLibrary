@@ -9,6 +9,7 @@ import {
 import {selectBooks} from '../../../../slices/books/booksSlice'
 import { borrowReturn } from '../../../../sagas/actions'
 import {getUser} from '../../../../slices/user/user'
+import {setCurrentRead} from '../../../../slices/currentBook/currentBook'
 
 const EntryContainer = styled.div`
   display: flex;
@@ -37,11 +38,13 @@ const BorrowedBooks = () => {
   for(let entry of borrowedBooksIds) {
   const id = entry
   const { title, authors } = Books[hash[id]]
-    list.push(<EntryContainer key={id}>
+    list.push(
+    <EntryContainer key={id}>
         <h2>{title}</h2>
         <h3>{authors.join(', ')}</h3>
       <Button
         variant="contained"
+        onClick={()=>dispatch(setCurrentRead(Books[hash[id]]))}
         sx={{
           background: 'var(--main-color)',
           color: 'var(--main-button-font-color)'
@@ -59,7 +62,7 @@ const BorrowedBooks = () => {
         >
         Return
       </Button> 
-      </EntryContainer>)
+    </EntryContainer>)
    }
      
   return(

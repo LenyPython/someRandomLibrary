@@ -18,6 +18,8 @@ import {
   emptyFirebaseData,
   checkAdminPriv,
 } from './sagas/actions'
+import ReadBookContainer from './components/ReadBookContainer/ReadBookContainer'
+import {getCurrentRead} from './slices/currentBook/currentBook'
 
 
 const Container = styled.div`
@@ -31,6 +33,7 @@ const Container = styled.div`
 function App() {
   const theme = useAppSelector(selectTheme)
   const isLoading = useAppSelector(selectIsLoading)
+  const currentBook = useAppSelector(getCurrentRead)
   const dispatch = useAppDispatch()
 
 
@@ -59,6 +62,7 @@ function App() {
         <MainContent />
       </Container>
     <Footer />
+    {currentBook.open && <ReadBookContainer />}
     {isLoading && <LoadingScreen />}
   </>
          )

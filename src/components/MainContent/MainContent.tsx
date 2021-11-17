@@ -22,7 +22,7 @@ const MainContent = () => {
         <Route path='/register'>
           <LoginForm reg />
         </Route>
-        <Route path='/LenyPython/someRandomLibrary' exact>
+        <Route path='/someRandomLibrary' exact>
           <Welcome />
           </Route>
         <Route path='/' exact>
