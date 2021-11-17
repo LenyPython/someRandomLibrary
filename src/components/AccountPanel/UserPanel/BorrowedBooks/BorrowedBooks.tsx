@@ -37,6 +37,24 @@ const BorrowedBooks = () => {
   const list: JSX.Element[] = []
   for(let entry of borrowedBooksIds) {
   const id = entry
+  if(!hash[id]) {
+    list.push(
+      <EntryContainer key={id}>
+        {'Book has been deleted'}
+        <Button 
+          onClick={()=>handleClick(id)}
+          variant="contained"
+          sx={{
+            background: 'var(--main-color)',
+            color: 'var(--main-button-font-color)'
+          }}
+          >
+          Delete borrowed entry
+        </Button> 
+      </EntryContainer>
+    )
+    continue
+  }
   const { title, authors } = Books[hash[id]]
     list.push(
     <EntryContainer key={id}>

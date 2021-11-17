@@ -28,8 +28,8 @@ export enum usersActions {
 export interface borrowReturnInterface {
   type: usersActions.BORROW_RETURN
   payload: { id: string
-    status: boolean
     uid: string
+    status: boolean
   }
 }
 export interface getFirebaseDataInterface {

@@ -34,8 +34,8 @@ function* borrowBookWorker(action: Effect) {
 	console.log('BorrowWorker')
 	const { id, uid, status } = action.payload
 	try {
-	yield call(updateAvailable, id, status)
 	yield call(updateMyBorrowed, uid, id, status)
+	yield call(updateAvailable, id, status)
 	yield put(changeBookStatus({id, available: status}))
 	if(status) {
 		yield put(removeMyBorrowed(id))
@@ -52,10 +52,12 @@ function* borrowBookWorker(action: Effect) {
 		}))
 	}
 	} catch (e) {
-		yield put(sendError({
-			alert: 'error',
-			message: 'Couldn\'t borrow/return book, error occured'
-		}))
+		if(e instanceof Error){
+				yield put(sendError({
+					alert: 'error',
+					message: e.message
+				}))
+		}
 	}
 }
 
