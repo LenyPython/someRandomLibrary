@@ -12,25 +12,26 @@ Users can browse and borrow book. There is small 'reading screen' in 'My borrowe
 
 ## Techs:
 
--react
--reac-router
--typescript
--redux
--redux-saga
--firebase
--styled components
--MUI
+- react
+- reac-router
+- typescript
+- redux
+- redux-saga
+- firebase
+- styled components
+- MUI
 
-###What I learned:
--basic TS, interfaces, types, react Props interfaces, redux and saga action types interfaces
--theme light/dark changing usign GlobalTheme
--styled Components
--third party UI libraries (MUI)
--routing using react router v5
--redux-saga and generator function for async action dispatching
--fetching data using redux-saga
--basic firebase rules for Db safety
--firebase/firestore getDoc, setDoc, updateDoc
--firebase/auth user authentication using firebase
+### What I learned:
+
+- basic TS, interfaces, types, react Props interfaces, redux and saga action types interfaces
+- theme light/dark changing usign GlobalTheme
+- styled Components
+- third party UI libraries (MUI)
+- routing using react router v5
+- redux-saga and generator function for async action dispatching
+- fetching data using redux-saga
+- basic firebase rules for Db safety
+- firebase/firestore getDoc, setDoc, updateDoc
+- firebase/auth user authentication using firebase
 
 
